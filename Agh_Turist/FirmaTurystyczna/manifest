@@ -1,0 +1,2 @@
+Main-Class: turistcompany.TuristCompany
+Class-Path: ../lib/postgresql-8.3-604.jdbc3.jar

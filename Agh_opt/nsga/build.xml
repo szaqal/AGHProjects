@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="NSGA" default="dist">
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist" location="dist"/>
+	<property name="gfx" location="gfx"/>
+	<!-- Init -->
+	<target name="init">
+	 	<mkdir dir="${build}"/>
+	 	<mkdir dir="${dist}"/>
+	</target>
+	
+	<!-- Koplikacja :-) -->
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}"/>		
+	</target>
+	
+	<!-- JAR	-->
+	<target name="dist" depends="compile">
+		<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}" manifest="manifest">
+		</jar>
+	</target>
+	
+	 <target name="clean">
+	    <delete dir="${build}"/>
+	    <delete dir="${dist}"/>
+  	</target>
+	
+	<target name="run_zdt1" depends="dist">
+		<java jar="dist/${ant.project.name}.jar" fork="true">
+			<arg value="ZDT1"/>
+       </java>
+	</target>
+	
+	<target name="run_zdt2" depends="dist">
+		<java jar="dist/${ant.project.name}.jar" fork="true">
+			<arg value="ZDT2"/>
+       </java>
+	</target>
+	
+	<target name="run_zdt3" depends="dist">
+		<java jar="dist/${ant.project.name}.jar" fork="true">
+			<arg value="ZDT3"/>
+       </java>
+	</target>
+
+	<target name="run_zdt4" depends="dist">
+		<java jar="dist/${ant.project.name}.jar" fork="true">
+			<arg value="ZDT4"/>
+       </java>
+	</target>
+	
+</project>

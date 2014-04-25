@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="login.def" extends="simplelayout">
+		<put-attribute name="headertitle" value="(logowanie)"/>
+		<put-attribute name="title" value="Logowanie"/>
+		<put-attribute name="body" value="/jsp/users/login.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="login.failed" extends="simplelayout">
+		<put-attribute name="headertitle" value="(logowanie)"/>
+		<put-attribute name="title" value="Logowanie"/>
+		<put-attribute name="body" value="/jsp/users/loginfailed.jsp"></put-attribute>
+	</definition>
+
+	<definition name="register.def" extends="simplelayout">
+		<put-attribute name="title" value="Rejestracja"/>
+		<put-attribute name="headertitle" value="(rejestracja)"/>
+		<put-attribute name="body" value="/jsp/users/register.jsp"></put-attribute>
+	</definition>
+
+	<definition name="userlist" extends="simplelayout">
+		<put-attribute name="title" value="Uzytkownicy"/>
+		<put-attribute name="headertitle" value="(uzytkownicy)"/>
+		<put-attribute name="body" value="/jsp/users/userslist.jsp"></put-attribute>
+	</definition>
+
+	<definition name="useredit" extends="simplelayout">
+		<put-attribute name="title" value="Edycja uzytkownika"/>
+		<put-attribute name="headertitle" value="(edycja uzytkownika)"/>
+		<put-attribute name="body" value="/jsp/users/useredit.jsp"></put-attribute>
+	</definition>
+
+</tiles-definitions>

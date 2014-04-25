@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="myprojectslist" extends="simplelayout">
+		<put-attribute name="headertitle" value="(moje projekty)"/>
+		<put-attribute name="title" value="Moje projekty"/>
+		<put-attribute name="body" value="/jsp/projects/myprojects.jsp"></put-attribute>
+	</definition>
+
+
+	<definition name="projectslist" extends="simplelayout">
+		<put-attribute name="headertitle" value="(projekty)"/>
+		<put-attribute name="title" value="Moje projekty"/>
+		<put-attribute name="body" value="/jsp/projects/projects.jsp"></put-attribute>
+	</definition>
+
+	<definition name="projectteams" extends="simplelayout">
+		<put-attribute name="headertitle" value="(grupy projektowe)"/>
+		<put-attribute name="title" value="Grupy projektowe"/>
+		<put-attribute name="body" value="/jsp/projects/projectsgroups.jsp"></put-attribute>
+	</definition>
+
+	<definition name="editproject" extends="simplelayout">
+		<put-attribute name="headertitle" value="(edycja projektu)"/>
+		<put-attribute name="title" value="Edycja projektu"/>
+		<put-attribute name="body" value="/jsp/projects/projectedit.jsp"></put-attribute>
+	</definition>
+
+	<definition name="newproject" extends="simplelayout">
+		<put-attribute name="headertitle" value="(edycja projektu)"/>
+		<put-attribute name="title" value="Edycja projektu"/>
+		<put-attribute name="body" value="/jsp/projects/newproject.jsp"></put-attribute>
+	</definition>
+
+	<definition name="projectsmanage" extends="simplelayout">
+		<put-attribute name="headertitle" value="(zarzadzanie projektem)"/>
+		<put-attribute name="title" value="Zarzadzanie projektem"/>
+		<put-attribute name="body" value="/jsp/projects/manageproject.jsp"></put-attribute>
+	</definition>
+
+	<definition name="newprojectstage" extends="simplelayout">
+		<put-attribute name="headertitle" value="(edycja etapu projektu)"/>
+		<put-attribute name="title" value="edycja etapu projektu"/>
+		<put-attribute name="body" value="/jsp/projects/newprojectstage.jsp"></put-attribute>
+	</definition>
+
+
+	<definition name="projectitems" extends="simplelayout">
+		<put-attribute name="headertitle" value="(elementy projektu)"/>
+		<put-attribute name="title" value="elementy projektu"/>
+		<put-attribute name="body" value="/jsp/projects/projectitems.jsp"></put-attribute>
+	</definition>
+
+	<definition name="newprojectnote" extends="simplelayout">
+		<put-attribute name="headertitle" value="(nowa notatka)"/>
+		<put-attribute name="title" value="nowa notatka"/>
+		<put-attribute name="body" value="/jsp/projects/newnote.jsp"></put-attribute>
+	</definition>
+
+	<definition name="importfile" extends="simplelayout">
+		<put-attribute name="headertitle" value="(import pliku)"/>
+		<put-attribute name="title" value="Import pliku"/>
+		<put-attribute name="body" value="/jsp/import.jsp"></put-attribute>
+	</definition>
+
+	<definition name="managestage" extends="simplelayout">
+		<put-attribute name="headertitle" value="(zarzadzanie etapem)"/>
+		<put-attribute name="title" value="zarzadzanie etapem"/>
+		<put-attribute name="body" value="/jsp/projects/managestage.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="viewnote" extends="simplelayout">
+		<put-attribute name="headertitle" value="(podglad notatki)"/>
+		<put-attribute name="title" value="podglad notatki"/>
+		<put-attribute name="body" value="/jsp/notes/noteview.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="correction" extends="simplelayout">
+		<put-attribute name="headertitle" value="(poprawa)"/>
+		<put-attribute name="title" value="poprawa"/>
+		<put-attribute name="body" value="/jsp/projects/correction.jsp"></put-attribute>
+	</definition>
+
+	<definition name="publicdocuments" extends="simplelayout">
+		<put-attribute name="headertitle" value="(dokument publiczne)"/>
+		<put-attribute name="title" value="dokumenty publiczne"/>
+		<put-attribute name="body" value="/jsp/projects/publicdocs.jsp"></put-attribute>
+	</definition>
+
+
+</tiles-definitions>

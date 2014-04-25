@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ajaxActions" extends="json-default">
+		<action name="AjaxUsersList" class="ewpp.web.users.ajax.UsersListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param> 
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxStudentsList" class="ewpp.web.users.ajax.StudentsListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param> 
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxMessagesList" class="ewpp.web.messages.ajax.MessagesListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param> 
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxMyProjectsList" class="ewpp.web.projects.ajax.MyProjectsListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param> 
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxMyClosedProjectsList" class="ewpp.web.projects.ajax.MyClosedProjectsListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param> 
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>		
+		
+		<action name="AjaxProjectsNotesList" class="ewpp.web.projects.ajax.ProjectNotesListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param> 
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxProjectsFilesList" class="ewpp.web.projects.ajax.ProjectFilesListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param> 
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxPublicDocs" class="ewpp.web.projects.ajax.PublicDocsListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param> 
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+        <persistence-unit name="ewpp">
+                <provider>org.hibernate.ejb.HibernatePersistence</provider>
+                <jta-data-source>jdbc/db2</jta-data-source>
+
+
+                <class>ewpp.auth.entity.User</class>
+                <class>ewpp.business.entity.File</class>
+                <class>ewpp.business.entity.Note</class>
+                <class>ewpp.business.entity.Project</class>
+                <class>ewpp.business.entity.ProjectItem</class>
+                <class>ewpp.business.entity.ProjectItemContent</class>
+                <class>ewpp.business.entity.ProjectStage</class>
+                <class>ewpp.business.entity.ProjectTeam</class>
+
+                <properties>
+                        <property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect" />
+                        <property name="hibernate.show_sql" value="true" />
+                        <property name="hibernate.hbm2ddl.auto" value="validate" />
+                </properties>
+
+        </persistence-unit>
+</persistence>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ewppmessage" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		
+		<interceptors>
+			<interceptor name="authInterceptor" class="ewpp.web.auth.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="secureStack"/>
+
+		<action name="Messages" class="ewpp.web.messages.MessagesAction">
+			<result name="list" type="tiles">messageslist</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="MessageView" class="ewpp.web.messages.MessageViewAction">
+			<result name="view" type="tiles">messageview</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="MessageEdit" class="ewpp.web.messages.MessageEditAction">
+			<result name="edit" type="tiles">editmessage</result>
+			<result name="notlogged" type="redirectAction">ErrorMessage</result>
+			<result name="sent" type="redirectAction">Messages</result>
+			<result name="deleted" type="redirectAction">Messages</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+	</package>
+</struts>

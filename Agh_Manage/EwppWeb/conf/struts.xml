@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ewppdefault" extends="struts-default">
+	
+		<result-types>
+  			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+		</result-types>
+	
+		<interceptors>
+			<interceptor name="authInterceptor" class="ewpp.web.auth.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		                                              
+		<default-interceptor-ref name="secureStack"/>
+	
+
+		<action name="Upload" class="ewpp.web.UploadAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">ProjectItems</param>
+				<param name="projectId">${projectId}</param>
+			</result>
+
+		</action>
+
+		<action name="Metadata" class="ewpp.web.FileMetadataAction">
+			<result name="view" type="tiles">metadata</result>
+		</action>
+		
+		<action name="NoteView" class="ewpp.web.NoteViewAction">
+			<result name="view" type="tiles">viewnote</result>
+		</action>
+		
+		<action name="Configuration" class="ewpp.web.conf.ConfigurationAction">
+			<result name="view" type="tiles">viewconfig</result>
+			<result name="edit" type="tiles">editconfig</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="Download" class="ewpp.web.DownloadAction">
+			<result name="download" type="stream">
+				<param name="contentType">${contentType}</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+
+		<action name="ErrorMessage" class="ewpp.web.messages.ErrorAction">
+			<result name="view" type="tiles">errorlayout</result>
+		</action>
+	</package>
+
+	<include file="struts_users.xml"/>
+	<include file="struts_projects.xml"/>
+	<include file="struts_doc.xml"/>
+	<include file="struts_messages.xml"/>
+	<include file="struts_ajax.xml"/>
+</struts>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="ewppuser" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		
+		<interceptors>
+			<interceptor name="authInterceptor" class="ewpp.web.auth.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		                                              
+		<default-interceptor-ref name="secureStack"/>
+
+		<action name="RegisterUser" class="ewpp.web.users.RegisterUserAction">
+			<result name="edit" type="tiles">register.def</result>
+			<result name="login" type="redirectAction">LoginUser</result>
+		</action>
+
+		<action name="LoginUser" class="ewpp.web.users.LogonAction">
+			<result name="edit" type="tiles">login.def</result>
+			<result name="logged" type="redirectAction">MyProjects</result>
+			<result name="adminlogged" type="redirectAction">UsersList</result>
+			<result name="notlogged" type="tiles">login.failed</result>
+		</action>
+
+		<action name="Logout" class="ewpp.web.users.LogoutAction">
+			<result name="success" type="redirectAction">LoginUser</result>
+		</action>
+
+		<action name="UsersList" class="ewpp.web.users.UsersListAction">
+			<result name="list" type="tiles">userlist</result>
+			<result name="pick">/jsp/users/userslistforpick.jsp</result>
+			<result name="pickstudent">/jsp/users/studentslistforpick.jsp</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="UserEdit" class="ewpp.web.users.UserEditAction">
+			<result name="edit" type="tiles">useredit</result>
+			<result name="saved" type="redirectAction">UsersList</result>
+			<result name="deleted" type="redirectAction">UsersList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+	</package>
+
+
+</struts>

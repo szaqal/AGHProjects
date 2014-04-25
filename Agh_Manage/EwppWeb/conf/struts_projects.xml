@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="ewppprojects" extends="struts-default">
+		<result-types>
+			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		
+		<interceptors>
+			<interceptor name="authInterceptor" class="ewpp.web.auth.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="secureStack"/>
+
+		<action name="MyProjects" class="ewpp.web.projects.MyProjectsAction">
+			<result name="list" type="tiles">myprojectslist</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="Projects" class="ewpp.web.projects.ProjectsAction">
+			<result name="list" type="tiles">projectslist</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="ManageProject" class="ewpp.web.projects.ManageProjectAction">
+			<result name="edit" type="tiles">projectsmanage</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="ProjectTeams" class="ewpp.web.projects.ProjectTeamsAction">
+			<result name="list" type="tiles">projectteams</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="EditProject" class="ewpp.web.projects.EditProjectAction">
+			<result name="edit" type="tiles">editproject</result>
+			<result name="new" type="tiles">newproject</result>
+			<result name="input" type="tiles">newproject</result>
+			<result name="saved" type="redirectAction">MyProjects</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+
+
+		<action name="ProjectStageEdit" class="ewpp.web.projects.EditProjectStageAction">
+			<result name="new" type="tiles">newprojectstage</result>
+			<result name="saved" type="redirectAction">
+				<param name="actionName">ManageProject</param>
+				<param name="projectId">${projectId}</param>
+			</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="ProjectItems" class="ewpp.web.projects.ProjectItemsAction">
+			<result name="list" type="tiles">projectitems</result>
+			<result name="newnote" type="tiles">newprojectnote</result>
+			<result name="importProjectFile" type="tiles">importfile</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="Correction" class="ewpp.web.projects.CorrectionAction">
+			<result name="edit" type="tiles">correction</result>
+			<result name="correct" type="redirectAction">
+				<param name="actionName">ManageStage</param>
+				<param name="projectId">${projectId}</param>
+				<param name="projectStageId">${projectStageId}</param>
+				<param name="operation">edit</param>
+			</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="ManageStage" class="ewpp.web.projects.ManageStageAction">
+			<result name="edit" type="tiles">managestage</result>
+			<result name="input" type="tiles">managestage</result>
+			<result name="accepted" type="redirectAction">
+				<param name="actionName">ManageProject</param>
+				<param name="projectId">${projectId}</param>
+			</result>
+			<result name="uploaded" type="redirectAction">
+				<param name="actionName">ManageStage</param>
+				<param name="projectId">${projectId}</param>
+				<param name="projectStageId">${projectStageId}</param>
+			</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="PublicDocuments" class="ewpp.web.projects.PublicDocumentsAction">
+			<result name="list" type="tiles">publicdocuments</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+	</package>
+
+</struts>

@@ -1,0 +1,47 @@
+package ewpp.messaging;
+
+import java.io.UnsupportedEncodingException;
+
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Powiadamianie o zamknieciu etapu projektu.
+ * @author malczyk.pawel@gmail.com
+ *
+ */
+public class MessageStageCloseCmd extends AbstractMessageCmd implements MessageOnEvent {
+	
+	/**
+	 * Logger. 
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(MessageStageCloseCmd.class);
+
+	/**
+	 * Konstruktor.
+	 */
+	public MessageStageCloseCmd() { }
+	
+	/** {@inheritDoc} */
+	@Override
+	public MimeMessage populateMessage(MimeMessage mimeMessage, MapMessage message) {
+		try {
+			mimeMessage.setSubject("Etap projektu zakoczony");
+			mimeMessage.setText(message.getString(MessageFields.PROJECT_LEADER_LABEL)+ " zakonczyl etap projektu.");
+			mimeMessage.addRecipient(javax.mail.Message.RecipientType.TO, createRecipientAddress(message) );
+		} catch (MessagingException e) {
+			LOG.error(e.getMessage());
+		} catch (JMSException e) {
+			LOG.error(e.getMessage());
+		} catch (UnsupportedEncodingException e) {
+			LOG.error(e.getMessage());
+		}
+		return mimeMessage;
+	}
+
+}

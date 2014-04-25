@@ -1,0 +1,2 @@
+Main-Class: grid.client.GridClient
+Class-Path: ../../GridWs/lib/axis.jar ../../GridWs/lib/addressing-1.0.jar ../../GridWs/lib/jaxrpc.jar ../../GridWs/build/lib/grid_bank_account_stubs.jar ../../GridWs/lib/commons-logging.jar ../../GridWs/lib/commons-discovery.jar ../../GridWs/lib/wsdl4j.jar

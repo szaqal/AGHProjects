@@ -1,0 +1,3 @@
+http\://www.globus.org/namespaces/grid/ws/BankAccountService_instance=grid.ws.stubs.BankAccountService_instance
+http\://www.globus.org/namespaces/grid/ws/BankAccountService_instance/bindings=grid.ws.stubs.BankAccountService_instance.bindings
+http\://www.globus.org/namespaces/grid/ws/BankAccountService_instance/service=grid.ws.stubs.BankAccountService_instance.service

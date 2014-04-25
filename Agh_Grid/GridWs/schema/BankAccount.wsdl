@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="BankAccountService"
+    targetNamespace="http://www.globus.org/namespaces/grid/ws/BankAccountService_instance"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://www.globus.org/namespaces/grid/ws/BankAccountService_instance"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsrp="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.xsd"
+    xmlns:wsrpw="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"
+    xmlns:wsdlpp="http://www.globus.org/namespaces/2004/10/WSDLPreprocessor"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<wsdl:import namespace="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"
+    location="wsrf/properties/WS-ResourceProperties.wsdl" />
+
+
+<!--============================================================
+
+                      T Y P E S
+                      
+  ============================================================-->
+<types>
+	<xsd:schema
+		targetNamespace="http://www.globus.org/namespaces/grid/ws/BankAccountService_instance"
+		xmlns:tns="http://www.globus.org/namespaces/grid/ws/BankAccountService_instance"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+		
+		<xsd:element name="depositIn" type="xsd:string"/>
+		<xsd:element name="withdrawIn" type="xsd:string"/>
+	
+		
+		<xsd:element name="chkSaldo" type="xsd:string"/>
+		<xsd:element name="chkSaldoResponse" type="xsd:string"/>
+		
+		<xsd:element name="openAcc" type="xsd:string"></xsd:element>
+		<xsd:element name="openAccountResponse">
+			<xsd:complexType/>
+		</xsd:element>
+		
+		<xsd:element name="closeAcc" type="xsd:string"></xsd:element>
+		<xsd:element name="closeAccountResponse">
+			<xsd:complexType/>
+		</xsd:element>
+		
+		<xsd:element name="transferResponse">
+			<xsd:complexType/>
+		</xsd:element>
+		
+		<xsd:element name="depositWithDrawResponse">
+			<xsd:complexType/>
+		</xsd:element>
+		
+
+		<!-- REQUESTS AND RESPONSES -->
+		<xsd:element name="getValueRP">
+			<xsd:complexType />
+		</xsd:element>
+		<xsd:element name="getValueRPResponse" type="xsd:int" />	
+		
+		<xsd:element name="genericStringParams" type="xsd:string"/>
+		
+		<xsd:element name="amount" type="xsd:double"/>
+		
+		
+
+<!-- KONTO -->
+
+		<xsd:element name="getAccounts">
+			<xsd:complexType/>
+		</xsd:element>
+		<!--  nie chce mi sie kombinowac z tablicami bo nie ma czasu -->
+		<xsd:element name="getAccountsResponse" type="xsd:string"/>
+
+<!-- RESOURCE PROPERTIES -->
+
+		<xsd:element name="Value" type="xsd:int" />
+		<xsd:element name="LastOp" type="xsd:string" />
+		<xsd:element name="AccountList" ref="tns:getAccountsResponse"/>
+		
+		<xsd:element name="BankAccountResourceProperties">
+			<xsd:complexType>
+				<xsd:sequence>
+					<xsd:element ref="tns:Value" minOccurs="1" maxOccurs="1" />
+					<xsd:element ref="tns:LastOp" minOccurs="1" maxOccurs="1" />
+					<xsd:element ref="tns:AccountList" minOccurs="1" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:element>
+
+
+
+	</xsd:schema>
+</types>
+
+
+<!--============================================================
+
+                       M E S S A G E S
+                      
+  ============================================================-->
+
+
+<message name="GetValueRPInputMessage">
+	<part name="parameters" element="tns:getValueRP"/>
+</message>
+<message name="GetValueRPOutputMessage">
+	<part name="parameters" element="tns:getValueRPResponse"/>
+</message>
+
+<message name="ListAccountsOutputMessage">
+	<part name="parameters" element="tns:getAccountsResponse"/>
+</message>
+
+<message name="ListAccountsInputMessage">
+	<part name="parameters" element="tns:getAccounts"/>
+</message>
+
+<message name="CloseAccountInputMessage">
+	<part name="parameters" element="tns:closeAcc"/>
+</message>
+
+<message name="CloseAccountOutputMessage">
+	<part name="parameters" element="tns:closeAccountResponse"/>
+</message>
+
+
+<message name="OpenAccountInputMessage">
+	<part name="parameters" element="tns:openAcc"/>
+</message>
+
+<message name="OpenAccountOutputMessage">
+	<part name="parameters" element="tns:openAccountResponse"/>
+</message>
+
+<message name="TransferInputMessage">
+	<part name="fromId" element="tns:genericStringParams"/>
+</message>
+
+<message name="TransferOutputMessage">
+	<part name="parameters" element="tns:transferResponse"/>
+</message>
+
+<message name="depositInputMessage">
+	<part name="parameters" element="tns:depositIn"/>
+</message>
+
+<message name="withdrawInputMessage">
+	<part name="parameters" element="tns:withdrawIn"/>
+</message>
+
+<message name="depositWithdrawOutputMessage">
+	<part name="parameters" element="tns:depositWithDrawResponse"/>
+</message>
+
+
+<message name="checkSaldoInputMessage">
+	<part name="parameters" element="tns:chkSaldo"/>
+</message>
+
+<message name="checkSaldoOutputMessage">
+	<part name="parameters" element="tns:chkSaldoResponse"/>
+</message>
+
+
+<!--============================================================
+
+                       P O R T T Y P E
+                      
+  ============================================================-->
+<portType name="BankAccountPortType" 
+    wsdlpp:extends="wsrpw:GetResourceProperty"
+    wsrp:ResourceProperties="tns:BankAccountResourceProperties">
+    
+    <operation name="getAccounts">
+    	<input message="tns:ListAccountsInputMessage"/>
+		<output message="tns:ListAccountsOutputMessage"/>
+    </operation>
+
+	<operation name="getValueRP">
+		<input message="tns:GetValueRPInputMessage"/>
+		<output message="tns:GetValueRPOutputMessage"/>
+	</operation>
+	
+	<operation name="openAccount">
+		<input message="tns:OpenAccountInputMessage"/>
+		<output message="tns:OpenAccountOutputMessage"/>		
+	</operation>
+	
+	<operation name="closeAccount">
+		<input message="tns:CloseAccountInputMessage"/>
+		<output message="tns:CloseAccountOutputMessage"/>
+	</operation>
+	
+	<operation name="transfer">
+		<input message="tns:TransferInputMessage"/>
+		<output message="tns:TransferOutputMessage"/>
+	</operation>
+	
+	<operation name="deposit">
+		<input message="tns:depositInputMessage"/>	
+		<output message="tns:depositWithdrawOutputMessage"/>
+	</operation>
+	
+	<operation name="withdraw">
+		<input message="tns:withdrawInputMessage"/>	
+		<output message="tns:depositWithdrawOutputMessage"/>
+	</operation>
+	
+	<operation name="checkSaldo">
+		<input message="tns:checkSaldoInputMessage" />
+		<output message="tns:checkSaldoOutputMessage" />
+	</operation>
+	
+
+</portType>
+
+</definitions>

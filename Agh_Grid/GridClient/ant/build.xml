@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="GridClient" basedir="." default="dist">
+	<property name="src" location="../src" />
+	<property name="build" location="../build" />
+	<property name="dist" location="../dist" />
+	<property name="globuslibs" location="../../GridWs/lib" />
+	<property name="genlibs" location="../../GridWs/build/lib" />
+
+
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+	</target>
+
+	<path id="jarclaspath">
+		<fileset dir="${globuslibs}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${genlibs}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<pathconvert property="manifest.classpath" pathsep=" ">
+	  <path refid="jarclaspath"/>
+	</pathconvert>
+
+
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}">
+			<classpath>
+				<fileset dir="${globuslibs}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${genlibs}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile">
+		<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="grid.client.GridClient" />
+				<attribute name="Class-Path"  value="${manifest.classpath}" />
+			</manifest>
+
+		</jar>
+		<echo>Utworzono  -> ${ant.project.name}.jar</echo>
+	</target>
+
+	<target name="run" depends="dist">
+		<java jar="${dist}/${ant.project.name}.jar" fork="true" />
+	</target>
+
+
+
+	<target name="clean">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+
+</project>

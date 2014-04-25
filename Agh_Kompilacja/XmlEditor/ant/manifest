@@ -1,0 +1,2 @@
+Main-Class: xml.editor.XmlEditor
+Class-Path: jdom.jar

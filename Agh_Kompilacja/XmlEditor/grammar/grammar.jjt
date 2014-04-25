@@ -1,0 +1,698 @@
+options {
+	STATIC = false;
+	TRACK_TOKENS=true;
+	MULTI=true;
+}
+
+PARSER_BEGIN(XMLDTDParser)
+package parser;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import xml.editor.gui.EditorPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Highlighter;
+import java.awt.Color;
+import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
+
+
+
+public class XMLDTDParser
+{
+	public SimpleNode rootDocType = null;
+	public SimpleNode rootData = null;
+
+	public String messageError = null;
+
+        public Token tokenError = null;
+	public Token tokenErrorSecondary = null;
+
+	public ParseException parseException = null;
+	public TokenMgrError parseError = null;
+
+	public char[] getBuffer()
+	{
+		return jj_input_stream.buffer;
+	}
+
+	public ArrayList getParsedElements()
+	{
+		ArrayList elementNodeList = new ArrayList();
+		ArrayList stack = new ArrayList();
+		stack.add( rootDocType );
+		while ( stack.size() > 0 )
+		{
+			SimpleNode currentNode = ( SimpleNode ) stack.get( stack.size() - 1 );
+			
+			if( currentNode instanceof ASTElementNode )
+				elementNodeList.add( stack.get( stack.size() - 1 ) );
+			
+			stack.remove( currentNode );
+			
+			for( int i = 0; i != currentNode.jjtGetNumChildren(); i++ )
+				stack.add( currentNode.jjtGetChild( i ) );
+		}
+
+		return elementNodeList;
+	}
+
+	public ArrayList getParsedAttributes()
+	{
+		ArrayList elementNodeList = new ArrayList();
+		ArrayList stack = new ArrayList();
+		stack.add( rootDocType );
+		while ( stack.size() > 0 )
+		{
+			SimpleNode currentNode = ( SimpleNode ) stack.get( stack.size() - 1 );
+			
+			if( currentNode instanceof ASTAttributeListNode )
+				elementNodeList.add( stack.get( stack.size() - 1 ) );
+			
+			stack.remove( currentNode );
+			
+			for( int i = 0; i != currentNode.jjtGetNumChildren(); i++ )
+				stack.add( currentNode.jjtGetChild( i ) );
+		}
+
+		return elementNodeList;
+	}
+
+	public ArrayList getParsedEntities()
+	{
+		ArrayList elementNodeList = new ArrayList();
+		ArrayList stack = new ArrayList();
+		stack.add( rootDocType );
+		while ( stack.size() > 0 )
+		{
+			SimpleNode currentNode = ( SimpleNode ) stack.get( stack.size() - 1 );
+			
+			if( currentNode instanceof ASTEntityNode )
+				elementNodeList.add( stack.get( stack.size() - 1 ) );
+			
+			stack.remove( currentNode );
+			
+			for( int i = 0; i != currentNode.jjtGetNumChildren(); i++ )
+				stack.add( currentNode.jjtGetChild( i ) );
+		}
+
+		return elementNodeList;
+	}
+
+	public String erraseMultiplicityFromName( String _name )
+	{
+		if( ( _name.charAt( _name.length() - 1 ) == '*' ) || 
+			( _name.charAt( _name.length() - 1 ) == '+' ) ||
+			( _name.charAt( _name.length() - 1 ) == '?' ) )
+			_name = _name.substring( 0, _name.length() - 1 );
+		return _name;
+	}	
+
+}
+
+PARSER_END(XMLDTDParser)
+
+TOKEN :
+{
+	<LETTER:	[ "A"-"Z", "a"-"z" ]					>
+|	<DIGIT:		[ "0"-"9" ]						>
+|	<NAMECHAR:	( <LETTER> | <DIGIT> | "." | "-" | "_" | ":" | "'" )	>
+|	<FIXED:		"#FIXED"						>
+|	<IMPLIED:	"#IMPLIED"						>
+|	<PCDATA:	"#PCDATA"						>
+|	<REQUIRED:	"#REQUIRED"						>
+|	<CDATA:		"CDATA"							>
+|	<ANY:		"ANY"							>
+|	<EMPTY:		"EMPTY"							>
+|	<ID:		"ID"							>
+|	<IDREF:		"IDREF"							>
+|	<IDREFS:	"IDREFS"						>
+|	<ENTITY:	"ENTITY"						>
+|	<ENTITIES:	"ENTITIES"						>
+|	<NMTOKEN:	"NMTOKEN"						>
+|	<NMTOKENS:	"NMTOKENS"						>
+|	<NOTATION:	"NOTATION"						>
+|	<NAME:		( <NAMECHAR> )+						>
+|	<NAME_WITH_MULTIPLICITY: <NAME> ( "+" | "*" | "?")				>
+}
+
+SKIP :
+{
+	<	( " " | "\t" | "\n" | "\r" )+					>
+|	<	"<!--" ( ~["-"] | ( "-" ~["-"] ) )* "-->"			>
+|	<	"<?"   (~[">"])* ">"						>
+}
+
+
+SimpleNode rootDocType() :
+{
+}
+{
+	{
+		rootDocType = jjtThis;
+	}
+
+	( parseDocType() )?
+
+	{
+		return jjtThis;
+	}
+}
+
+SimpleNode rootData() :
+{
+}
+{
+	{
+		rootData = jjtThis;
+	}
+
+	parseData()
+
+	{
+		return jjtThis;
+	}
+}
+
+void parseDocType() #DocTypeNode(true) :
+{
+	Token t;
+	ASTElementNode elementNode;
+	ASTAttributeListNode attributeListNode;
+	ASTEntityNode entityNode;
+	int start;
+	int end;
+	Highlighter h;
+}
+{
+	"<!DOCTYPE" t=<NAME>
+	{
+		jjtThis.jjtSetValue( t );
+	}
+
+	"["
+	(
+		LOOKAHEAD( 4 )
+
+		elementNode = parseElement()
+		{
+			start = EditorPane.getInstance().getTextPosition( elementNode.jjtGetFirstToken().beginLine, elementNode.jjtGetFirstToken().beginColumn );
+			end = EditorPane.getInstance().getTextPosition( elementNode.jjtGetLastToken().endLine, elementNode.jjtGetLastToken().endColumn );
+			end += elementNode.jjtGetLastToken().image.length();
+			h = EditorPane.getInstance().getHighlighter();
+			try {	
+				h.addHighlight( start, end, new DefaultHighlightPainter(Color.orange) );
+			} catch (BadLocationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+		}
+
+		|
+
+		attributeListNode = parseAttributeList()
+		{
+			start = EditorPane.getInstance().getTextPosition( attributeListNode.jjtGetFirstToken().beginLine, attributeListNode.jjtGetFirstToken().beginColumn );
+			end = EditorPane.getInstance().getTextPosition( attributeListNode.jjtGetLastToken().endLine, attributeListNode.jjtGetLastToken().endColumn );
+			end += attributeListNode.jjtGetLastToken().image.length();
+			h = EditorPane.getInstance().getHighlighter();
+			try {
+				h.addHighlight( start, end, new DefaultHighlightPainter(Color.cyan) );
+			} catch (BadLocationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+		}
+		
+		|
+
+		entityNode = parseEntity()
+		{
+			start = EditorPane.getInstance().getTextPosition( entityNode.jjtGetFirstToken().beginLine, entityNode.jjtGetFirstToken().beginColumn );
+			end = EditorPane.getInstance().getTextPosition( entityNode.jjtGetLastToken().endLine, entityNode.jjtGetLastToken().endColumn );
+			end += entityNode.jjtGetLastToken().image.length();
+			h = EditorPane.getInstance().getHighlighter();
+			try {
+				h.addHighlight( start, end, new DefaultHighlightPainter(Color.white) );
+			} catch (BadLocationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+		}
+
+	)*
+	"]>" 
+
+}
+
+
+ASTElementNode parseElement() #ElementNode(true) :
+{
+	Token t;
+	SimpleNode node;
+}
+{
+	"<!ELEMENT" t=<NAME>
+	{
+		jjtThis.jjtSetValue( t );
+	}
+
+	"("
+
+	(
+		LOOKAHEAD(2)
+		parseElementContent()
+		","
+		
+	)*
+
+	parseElementContent()
+	")"
+
+	">"
+
+	{
+    		int start = EditorPane.getInstance().getTextPosition( t.beginLine, t.beginColumn );
+    		int end = start + t.image.length();
+    			
+    		Highlighter h = EditorPane.getInstance().getHighlighter();
+    		try {
+    			h.addHighlight(start, end, new DefaultHighlightPainter(Color.magenta));
+    		} catch (BadLocationException e1) {
+			e1.printStackTrace();
+		} 
+
+		return jjtThis;
+	}
+
+}
+
+void parseElementContent() #ElementContentNode(true) :
+{
+	Token t;
+}
+{
+	( 
+		t=<NAME_WITH_MULTIPLICITY>
+		|
+		t=<NAME>
+		|
+		t=<PCDATA>
+		|
+		t=<CDATA>
+		|
+		t=<EMPTY>
+	)
+	{
+		jjtThis.jjtSetValue( t );
+	}
+}
+
+ASTAttributeListNode parseAttributeList() #AttributeListNode(true) :
+{
+	Token t;
+	Token fixedT = new Token();
+}
+{
+	"<!ATTLIST" t=<NAME>
+	{
+		jjtThis.jjtSetValue( t );
+	}
+
+	t=<NAME>
+	{
+		jjtThis.attributeNameToken = t;
+		int start = EditorPane.getInstance().getTextPosition( t.beginLine, t.beginColumn );
+		int end = start + t.image.length();
+   			
+		Highlighter h = EditorPane.getInstance().getHighlighter();
+		try {
+			h.addHighlight(start, end, new DefaultHighlightPainter(Color.green));
+		} catch (BadLocationException e1) {
+    			e1.printStackTrace();
+		} 
+	}
+
+	(
+		t=<CDATA>
+		|
+		t=<ID>
+		|
+		t=<IDREF>
+		|
+		t=<IDREFS>
+		|
+		t=<NMTOKEN>
+		|
+		t=<NMTOKENS>
+		|
+		t=<ENTITY>
+		|
+		t=<ENTITIES>
+		|
+		t=<NOTATION>
+	)
+	{
+		jjtThis.attributeTypeToken = t;
+	}
+
+	(
+
+		LOOKAHEAD( 2 )
+
+		"\""
+		t=<NAME>
+		"\""
+
+		|
+	
+		(
+			t=<REQUIRED>
+
+			|
+
+			t=<IMPLIED>
+
+			|
+
+			t=<FIXED>
+
+			"=\""
+			fixedT=<NAME>
+			"\""
+		)
+
+	)
+	{
+		jjtThis.attributeValueToken = t;
+		jjtThis.fixedToken = fixedT;
+	}
+	
+	">"
+
+	{
+		return jjtThis;
+	}
+
+}
+
+
+ASTEntityNode parseEntity() #EntityNode(true) :
+{
+	Token t;
+	Token valueToken;
+
+	int previousBufferPosition = -1;
+	int currentBufferPosition = -1;
+}
+{
+	"<!ENTITY" t=<NAME>
+	{
+		jjtThis.name = t;
+		int start = EditorPane.getInstance().getTextPosition( t.beginLine, t.beginColumn );
+		int end = start + t.image.length();
+   			
+		Highlighter h = EditorPane.getInstance().getHighlighter();
+		try {
+			h.addHighlight(start, end, new DefaultHighlightPainter(Color.darkGray ));
+		} catch (BadLocationException e1) {
+    			e1.printStackTrace();
+		} 
+
+	}
+
+	"\""
+
+	valueToken=<NAME>
+	{
+		
+		jjtThis.valueToken = valueToken;
+		currentBufferPosition = jj_input_stream.bufpos;
+	}
+
+	(
+		valueToken=<NAME>
+		{
+			previousBufferPosition = currentBufferPosition;
+			currentBufferPosition = jj_input_stream.bufpos;
+			while ( previousBufferPosition != currentBufferPosition )
+			{
+				Token token = jjtThis.valueToken;
+				token.image = token.image + ( char ) jj_input_stream.buffer[ ++previousBufferPosition ];
+			}
+		}
+	)*
+
+	"\">"
+
+	{
+		return jjtThis;
+	}
+
+}
+
+
+void parseData() #DataNode(true) :
+{
+	Token startToken;
+	Token endToken;
+	Token valueToken;
+	int previousBufferPosition = -1;
+	int currentBufferPosition = -1;
+	ASTDataAttributeNode attributeNode;
+}
+{
+	"<"
+	startToken=<NAME>
+	
+	( 
+		attributeNode = parseDataAttribute()
+		{
+                        boolean matches = false;
+                        ArrayList attributes = getParsedAttributes();
+                        for( int i = 0; i != attributes.size(); i++ )
+                        {
+                                ASTAttributeListNode node = ( ASTAttributeListNode ) attributes.get( i );
+                                String name = erraseMultiplicityFromName( ( ( Token )node.jjtGetValue() ).image );
+                                if( ( name.compareToIgnoreCase( startToken.image ) == 0 ) && ( node.attributeNameToken.image.compareToIgnoreCase( ( ( Token ) attributeNode.jjtGetValue() ).image ) == 0 ) )
+                              		matches = true;
+                        }
+                        if( !matches && ( attributes.size() > 0 ) )
+                        {
+                                messageError = "attribute \"" + ( ( Token ) attributeNode.jjtGetValue() ).image + "\" isn't a element \"" + startToken.image + "\" attribute";
+                                tokenError = ( ( Token ) attributeNode.jjtGetValue() );
+                                tokenErrorSecondary = startToken;
+        	                throw new Exception();
+	                }
+
+			int start = EditorPane.getInstance().getTextPosition( ( ( Token ) attributeNode.jjtGetValue() ).beginLine, ( ( Token ) attributeNode.jjtGetValue() ).beginColumn );
+			int end = start + ( ( Token ) attributeNode.jjtGetValue() ).image.length();
+    			
+			Highlighter h = EditorPane.getInstance().getHighlighter();
+    			try {
+				h.addHighlight(start, end, new DefaultHighlightPainter(Color.cyan));
+			} catch (BadLocationException e1) {
+    				e1.printStackTrace();
+			} 
+
+		}
+	)*
+
+	">"
+
+	{
+		jjtThis.nameToken = startToken;
+		boolean matches = false;
+		ArrayList elements = getParsedElements();
+		for( int i = 0; i != elements.size(); i++ )
+		{
+			SimpleNode node = ( SimpleNode ) elements.get( i );
+			String name = erraseMultiplicityFromName( ( ( Token) node.jjtGetValue() ).image );
+			if( ( name.compareToIgnoreCase( startToken.image ) == 0 ) )
+				matches = true;
+		}
+		if( !matches && ( elements.size() > 0 ) )
+		{
+			messageError = "opening node \"" + startToken.image + "\" isn't defined in dtd's elements hierarchy";
+			tokenError = startToken;
+			throw new Exception();
+		}
+	
+
+	}
+
+	(
+
+		LOOKAHEAD(4)
+		"</"
+		endToken=<NAME>
+		">"
+		{
+			if( startToken.image.compareToIgnoreCase( endToken.image ) != 0 )
+			{
+				messageError = "wrong closing node \"" + endToken.image + "\" of node \"" + startToken.image + "\"";
+				tokenError = endToken;
+				tokenErrorSecondary = startToken;
+				throw new Exception();
+			}
+		}
+
+		|
+
+		valueToken=<NAME>
+		{
+			
+			matches = false;
+			elements = getParsedElements();
+			for( int i = 0; i != elements.size(); i++ )
+			{
+				SimpleNode node = ( SimpleNode ) elements.get( i );
+				String name = erraseMultiplicityFromName( ( ( Token )node.jjtGetValue() ).image );
+				if( ( name.compareToIgnoreCase( startToken.image ) == 0 ) && ( node.jjtGetNumChildren() == 1 ) && ( ( ( Token ) ( ( SimpleNode ) node.jjtGetChild( 0 ) ).jjtGetValue() ).image.compareToIgnoreCase( "EMPTY" ) == 0 ) )
+					matches = true;
+			}
+			if( matches && ( elements.size() > 0 ) )
+			{
+				messageError = "opening node \"" + startToken.image + "\" can't have value because its defined as EMPTY in dtd's element hierarchy";
+				tokenError = startToken;
+				throw new Exception();
+			}
+
+			jjtThis.jjtSetValue( valueToken );
+			currentBufferPosition = jj_input_stream.bufpos;
+		}
+		(
+			(
+				valueToken=<NAME>
+				{
+					previousBufferPosition = currentBufferPosition;
+					currentBufferPosition = jj_input_stream.bufpos;
+					while ( previousBufferPosition != currentBufferPosition )
+					{
+						Token token =  ( Token ) jjtThis.jjtGetValue();
+						token.image = token.image + ( char ) jj_input_stream.buffer[ ++previousBufferPosition ];
+					}
+				}
+			)*
+			
+			"</"
+			endToken=<NAME>
+			">"
+			{
+				if( startToken.image.compareToIgnoreCase( endToken.image.toString() ) != 0 )
+				{
+					messageError = "wrong closing node \"" + endToken.image + "\" of node \"" + startToken.image + "\"";
+					tokenError = endToken;
+					tokenErrorSecondary = startToken;
+					throw new Exception();
+				}
+			}
+		)
+
+		|
+		(
+			parseData()
+		)+
+
+		"</"
+		endToken=<NAME>
+		">"
+		{
+			if( startToken.image.compareToIgnoreCase( endToken.image ) != 0 )
+			{
+				messageError = "wrong closing node \"" + endToken.image + "\" of node \"" + startToken.image + "\"";
+				tokenError = endToken;
+				tokenErrorSecondary = startToken;
+				throw new Exception();
+			}
+		}
+
+	)
+
+	{
+		int start = EditorPane.getInstance().getTextPosition( startToken.beginLine, startToken.beginColumn );
+    		int end = start + startToken.image.length();
+    			
+    		Highlighter h = EditorPane.getInstance().getHighlighter();
+    		try {
+    			h.addHighlight(start, end, new DefaultHighlightPainter(Color.orange));
+    		} catch (BadLocationException e1) {
+    			e1.printStackTrace();
+    		} 
+
+		start = EditorPane.getInstance().getTextPosition( endToken.beginLine, endToken.beginColumn );
+    		end = start + endToken.image.length();
+    			
+    		try {
+    			h.addHighlight(start, end, new DefaultHighlightPainter(Color.orange));
+    		} catch (BadLocationException e1) {
+    			e1.printStackTrace();
+    		} 
+
+	}
+
+
+}
+
+ASTDataAttributeNode parseDataAttribute() #DataAttributeNode( true ) :
+{
+	int previousBufferPosition = -1;
+	int currentBufferPosition = -1;
+	Token startToken;
+	Token endToken;
+
+}
+{
+
+	startToken=<NAME>
+	{
+		jjtThis.jjtSetValue( startToken );
+	}
+
+	"=\""
+
+	endToken=<NAME>
+	{
+		jjtThis.attributeValueToken = endToken;
+		currentBufferPosition = jj_input_stream.bufpos;
+	}
+
+	(
+		endToken=<NAME>
+		{
+
+			previousBufferPosition = currentBufferPosition;
+			currentBufferPosition = jj_input_stream.bufpos;
+			while ( previousBufferPosition != currentBufferPosition )
+			{
+				Token token = ( Token ) jjtThis.attributeValueToken;
+				token.image = token.image + ( char ) jj_input_stream.buffer[ ++previousBufferPosition ];
+			}
+
+		}
+	)*
+
+
+	"\""
+
+	{
+		boolean matches = false;
+		ArrayList attributes = getParsedAttributes();
+		for( int i = 0; i != attributes.size(); i++ )
+		{
+			SimpleNode node = ( SimpleNode ) attributes.get( i );
+			String name = erraseMultiplicityFromName( ( ( Token )node.jjtGetValue() ).image );
+			if( ( name.compareToIgnoreCase( startToken.image ) == 0 ) && ( node.jjtGetNumChildren() == 1 ) && ( ( ( Token ) ( ( SimpleNode ) node.jjtGetChild( 0 ) ).jjtGetValue() ).image.compareToIgnoreCase( "EMPTY" ) == 0 ) )
+				matches = true;
+		}
+		if( matches && ( attributes.size() > 0 ) )
+		{
+			messageError = "opening node \"" + startToken.image + "\" can't have value because its defined as EMPTY in dtd's element hierarchy";
+			tokenError = startToken;
+			throw new Exception();
+		}
+		return jjtThis;
+	}
+
+}
+

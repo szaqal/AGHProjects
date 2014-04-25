@@ -1,0 +1,1 @@
+ALTER TABLE computation_settings ADD COLUMN description varchar(255);

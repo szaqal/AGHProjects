@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="4913,5090" id="computation.worker" metadata="uml2-1.0" initialized="true" zoom="0.5" scrolledX="367" scrolledY="1793" tag="1000" key="32303037303533312D313030302050726F63657373436F6D7075746174696F6E2F6D616C637A796B">
+  <children xsi:type="editmodel:InterfaceEditModel" name="ComputationPackageWorker" location="2451,2250" size="296,286" id="computation.worker/ComputationPackageWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="173,126">
+      <children xsi:type="editmodel:MethodEditModel" name="isPackageValid" id="computation.worker/ComputationPackageWorker#isPackageValid(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isPackageValid" id="computation.worker/ComputationPackageWorker#isPackageValid(Lcomputation.model.ComputationPackage;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputationPackage" id="computation.worker/ComputationPackageWorker#retrieveComputationPackage(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputationPackages" id="computation.worker/ComputationPackageWorker#retrieveComputationPackages()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveConfigFromPackage" id="computation.worker/ComputationPackageWorker#retrieveConfigFromPackage(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="saveComputationPackage" id="computation.worker/ComputationPackageWorker#saveComputationPackage(Lcomputation.model.ComputationPackage;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="saveComputationPackage" id="computation.worker/ComputationPackageWorker#saveComputationPackage([BLjava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="273,88">
+      <children xsi:type="editmodel:InterfaceEditModel" name="ComputationPackageWorkerLocal" size="259,42" id="computation.worker/ComputationPackageWorker$ComputationPackageWorkerLocal">
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+      <children xsi:type="editmodel:InterfaceEditModel" name="ComputationPackageWorkerRemote" size="273,42" id="computation.worker/ComputationPackageWorker$ComputationPackageWorkerRemote">
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationPackageWorker-Soyatec::Import->computation.model/ComputationPackage" source="//@children.0" target="//@children.12" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,103" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="178,102"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.14/@sourceConnections.0" name="ComputingNode" location="1350,2774" size="174,440" id="computation.model/ComputingNode">
+    <children xsi:type="editmodel:CompartmentEditModel" size="151,252">
+      <children xsi:type="editmodel:AttributeEditModel" name="arch" id="computation.model/ComputingNode#arch"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="currentLoad" id="computation.model/ComputingNode#currentLoad"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="freePhysicalMemory" id="computation.model/ComputingNode#freePhysicalMemory"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="host" id="computation.model/ComputingNode#host"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="inetAddr" id="computation.model/ComputingNode#inetAddr"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lastUpdateDate" id="computation.model/ComputingNode#lastUpdateDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lifeThreads" id="computation.model/ComputingNode#lifeThreads"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="operationPort" id="computation.model/ComputingNode#operationPort"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="osName" id="computation.model/ComputingNode#osName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="physicalMemory" id="computation.model/ComputingNode#physicalMemory"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="port" id="computation.model/ComputingNode#port"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="processorCount" id="computation.model/ComputingNode#processorCount"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="vmName" id="computation.model/ComputingNode#vmName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="vmVendor" id="computation.model/ComputingNode#vmVendor"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="140,126">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputingNode" id="computation.model/ComputingNode#ComputingNode(Lcomputation.model.RegistrationData;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getFullJson" id="computation.model/ComputingNode#getFullJson()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputingNode#getJsonData()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getUniqueId" id="computation.model/ComputingNode#getUniqueId()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="populate" id="computation.model/ComputingNode#populate(Lnode.ServerData;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="computation.model/ComputingNode#toString()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="updateLastUpdateDate" id="computation.model/ComputingNode#updateLastUpdateDate()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.7/@sourceConnections.0 //@children.8/@sourceConnections.0 //@children.14/@sourceConnections.1 //@children.4/@sourceConnections.0" name="PerformedComputation" location="1590,2849" size="190,188" id="computation.model/PerformedComputation">
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING" id="computation.model/PerformedComputation#eXISTING"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING_COUNT" id="computation.model/PerformedComputation#eXISTING_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="endDate" id="computation.model/PerformedComputation#endDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="startDate" id="computation.model/PerformedComputation#startDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/PerformedComputation#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="139,36">
+      <children xsi:type="editmodel:MethodEditModel" name="PerformedComputation" id="computation.model/PerformedComputation#PerformedComputation()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/PerformedComputation#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/PerformedComputation-Soyatec::Import->computation.model/Computation" source="//@children.2" target="//@children.13" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="190,94" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,109"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.13/@sourceConnections.0 //@children.5/@sourceConnections.0 //@children.16/@sourceConnections.0 //@children.22/@sourceConnections.0 //@children.18/@sourceConnections.0" name="ComputationTaskOutput" location="1934,3344" size="193,242" id="computation.model/ComputationTaskOutput">
+    <children xsi:type="editmodel:CompartmentEditModel" size="110,108">
+      <children xsi:type="editmodel:AttributeEditModel" name="id" id="computation.model/ComputationTaskOutput#id"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="computation.model/ComputationTaskOutput#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="oUT_BY_ID" id="computation.model/ComputationTaskOutput#oUT_BY_ID"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="result" id="computation.model/ComputationTaskOutput#result"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationTaskOutput#uniqueId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="valueName" id="computation.model/ComputationTaskOutput#valueName"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="143,72">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationTaskOutput" id="computation.model/ComputationTaskOutput#ComputationTaskOutput()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationTaskOutput#getJsonData()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setStrResult" id="computation.model/ComputationTaskOutput#setStrResult(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="computation.model/ComputationTaskOutput#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationTaskOutput-Soyatec::Import->computation.model/ComputationTask" source="//@children.3" target="//@children.16" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="139,242" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="255,15"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="PerformedComputationWorker" location="1689,2251" size="236,134" id="computation.worker/PerformedComputationWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="204,72">
+      <children xsi:type="editmodel:MethodEditModel" name="retrievePerformedComputation" id="computation.worker/PerformedComputationWorker#retrievePerformedComputation(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrievePerformedComputationCount" id="computation.worker/PerformedComputationWorker#retrievePerformedComputationCount()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrievePerformedComputations" id="computation.worker/PerformedComputationWorker#retrievePerformedComputations(Lcore.utils.PagingInfo;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="savePerformedComputation" id="computation.worker/PerformedComputationWorker#savePerformedComputation(Lcomputation.model.PerformedComputation;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="285,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/PerformedComputationWorker-Soyatec::Import->computation.model/PerformedComputation" source="//@children.4" target="//@children.2" targetEnd="//@children.4/@sourceConnections.0/@children.2" label="//@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="45,134" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="144,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.13/@sourceConnections.1 //@children.11/@sourceConnections.1" name="ComputationTransition" location="1669,3242" size="186,188" id="computation.model/ComputationTransition">
+    <children xsi:type="editmodel:CompartmentEditModel" size="135,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_PREV_NEXT" id="computation.model/ComputationTransition#bY_PREV_NEXT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nextInputId" id="computation.model/ComputationTransition#nextInputId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="previousOutputId" id="computation.model/ComputationTransition#previousOutputId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="transitionId" id="computation.model/ComputationTransition#transitionId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationTransition#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="136,36">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationTransition" id="computation.model/ComputationTransition#ComputationTransition()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationTransition#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationTransition-Soyatec::Import->computation.model/ComputationTaskOutput" source="//@children.5" target="//@children.3" targetEnd="//@children.5/@sourceConnections.0/@children.2" label="//@children.5/@sourceConnections.0/@children.0" sourceEnd="//@children.5/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="186,145" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,43"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationTransition-Soyatec::Import->computation.model/ComputationTaskInput" source="//@children.5" target="//@children.20" targetEnd="//@children.5/@sourceConnections.1/@children.2" label="//@children.5/@sourceConnections.1/@children.0" sourceEnd="//@children.5/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="186,76" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,129"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationTransition-Soyatec::Import->computation.model/Computation" source="//@children.5" target="//@children.13" targetEnd="//@children.5/@sourceConnections.2/@children.2" label="//@children.5/@sourceConnections.2/@children.0" sourceEnd="//@children.5/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="157,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,299"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="ComputationConfgurationWorker" location="2642,845" size="323,250" id="computation.worker/ComputationConfgurationWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="224,90">
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveById" id="computation.worker/ComputationConfgurationWorker#retrieveById(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputationConfigurations" id="computation.worker/ComputationConfgurationWorker#retrieveComputationConfigurations(Lcore.utils.PagingInfo;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputationConfigurations" id="computation.worker/ComputationConfgurationWorker#retrieveComputationConfigurations()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputationConfigurationsCount" id="computation.worker/ComputationConfgurationWorker#retrieveComputationConfigurationsCount()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="store" id="computation.worker/ComputationConfgurationWorker#store([BLjava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="300,88">
+      <children xsi:type="editmodel:InterfaceEditModel" name="ComputationConfgurationWorkerLocal" size="286,42" id="computation.worker/ComputationConfgurationWorker$ComputationConfgurationWorkerLocal">
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+      <children xsi:type="editmodel:InterfaceEditModel" name="ComputationConfgurationWorkerRemote" size="300,42" id="computation.worker/ComputationConfgurationWorker$ComputationConfgurationWorkerRemote">
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationConfgurationWorker-Soyatec::Import->computation.model/ComputationConfiguration" source="//@children.6" target="//@children.17" targetEnd="//@children.6/@sourceConnections.0/@children.2" label="//@children.6/@sourceConnections.0/@children.0" sourceEnd="//@children.6/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="209,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="104,206"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.15/@sourceConnections.0" name="ComputationLogEntry" location="1394,2543" size="277,206" id="computation.model/ComputationLogEntry">
+    <children xsi:type="editmodel:CompartmentEditModel" size="254,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_PERFORMED_COMPUTATION" id="computation.model/ComputationLogEntry#bY_PERFORMED_COMPUTATION"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_PERFORMED_COMPUTATION_COUNT" id="computation.model/ComputationLogEntry#bY_PERFORMED_COMPUTATION_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="createTime" id="computation.model/ComputationLogEntry#createTime"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="message" id="computation.model/ComputationLogEntry#message"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationLogEntry#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="132,54">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationLogEntry" id="computation.model/ComputationLogEntry#ComputationLogEntry()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationLogEntry" id="computation.model/ComputationLogEntry#ComputationLogEntry(Ljava.lang.String;Lcomputation.model.PerformedComputation;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationLogEntry#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationLogEntry-Soyatec::Import->computation.model/PerformedComputation" source="//@children.7" target="//@children.2" targetEnd="//@children.7/@sourceConnections.0/@children.2" label="//@children.7/@sourceConnections.0/@children.0" sourceEnd="//@children.7/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="236,206" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="40,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.9/@sourceConnections.0" name="ComputationResult" location="1964,2525" size="209,224" id="computation.model/ComputationResult">
+    <children xsi:type="editmodel:CompartmentEditModel" size="186,108">
+      <children xsi:type="editmodel:AttributeEditModel" name="createDate" id="computation.model/ComputationResult#createDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING" id="computation.model/ComputationResult#eXISTING"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING_BY_USR" id="computation.model/ComputationResult#eXISTING_BY_USR"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING_BY_USR_COUNT" id="computation.model/ComputationResult#eXISTING_BY_USR_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="result" id="computation.model/ComputationResult#result"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationResult#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="119,54">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationResult" id="computation.model/ComputationResult#ComputationResult()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationResult" id="computation.model/ComputationResult#ComputationResult([B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationResult#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationResult-Standard::Call->computation.model/PerformedComputation*computation.model/ComputationResult-Soyatec::Import->computation.model/PerformedComputation" source="//@children.8" target="//@children.2" targetEnd="//@children.8/@sourceConnections.0/@children.2" label="//@children.8/@sourceConnections.0/@children.0" sourceEnd="//@children.8/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Import»" size="64,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,195" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="190,18"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationResult-Standard::Call->computation.model/Computation" source="//@children.8" target="//@children.13" targetEnd="//@children.8/@sourceConnections.1/@children.2" label="//@children.8/@sourceConnections.1/@children.0" sourceEnd="//@children.8/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call»" size="29,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="104,224" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="144,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="ComputationResultWorker" location="1965,2251" size="208,170" id="computation.worker/ComputationResultWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="156,108">
+      <children xsi:type="editmodel:MethodEditModel" name="resultsCount" id="computation.worker/ComputationResultWorker#resultsCount(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveAsXml" id="computation.worker/ComputationResultWorker#retrieveAsXml(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputationResult" id="computation.worker/ComputationResultWorker#retrieveComputationResult(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveResults" id="computation.worker/ComputationResultWorker#retrieveResults()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveResults" id="computation.worker/ComputationResultWorker#retrieveResults(Lcore.utils.PagingInfo;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="saveResult" id="computation.worker/ComputationResultWorker#saveResult(Lcomputation.model.ComputationResult;I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="257,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationResultWorker-Soyatec::Import->computation.model/ComputationResult" source="//@children.9" target="//@children.8" targetEnd="//@children.9/@sourceConnections.0/@children.2" label="//@children.9/@sourceConnections.0/@children.0" sourceEnd="//@children.9/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="103,170" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="104,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.22/@sourceConnections.1" name="ComputationForTask" location="3009,3988" size="175,170" id="computation.model/ComputationForTask">
+    <children xsi:type="editmodel:CompartmentEditModel" size="152,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_COMP_ID" id="computation.model/ComputationForTask#bY_COMP_ID"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_COMP_TASK_ID" id="computation.model/ComputationForTask#bY_COMP_TASK_ID"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="fIRST_BY_COMP_ID" id="computation.model/ComputationForTask#fIRST_BY_COMP_ID"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationForTask#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="127,36">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationForTask" id="computation.model/ComputationForTask#ComputationForTask()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationForTask#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationForTask-Soyatec::Import->computation.model/Computation" source="//@children.10" target="//@children.13" targetEnd="//@children.10/@sourceConnections.0/@children.2" label="//@children.10/@sourceConnections.0/@children.0" sourceEnd="//@children.10/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="6,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="294,312"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationForTask-Soyatec::Import->computation.model/ComputationTask" source="//@children.10" target="//@children.16" targetEnd="//@children.10/@sourceConnections.1/@children.2" label="//@children.10/@sourceConnections.1/@children.0" sourceEnd="//@children.10/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,46" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="255,375"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="ComputationPerformerWorker" location="1350,3434" size="233,134" id="computation.worker/ComputationPerformerWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="165,72">
+      <children xsi:type="editmodel:MethodEditModel" name="createRunnableComputation" id="computation.worker/ComputationPerformerWorker#createRunnableComputation(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createRunnableComputation" id="computation.worker/ComputationPerformerWorker#createRunnableComputation(Ljava.util.Collection;Ljava.util.Collection;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="doComputation" id="computation.worker/ComputationPerformerWorker#doComputation(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setup" id="computation.worker/ComputationPerformerWorker#setup(Ljava.util.Map;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="282,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationPerformerWorker-Soyatec::Import->computation.engine/RunableComputation" source="//@children.11" target="//@children.19" targetEnd="//@children.11/@sourceConnections.0/@children.2" label="//@children.11/@sourceConnections.0/@children.0" sourceEnd="//@children.11/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="116,134" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="116,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationPerformerWorker-Soyatec::Import->computation.model/ComputationTransition" source="//@children.11" target="//@children.5" targetEnd="//@children.11/@sourceConnections.1/@children.2" label="//@children.11/@sourceConnections.1/@children.0" sourceEnd="//@children.11/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="233,2" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,146"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationPerformerWorker-Soyatec::Import->computation.model/ComputationTask" source="//@children.11" target="//@children.16" targetEnd="//@children.11/@sourceConnections.2/@children.2" label="//@children.11/@sourceConnections.2/@children.0" sourceEnd="//@children.11/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="232,134" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,138"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0 //@children.18/@sourceConnections.3" name="ComputationPackage" location="2220,2251" size="178,206" id="computation.model/ComputationPackage">
+    <children xsi:type="editmodel:CompartmentEditModel" size="146,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="addDate" id="computation.model/ComputationPackage#addDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="cONFIG_FILENAME" id="computation.model/ComputationPackage#cONFIG_FILENAME"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="title" id="computation.model/ComputationPackage#title"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationPackage#uniqueId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="validated" id="computation.model/ComputationPackage#validated"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="130,54">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationPackage" id="computation.model/ComputationPackage#ComputationPackage()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getFileContentId" id="computation.model/ComputationPackage#getFileContentId()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationPackage#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.21/@sourceConnections.0 //@children.5/@sourceConnections.2 //@children.8/@sourceConnections.1 //@children.10/@sourceConnections.0 //@children.18/@sourceConnections.1 //@children.2/@sourceConnections.0" name="Computation" location="1924,2834" size="294,314" id="computation.model/Computation">
+    <children xsi:type="editmodel:CompartmentEditModel" size="271,162">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_COMPUTATION_ID" id="computation.model/Computation#bY_COMPUTATION_ID"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="computationId" id="computation.model/Computation#computationId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="computationSettings" id="computation.model/Computation#computationSettings"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="computationTasks" id="computation.model/Computation#computationTasks"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="computationTransitions" id="computation.model/Computation#computationTransitions"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="computation.model/Computation#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING" id="computation.model/Computation#eXISTING"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING_COUNT" id="computation.model/Computation#eXISTING_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/Computation#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="93,90">
+      <children xsi:type="editmodel:MethodEditModel" name="Computation" id="computation.model/Computation#Computation()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addSetting" id="computation.model/Computation#addSetting(Lcomputation.model.ComputationSetting;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addTask" id="computation.model/Computation#addTask(Lcomputation.model.ComputationTask;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addTransiton" id="computation.model/Computation#addTransiton(Lcomputation.model.ComputationTransition;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/Computation#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/Computation-Soyatec::Import->computation.model/ComputationTaskOutput" source="//@children.13" target="//@children.3" targetEnd="//@children.13/@sourceConnections.0/@children.2" label="//@children.13/@sourceConnections.0/@children.0" sourceEnd="//@children.13/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="106,314" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="96,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/Computation-Standard::Call->computation.model/ComputationTransition*computation.model/Computation-Soyatec::Import->computation.model/ComputationTransition" source="//@children.13" target="//@children.5" targetEnd="//@children.13/@sourceConnections.1/@children.2" label="//@children.13/@sourceConnections.1/@children.0" sourceEnd="//@children.13/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Import»" size="64,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="6,314" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="177,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/Computation-Standard::Call->computation.model/ComputationTask*computation.model/Computation-Soyatec::Import->computation.model/ComputationTask" source="//@children.13" target="//@children.16" targetEnd="//@children.13/@sourceConnections.2/@children.2" label="//@children.13/@sourceConnections.2/@children.0" sourceEnd="//@children.13/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Import»" size="64,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="174,314" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="118,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/Computation-Soyatec::Import->computation.model/ComputationTaskInput" source="//@children.13" target="//@children.20" targetEnd="//@children.13/@sourceConnections.3/@children.2" label="//@children.13/@sourceConnections.3/@children.0" sourceEnd="//@children.13/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="294,207" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,72"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="NodeInvokerWorker" location="1559,3075" size="168,80" id="computation.worker/NodeInvokerWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="61,18">
+      <children xsi:type="editmodel:MethodEditModel" name="invoke" id="computation.worker/NodeInvokerWorker#invoke(Lcomputation.model.ComputingNode;Ljava.util.Map;Ljava.util.HashMap;Ljava.lang.String;Lcomputation.model.PerformedComputation;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="217,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/NodeInvokerWorker-Soyatec::Import->computation.model/ComputingNode" source="//@children.14" target="//@children.1" targetEnd="//@children.14/@sourceConnections.0/@children.2" label="//@children.14/@sourceConnections.0/@children.0" sourceEnd="//@children.14/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="16,40" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="174,341"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/NodeInvokerWorker-Soyatec::Import->computation.model/PerformedComputation" source="//@children.14" target="//@children.2" targetEnd="//@children.14/@sourceConnections.1/@children.2" label="//@children.14/@sourceConnections.1/@children.0" sourceEnd="//@children.14/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="99,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="68,188"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="ComputationLogEntryWorker" location="1445,2251" size="225,116" id="computation.worker/ComputationLogEntryWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="119,54">
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveLogs" id="computation.worker/ComputationLogEntryWorker#retrieveLogs(ILcore.utils.PagingInfo;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveLogsCount" id="computation.worker/ComputationLogEntryWorker#retrieveLogsCount(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="store" id="computation.worker/ComputationLogEntryWorker#store(Lcomputation.model.ComputationLogEntry;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="274,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationLogEntryWorker-Soyatec::Import->computation.model/ComputationLogEntry" source="//@children.15" target="//@children.7" targetEnd="//@children.15/@sourceConnections.0/@children.2" label="//@children.15/@sourceConnections.0/@children.0" sourceEnd="//@children.15/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="112,116" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="163,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.13/@sourceConnections.2 //@children.11/@sourceConnections.2 //@children.19/@sourceConnections.0 //@children.22/@sourceConnections.2 //@children.3/@sourceConnections.0 //@children.10/@sourceConnections.1 //@children.20/@sourceConnections.0" name="ComputationTask" location="1980,3659" size="255,422" id="computation.model/ComputationTask">
+    <children xsi:type="editmodel:CompartmentEditModel" size="232,180">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_TASK_ID" id="computation.model/ComputationTask#bY_TASK_ID"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="className" id="computation.model/ComputationTask#className"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="computation.model/ComputationTask#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="inputs" id="computation.model/ComputationTask#inputs"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="outputs" id="computation.model/ComputationTask#outputs"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="performer" id="computation.model/ComputationTask#performer"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="start" id="computation.model/ComputationTask#start"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="taskId" id="computation.model/ComputationTask#taskId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="taskName" id="computation.model/ComputationTask#taskName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationTask#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="117,180">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationTask" id="computation.model/ComputationTask#ComputationTask()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addInput" id="computation.model/ComputationTask#addInput(Lcomputation.model.ComputationTaskInput;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addOutput" id="computation.model/ComputationTask#addOutput(Lcomputation.model.ComputationTaskOutput;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getInputById" id="computation.model/ComputationTask#getInputById(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getInputByName" id="computation.model/ComputationTask#getInputByName(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationTask#getJsonData()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getOutputById" id="computation.model/ComputationTask#getOutputById(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getOutputByName" id="computation.model/ComputationTask#getOutputByName(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hasInput" id="computation.model/ComputationTask#hasInput(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="computation.model/ComputationTask#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationTask-Standard::Call->computation.model/ComputationTaskOutput*computation.model/ComputationTask-Soyatec::Import->computation.model/ComputationTaskOutput" source="//@children.16" target="//@children.3" targetEnd="//@children.16/@sourceConnections.0/@children.2" label="//@children.16/@sourceConnections.0/@children.0" sourceEnd="//@children.16/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Import»" size="64,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="73,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="119,242"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationTask-Standard::Call->computation.model/ComputationTaskInput*computation.model/ComputationTask-Soyatec::Import->computation.model/ComputationTaskInput" source="//@children.16" target="//@children.20" targetEnd="//@children.16/@sourceConnections.1/@children.2" label="//@children.16/@sourceConnections.1/@children.0" sourceEnd="//@children.16/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Import»" size="64,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="255,123" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,165"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0" name="ComputationConfiguration" location="2747,50" size="209,206" id="computation.model/ComputationConfiguration">
+    <children xsi:type="editmodel:CompartmentEditModel" size="183,108">
+      <children xsi:type="editmodel:AttributeEditModel" name="cONFIGURATIONS" id="computation.model/ComputationConfiguration#cONFIGURATIONS"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="cONFIGURATIONS_COUNT" id="computation.model/ComputationConfiguration#cONFIGURATIONS_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="configurationId" id="computation.model/ComputationConfiguration#configurationId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="computation.model/ComputationConfiguration#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationConfiguration#uniqueId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="validated" id="computation.model/ComputationConfiguration#validated"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="153,36">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationConfiguration" id="computation.model/ComputationConfiguration#ComputationConfiguration()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationConfiguration#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="ComputationWorker" location="2295,2553" size="229,296" id="computation.worker/ComputationWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="206,234">
+      <children xsi:type="editmodel:MethodEditModel" name="createComputation" id="computation.worker/ComputationWorker#createComputation(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createComputation" id="computation.worker/ComputationWorker#createComputation(Lcomputation.model.ComputationPackage;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createComputationFromConfig" id="computation.worker/ComputationWorker#createComputationFromConfig(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="rerieveByTask" id="computation.worker/ComputationWorker#rerieveByTask(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retieveTasksForComputation" id="computation.worker/ComputationWorker#retieveTasksForComputation(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveByTask" id="computation.worker/ComputationWorker#retrieveByTask(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputation" id="computation.worker/ComputationWorker#retrieveComputation(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputationByComputationId" id="computation.worker/ComputationWorker#retrieveComputationByComputationId(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputations" id="computation.worker/ComputationWorker#retrieveComputations(Lcore.utils.PagingInfo;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveComputationsCount" id="computation.worker/ComputationWorker#retrieveComputationsCount()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveTaskInputs" id="computation.worker/ComputationWorker#retrieveTaskInputs(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveTransitionsForComputation" id="computation.worker/ComputationWorker#retrieveTransitionsForComputation(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="runProcess" id="computation.worker/ComputationWorker#runProcess(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="218,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationWorker-Soyatec::Import->computation.model/ComputationTaskOutput" source="//@children.18" target="//@children.3" targetEnd="//@children.18/@sourceConnections.0/@children.2" label="//@children.18/@sourceConnections.0/@children.0" sourceEnd="//@children.18/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="41,296" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="156,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationWorker-Soyatec::Import->computation.model/Computation" source="//@children.18" target="//@children.13" targetEnd="//@children.18/@sourceConnections.1/@children.2" label="//@children.18/@sourceConnections.1/@children.0" sourceEnd="//@children.18/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,288" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="294,7"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationWorker-Soyatec::Import->computation.model/ComputationTaskInput" source="//@children.18" target="//@children.20" targetEnd="//@children.18/@sourceConnections.2/@children.2" label="//@children.18/@sourceConnections.2/@children.0" sourceEnd="//@children.18/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="229,273" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,4"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationWorker-Soyatec::Import->computation.model/ComputationPackage" source="//@children.18" target="//@children.12" targetEnd="//@children.18/@sourceConnections.3/@children.2" label="//@children.18/@sourceConnections.3/@children.0" sourceEnd="//@children.18/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="51,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="126,206"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.11/@sourceConnections.0" name="RunableComputation" location="1350,3614" size="305,206" id="computation.engine/RunableComputation">
+    <children xsi:type="editmodel:CompartmentEditModel" size="282,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="tasks" id="computation.engine/RunableComputation#tasks"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="transitionMapping" id="computation.engine/RunableComputation#transitionMapping"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="128,108">
+      <children xsi:type="editmodel:MethodEditModel" name="RunableComputation" id="computation.engine/RunableComputation#RunableComputation()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addMapping" id="computation.engine/RunableComputation#addMapping(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addTask" id="computation.engine/RunableComputation#addTask(Lcomputation.model.ComputationTask;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addTaskClass" id="computation.engine/RunableComputation#addTaskClass(Ljava.lang.Class;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getNextInput" id="computation.engine/RunableComputation#getNextInput(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getNextTask" id="computation.engine/RunableComputation#getNextTask(Lcomputation.model.ComputationTask;Lapi.computation.ComputableTask;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.engine/RunableComputation-Standard::Call->computation.model/ComputationTask*computation.engine/RunableComputation-Soyatec::Import->computation.model/ComputationTask" source="//@children.19" target="//@children.16" targetEnd="//@children.19/@sourceConnections.0/@children.2" label="//@children.19/@sourceConnections.0/@children.0" sourceEnd="//@children.19/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Import»" size="64,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="305,125" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,80"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.13/@sourceConnections.3 //@children.5/@sourceConnections.1 //@children.16/@sourceConnections.1 //@children.18/@sourceConnections.2" name="ComputationTaskInput" location="2860,3189" size="183,206" id="computation.model/ComputationTaskInput">
+    <children xsi:type="editmodel:CompartmentEditModel" size="106,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="iN_BY_ID" id="computation.model/ComputationTaskInput#iN_BY_ID"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="id" id="computation.model/ComputationTaskInput#id"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="computation.model/ComputationTaskInput#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="computation.model/ComputationTaskInput#uniqueId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="valueName" id="computation.model/ComputationTaskInput#valueName"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="134,54">
+      <children xsi:type="editmodel:MethodEditModel" name="ComputationTaskInput" id="computation.model/ComputationTaskInput#ComputationTaskInput()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="computation.model/ComputationTaskInput#getJsonData()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="computation.model/ComputationTaskInput#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.model/ComputationTaskInput-Soyatec::Import->computation.model/ComputationTask" source="//@children.20" target="//@children.16" targetEnd="//@children.20/@sourceConnections.0/@children.2" label="//@children.20/@sourceConnections.0/@children.0" sourceEnd="//@children.20/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,145" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="255,103"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="ComputationCreateWorker" location="1349,3278" size="211,116" id="computation.worker/ComputationCreateWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="120,54">
+      <children xsi:type="editmodel:MethodEditModel" name="createComputation" id="computation.worker/ComputationCreateWorker#createComputation(Ljava.io.InputStream;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createComputation" id="computation.worker/ComputationCreateWorker#createComputation([B)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="processConfigFile" id="computation.worker/ComputationCreateWorker#processConfigFile(Ljava.util.jar.JarEntry;Ljava.util.jar.JarFile;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="260,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationCreateWorker-Soyatec::Import->computation.model/Computation" source="//@children.21" target="//@children.13" targetEnd="//@children.21/@sourceConnections.0/@children.2" label="//@children.21/@sourceConnections.0/@children.0" sourceEnd="//@children.21/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="209,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,239"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="ComputationTaskWorker" location="2502,4434" size="197,206" id="computation.worker/ComputationTaskWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="147,144">
+      <children xsi:type="editmodel:MethodEditModel" name="findNext" id="computation.worker/ComputationTaskWorker#findNext(Lcomputation.model.ComputationTaskOutput;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="firstTaskInputs" id="computation.worker/ComputationTaskWorker#firstTaskInputs(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getByComputation" id="computation.worker/ComputationTaskWorker#getByComputation(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getByTaskComputationId" id="computation.worker/ComputationTaskWorker#getByTaskComputationId(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getByTaskId" id="computation.worker/ComputationTaskWorker#getByTaskId(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveStartTask" id="computation.worker/ComputationTaskWorker#retrieveStartTask(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="store" id="computation.worker/ComputationTaskWorker#store(Lcomputation.model.ComputationTask;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="store" id="computation.worker/ComputationTaskWorker#store(Lcomputation.model.ComputationForTask;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="246,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationTaskWorker-Soyatec::Import->computation.model/ComputationTaskOutput" source="//@children.22" target="//@children.3" targetEnd="//@children.22/@sourceConnections.0/@children.2" label="//@children.22/@sourceConnections.0/@children.0" sourceEnd="//@children.22/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="43,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="160,242"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationTaskWorker-Soyatec::Import->computation.model/ComputationForTask" source="//@children.22" target="//@children.10" targetEnd="//@children.22/@sourceConnections.1/@children.2" label="//@children.22/@sourceConnections.1/@children.0" sourceEnd="//@children.22/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="197,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,166"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="computation.worker/ComputationTaskWorker-Soyatec::Import->computation.model/ComputationTask" source="//@children.22" target="//@children.16" targetEnd="//@children.22/@sourceConnections.2/@children.2" label="//@children.22/@sourceConnections.2/@children.0" sourceEnd="//@children.22/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="22,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="255,384"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=4;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

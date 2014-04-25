@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<computation id="Genetic Computation-DEME">
+	<description>
+		Algorytmy genetyczne - Model wyspowy
+	</description>
+	<settings>
+		<setting name="generationsCount" value="2" description="Ilosc pokolen"/>
+        <setting name="mutationProbability" value="0.5" description="Prawdopodobienstwo krzyzowania"/>
+        <setting name="individualLowerBound" value="-10" description="Dolny limit wartosci"/>
+        <setting name="individualUpperBound" value="10" description="Gorny limit wartosci" />
+        <setting name="individualVariableCount" value="10" description="Dlugosc wektora chromosomu"/>
+	</settings>
+	<tasks>
+		<task id="PopulationCreator" name="PopulationCreator" start="1" className="genetic.tasks.PopulationCreatorTask">
+			<input id="in_pop_size" name="populationSize" valueName="populationSize"/>
+			<output id="out_pop" name="population" valueName="population"/>
+			<description>Tworzy poczatkowa populacje osobnikow</description>
+		</task>
+		
+		<task id="DemeTask" name="DemeTask" className="genetic.tasks.DemeTask">
+			<input id="in_deme_pop" name="population" valueName="population"/>
+			<output id="out_deme_pop" name="population" valueName="population"/>
+			<description>Realizuje obliczenia na wyspie</description>
+		</task>
+		
+		
+		<task id="NonRoutableRanking" name="NonRoutableRanking" className="genetic.tasks.NonRoutableRanking">
+			<input id="nr_rank_in" name="population" valueName="population"/>
+			<output id="nr_rank_out" name="population" valueName="population" result="true"/>
+			<description>Ranking populacji </description>
+		</task>
+	</tasks>
+	
+	
+	<transitions>
+		<transition id="population" from="out_pop" to="in_deme_pop" />
+		<transition id="rnk" from="out_deme_pop" to="nr_rank_in" />
+	</transitions>
+
+</computation>

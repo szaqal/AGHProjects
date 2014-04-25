@@ -1,0 +1,200 @@
+\chapter{Obliczenia}
+\label{cha:obliczenia}
+%---------------------------------------------------------------------------
+
+\section{Wprowadzenie}
+Aby mo¿liwe by³o wykonanie obliczenia na platformie pierwszym krokiem jest
+wgranie na serwer pakietu obliczeñ, b±d¼ pliku konfiguracji. Po dokonaniu
+walidacji mo¿liwe jest utworznie obliczenia, które polega na stworzeniu
+bazodanowej reprezentacji obliczenia. Na podstawie tej reprezentacji
+silnik realizuje obliczenia zgodnie z konfiguracj± zawart± w pliku
+computation.xml zawartego w pakiecie obliczenia, b±d¼ oddzielnie dodanego pliku
+konfiguracji.
+\label{sec:wprowadzenie}
+\includegraphics[scale=0.5]{gfx/lifecycle.png}
+\newline
+Poszczególne elementy obliczeñ mog± byæ wspó³dzielone pomiêdzy ró¿ne obliczenia
+zale¿nie od ich konfiguracji.
+W realizacji projektu po³o¿ono nacisk na reu¿ywalno¶c poszcególnych sk³adowych
+obliczeñ a tak¿e na ³atw± i szybk± konfigurowalno¶æ ca³ych procesów obliczeñ.
+Rozwi±zanie to umo¿liwia koponowanie ca³ych procesów obliczeniowych z mniejszych
+sk³adowych.
+\newline
+Typowa realizacja obliczenia obejmuje nastêpuj±ce kroki.
+\newline
+\includegraphics[scale=0.5]{gfx/flow.png}
+
+
+\section{Pakiety Obliczeñ}
+\label{sec:pakiety obliczen}
+Typowy plik pakietu pobliczeñ jest typowym archiwum JAR, zawieraj±cym
+skompilowane klasy poszczególnych obliczeñ wraz z odpowiadaj±cym mu plikiem
+konfiguracyjnym opisuj±cym kolejne kroki realizaowanego obliczenia.
+\newline
+\includegraphics[scale=0.7]{gfx/pakiet.png}
+\section{Plik konfiguracji obliczenia}
+Elementy pliku konfiguracyjnego.
+\begin{itemize}
+  \item computation - g³ówny element pliku konfiguracyjnego posiadaj±cy atrybut
+  Id który jednoznacznie wyró¿nia obliczenie.
+  \item description - krótki opis ca³ego procesu obliczenia
+  \item settings -zawiera listê ustawieñ poszczególnych które zostan±
+  zastosowane w trakcie realizcacji obliczenia.
+  \item setting - pojedyncze ustawienie zawieraj±æe atrybut nazwy oraz warto¶ci
+  jak± ustawienie identyfikowane nazw± otrzyma.
+  \item tasks - zawiera listê obliczeñ których dostarcza pakiet obliczeñ. Pakiet
+  obliczeñ mo¿e zawieraæ wiêksza liczbê obliczeñ nie rzeczywi¶cie u¿ywa.
+  Nadmiarowe definicje obliczeñ mog± byæ wykorzystywane przez inne konfiguracje
+  obliczeñ.
+  \item task - pojedyncze atomowe obliczenie, z po³±czenia wiêkszej ilo¶ci
+  obliczeñ mo¿liwe jest tworzenie ca³ych procesów rezliuj±cych bardziej
+  skomplikowane obliczenia. Atrybutami elementu task s± id - jednoznacznie
+  wyrozniaj±ce pojedyncze obliczeni, name istotny atrybut, którego warto¶æ
+  odpowiada atrybutowi taskName adnotacji @Computable, className - pe³na
+  kwalifikowana nazwa klasy zawieraj±ca logike obliczenie globalnie unikalne, 
+  konieczne do dynamicznego za³adownia odpowiedniej klasy na
+  serwerach slave.
+  \item input - stanowi wejscie do pojdeynczego obliczenia zawiera atrybut id
+  który jednoznacznie okre¶la wej¶cie, name (przypomniec po co?) valueName
+  odpowiadaj±cy atrybutowi name adnotacji @Value.
+  \item output - stano wyjscie pojdeynczego obliczenia zawiea atrybut name
+  (przypomniec po co?) valueName, który podobnie jak ma to miejsce w przypadku
+  wejscia ma warto¶æ tak± sam± jak atrybut name adnotacji @Value
+  \item description mo¿e zawieraæ opis obliczenia.
+  \item transitions Zawiera listê przej¶æ pomiêdzy poszczególnymi obliczeniami. 
+  \item transition opisuje pjedyncze przej¶cie pomiêdzy dwoma zadaniami
+  obliczeniowymi. Zawiera atrybuty id który jednoznacznie okre¶la globalnie
+  pojedyncze przej¶cie atrybutr to okre¶la wejscie kolejnego zadania
+  obliczeniowego, atrybut from definije identygfikator wyjscia poprzeniego
+  zadania obliczeniowego.
+\end{itemize}
+
+\lstinputlisting[style=source_code, label = some label, caption=A
+shellscript,language=Xml]{/home/malczyk/Devel/Java/taskworkflow/ProcessComputationApi/cfg/computation.xsd}
+
+Typowe obliczenie zgodne z powy¿szym schematem
+
+\lstinputlisting[style=source_code, label = some label, caption=A
+shellscript,language=Xml]{/home/malczyk/Devel/Java/taskworkflow/GeneticCore/cfg/computation.xml}
+
+
+\section{Silnik Obliczeñ-Realizacja obliczenia}
+Proces realizacji obliczenia zaczyna siê od zakolejkowania obliczenia.
+U¿ytkownik uruchamiaj±cy obliczenie powoduje wys³anie komunikatu za
+po¶rednictwem JMS, który trafia do kolejki, zawieraj±cy wszystkie konieczne
+startowe parametry takie jak ustawienia obliczenia oraz warto¶ci startowe 
+pierwszego z obliczeñ w procesie. Po otrzymaniu komunikatu o uruchomieniu
+obliczenia nastêpuje jego realizacja. 
+Pierwszym krokiem jest ustawienie warto¶ci
+pocz±tkowych parametrów. Kolejnym krokiem jest wczytanie definicji procesu
+obliczenia z bazy danych, oraz utworzenie odpowiedniej wygodnej do u¿ycia
+reprezentacji procesu obliczenia. W dalszej czê¶ci silnik obliczeñ przesuwa siê
+po grafie zgodnie z zdeginiowanymi przej¶ciami wykonuj±c kolejne obliczenia.
+Silnik obliczeñ w momencie realizacji precesu zarz±dza swoj± przestrzenia
+zmiennych zawieraj±ce nazwy oraz odpowiednie warto¶ci, które mog± byæ
+uaktualniane. Po realizacji pojedynczego obliczenia warto¶æ jego wyj¶cia 
+tj. warto¶æ sk³adowje obiektu oznaczonej adnotacja @Value oraz atrybutem
+valueName wyjscia jest przechowywana i mo¿e pos³u¿yæ jako wej¶cie dowolnego
+kolejnego zadania obliczeniowego. Wykonanie pojedynczego zadania obliczeniowego
+rozpoczyna siê od ustalenia na podstawie odpowiednich informacji zawartych w
+konfiguracji obliczenia które zadanie jest kolejnym które powinno byæ
+realizowane. 
+Po ustaleniu tej informacji kolejnym krokiem bêdzie ustawienie
+warto¶ci na wej¶cia zadania obliczeniowego. W dalszej czêsci dobierany pozostaje
+wêze³ obliczeniowy slave, który zrealizuje obliczenie. Tu¿ po okre¶leniu
+który wêze³ zosta³ wybrany, dokonywana jest serializacja warto¶ci wejsci± oraz
+wys³anie przy pomocy protoko³u HTTP wraz z Hessian rz±dania wykonania
+obliczenia. Serwer slave po trzymaniu rz±dania okre¶la które zadanie
+obliczeniowe powienien wykonaæ na podstawie atrybutu taskName. Kolejnym
+poczynionym przez niego krokiem jest sprawdzenie w swojej pamiêci podrêcznej czy
+dla zadnego zadania obliczenia istnieje za³±dowan ju¿ klasa obiektu realizuj±ca
+obliczenie. W przypadku braku takiej informacji aplikacja na serwerach slave
+przeszukuje wszystkie archiva JAR, które znajdzie na swojej ¶cie¿ce przeszukiwañ
+w celu znalezienia odpowiedniej klasy. Gdy kalsa zosta³a znaleziona przy pomocy
+mechanizmów reflesksji jêzyka Java tworzony jest obiekt obliczenia, oraz
+ustawiane s± warto¶ci na jego wej¶ciach. W dalszej czêsci wykonywane jest
+w³a¶ciwe obliczenie. Po dokonaniu odpowiednich obliczeñ warto¶ci zmiennych które
+pos³u¿± jak wyj¶cia zostan± ustawione z odpowiednimi warto¶ciami. Warto¶ci z
+wyj¶æ zostañ za po¶rednictwem narzêdzia XStream zserwalizowane oraz zrócone do
+serwera Master. Serwer master po otrzymaniu wyników z serwera slave zapisze je
+do swojej pamiêci w celu dalszego wykorzystania. Te czynno¶ci wykonywane bêd±
+tak d³ugo jak d³ugo pozostan± pojedyczne sk³adowe obliczenia do wykonania.
+Po dokonaniu wszystkich obliczeñ warto¶ci wszystki wyj¶c, z krórego kolowiek
+zadania obliczeniowego oznaczonych jako result zostan± zapisane w bazie i bêd±
+stanowi³y ostateczny wynik obliczenia. Po zakoñczeniu obliczenia, b±d¼ w
+przypadku b³êdu w trakcie jego realizacji u¿ytkownik który zainicjowa³ wykonanie
+obliczenia zostanie poinformowany za po¶rednictwem wiadomo¶ci elektronicznej
+email o sukcesie wraz z adresem URL do strony sk±d bêdzie móg³ sci±gn±c wyniki
+obliczeñ b±d¼ te¿ b³êdzie obliczenia. I tym przypadku rz±dzanie o wys³anie
+wiadomo¶ci email odbywa siê w sposób asynchroniczny za pomoc± JMS.
+
+\section{Uruchamianie obliczenia}
+
+\section{Prezentacja Wyników}
+Wyniki obliczeñ przechowywane s± w formacie XML. Zawieraj± one dane jawnie
+wyspecyfikowane w konfiguracji obliczenia. Sposób prezentacji obliczeñ jest
+wpe³ni konfigurowalny.
+\newline
+\includegraphics[scale=0.5]{gfx/present.png}
+\newline
+Dodanie kolejnych metod prezentacji wyników obliczeñ wymaga stworzenia i dodania
+do systemu pliku transformaty XSL. W momencie próby pobrania na liscie 
+rozwijalej pojawi siê mo¿liwo¶æ wybrania transformaty, która na³o¿ona zostanie
+na plik XML wyniku a nastêpnie wynikikowy plik bêdzie mo¿liwy do ¶ci±gniêcia.
+
+\section{Interfejs Programownia (API)}
+
+\subsection{Przyk³adowe obliczenie}
+Poni¿szy przyk³ad ukazuje implemetacjê prostego pojedynczego zadania
+obliczeniowego, które mo¿e byæ w³±czone w ca³y proces. Zadanie obliczeniowe
+dokonuje ewaluacji poszczególnych osobników populacji poprzez wyliczenie
+warto¶ci funkcji DeJonga. 
+\newline
+
+\[F(x_{1}, x_{2}, \ldots, x_{i}) = \sum_{i=1}^{n} x_{i}^{2}\]
+
+Pojedyncze zadanie obliczeniowe mo¿e byæ postrzegane nastêpuj±co.
+\\
+\includegraphics[scale=0.8]{gfx/task.png}
+\\
+
+\lstinputlisting[style=source_code, label = some label, caption=A shellscript,language=Java]{/home/malczyk/Devel/Java/taskworkflow/GeneticCore/src/genetic/tasks/DeJongEvaluator.java} 
+
+Opisac\ldots
+
+
+
+\subsubsection{Adontacje jêzyka Java}
+Tworzenie obliczeñ na platformê polega na dostarczeniu obiektów enkapsuluj±cych
+logikê obliczenia, które bêd± implementowa³y odpowiednie interfejsy oraz bêd±
+odpowiednio zaadnotowane. Dostêpne adnotacje Javy to
+\begin{itemize}
+  \item Computable - Klasy zaadnotowane adnotacja @Computable bêd±
+  rozpoznane jako mo¿liwe do uruchomienia na platformie. Adnotacja ta posiada
+  atrybut taskName na podstawie którego sewer slave odnajduje odpowienia klasê
+  obliczenia tworzy jego instancjê i wywo³uje metodê doComputation()
+  zdefiniowan± w interfejsie ComputableTask, który ka¿de zadanie obliczeniowe
+  musi implementowaæ.
+  \item Routable - Dotyczy klas zadañ obliczeniowy które dodatkowo maj±
+  mo¿liwo¶æ sterowania przebiegiem obliczenia (zapêtleñ, rozga³êzieñ), zale¿nie
+  od pewnych czynników.
+  \item RouteTo - Stosowane wraz z adnotacj± @Routable okre¶la kolejne wej¶cie
+  nastêpnego zadania.
+  \item ComputationContext - Pola klasy oznaczone t± adnotacj± bêd± mia³y obiekt
+  przechowuj±cy informacjê o ustawieniach obliczenia oraz bie¿±cym statnie tego¿
+  obliczenia.
+  \item Value - Sk³adowe klasy zaadnotowane t± klasa przechowuj± warto¶ci, które
+  mog± pos³u¿yæ jako wej¶cia obliczenia, b±d¼ jako jego wyj¶cia tj. Obliczenia.
+  \item Partitionable - Obliczenia wykonanywane na warto¶ciach sk³adowych klas
+  oznaczonych adnotacj± @Partitionable mog± zostaæ podzielone i wykonywane
+  równolegle na wielu kolekcjach. Przyk³adem tutaj mo¿e byæ obliczenia funkcji
+  przystowowania populacji osobników. Gdzie wej¶ciem obliczenia jest ca³a
+  populacja, która dzielona jest na ró¿nej wielko¶ci fragmenty, zale¿nie od
+  ilo¶ci aktualnie dostêpnych serwerów slave. Po wykonaniu obliczenia wyniki
+  s± ³±czone i przypisywane do odpowiedniego wyj¶cia.
+\end{itemize}
+
+\subsection{Tworzenie procesu obliczenia}
+
+\label{sec:api}
+

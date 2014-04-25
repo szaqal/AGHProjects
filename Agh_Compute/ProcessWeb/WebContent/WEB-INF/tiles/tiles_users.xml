@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="tileslogin" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/login.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Logowanie"></put-attribute>
+	</definition>
+	
+	<definition name="usersList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/usersList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="groupsList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/groupsList.jsp"></put-attribute>	
+		<put-attribute name="titleText" value="Taskflow-Lista Grup"/>
+	</definition>
+	
+	<definition name="tilesregister" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/register.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Rejestracja Użytkownika"/>
+	</definition>
+	
+	<definition name="groupNew" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/newGroup.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Tworzenie Grupy"/>
+	</definition>
+	
+	<definition name="NewUser" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/newUser.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="EditUser" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/editUser.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="regstrationCompleted" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/regCompleted.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="regstrationNotCompleted" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/users/regNotCompleted.jsp"></put-attribute>
+	</definition>
+	
+	
+</tiles-definitions>

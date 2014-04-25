@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+   <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+      <param name="Threshold" value="INFO" />   
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="ConversionPattern" value="%d %-5p  [%c{1}] %m %n" />
+      </layout>
+   </appender>
+
+   <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
+      <param name="Threshold" value="INFO" />
+      <param name="File" value="/home/malczyk/Devel/logs/taskfow.log"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="ConversionPattern" value="%d %-5p  [%c{1}] %m %n" />
+      </layout>
+   </appender>
+   
+   <logger name="org.apache.cactus.internal" additivity="false" >   
+      <level value="WARN" />
+      <appender-ref ref="consoleAppender"/>      
+   </logger>
+   
+   <logger name="org.apache.commons" additivity="false" >   
+      <level value="WARN" />
+      <appender-ref ref="consoleAppender"/>      
+   </logger>
+   
+    <logger name="httpclient.wire" additivity="false" >   
+      <level value="WARN" />
+      <appender-ref ref="consoleAppender"/>      
+   </logger>
+   
+    <logger name="com.gargoylesoftware.htmlunit" additivity="false" >   
+      <level value="WARN" />
+      <appender-ref ref="consoleAppender"/>      
+   </logger>
+   
+   <logger name="org.apache.http" additivity="false" >   
+      <level value="WARN" />
+      <appender-ref ref="consoleAppender"/>      
+   </logger>
+   
+   <logger name="org.apache.james.mime4j" additivity="false" >   
+      <level value="WARN" />
+      <appender-ref ref="consoleAppender"/>      
+   </logger>
+   
+   
+
+   <logger name="process.web" additivity="false" >   
+      <level value="DEBUG" />
+      <appender-ref ref="consoleAppender"/>      
+      <appender-ref ref="fileAppender"/>      
+   </logger>
+   
+   <logger name="process.web.actions.edit" additivity="false" >   
+      <level value="DEBUG" />
+      <appender-ref ref="consoleAppender"/>      
+      <appender-ref ref="fileAppender"/>      
+   </logger>
+   
+   
+   <logger name="process.web.actions" additivity="false" >   
+      <level value="DEBUG" />
+      <appender-ref ref="consoleAppender"/>      
+      <appender-ref ref="fileAppender"/>      
+   </logger>
+
+   <logger name="process.schedulers" additivity="false" >
+      <level value="DEBUG" />
+      <appender-ref ref="consoleAppender"/>
+      <appender-ref ref="fileAppender"/>
+   </logger>
+
+   <logger name="core" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="fileAppender"/>
+   </logger>
+
+
+   <logger name="computation" additivity="false">
+	<level value="DEBUG"/>
+	<appender-ref ref="consoleAppender"/>
+	<appender-ref ref="fileAppender"/>
+   </logger>
+
+   <logger name="auth" additivity="false" >
+      <level value="DEBUG" />
+      <appender-ref ref="consoleAppender"/>
+      <appender-ref ref="fileAppender"/>
+   </logger>
+
+
+
+</log4j:configuration>

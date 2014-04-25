@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="computations" extends="struts-default">
+
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="plaintext"
+				class="org.apache.struts2.dispatcher.PlainTextResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="authInterceptor"
+				class="process.interceptors.AuthenticationInterceptor" />
+			<interceptor name="authzInterceptor" class="process.interceptors.AuthorizationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="authzInterceptor"/>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="secureStack"/>
+
+		<action name="NodesList" class="process.web.actions.lists.NodesListAction">
+			<result name="list" type="tiles">nodesList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="NodeDetails" class="process.web.actions.ajax.AjaxNodeDetailAction">
+			<result name="success">/jsp/comp/nodeDetail.jsp</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="NodeMappings" class="process.web.actions.lists.NodeMappingListAction">
+			<result name="list" type="tiles">nodeMappingsList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="EditMapping" class="process.web.actions.edit.EditMappingAction">
+			<result name="new" type="tiles">editMapping</result>
+			<result name="edit" type="tiles">editMapping</result>
+			<result name="input" type="tiles">editMapping</result>
+			<result name="delete" type="redirectAction">
+				<param name="actionName">NodeMappings</param>
+			</result>
+			<result name="save" type="redirectAction">
+				<param name="actionName">NodeMappings</param>
+			</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="PerformedComputationsList" class="process.web.actions.lists.PerformedComputationsListAction">
+			<result name="list" type="tiles">performedCompList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="ComputationResultList" class="process.web.actions.lists.ComputationResultListAction">
+			<result name="list" type="tiles">compResultList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		
+		
+		
+		<action name="ComputationResult" class="process.web.actions.edit.ComputationResultAction">
+			<result name="edit" type="tiles">viewComputationResult</result>
+			<result name="download" type="stream">
+				<param name="contentType">${contentType}</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<action name="RunComputation" class="process.web.actions.RunComputationAction">
+			<result name="success" type="tiles">runComputationAction</result>
+			<result name="scheduled" type="tiles">computationScheduled</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		
+		<action name="RunComputationWithFileAction" class="process.web.actions.RunComputationWithFileAction">
+			<result name="loadFile" type="tiles">runComputationWithFileAction</result>
+			<result name="input" type="tiles">runComputationWithFileAction</result>
+			<result name="scheduled" type="tiles">computationScheduled</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		
+
+	</package>
+</struts>

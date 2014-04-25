@@ -1,0 +1,553 @@
+\chapter{Konfiguracja i budowanie aplikacji}
+Do automatyzacji procesu budowania u¿yte zosta³o narzêdzie Apache ANT. Dziêki
+temu wiêkszo¶æ czynno¶ci zwi±zanych z budowaniem oraz konfigurowaniem aplikacji
+sprowadza siê do uruchomienia konkretnego celu narzêdzia ANT.  
+Aby mo¿liwe by³o poprana konfiguracja parametrów aplikacji konieczne jest
+ustawienie zmiennej TASK\_HOME wskazuj±cej na katalog w którym znajduje siê
+plik config.properties zawieraj±cy zmienne konfiguracyjne wraz z odpowiednimi
+warto¶ciami.
+
+\section{Zmienne konfiguracyjne}
+Zmienne serwera bazodanowego:
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+db.jdbc.driverClassName=klasa sterownika JDBC
+db.jdbc.url=URL po³aczenia JDBC uwzglêdniaj±ca nazwê bazy danych aplikacji
+db.jdbc.url.pg=URL po³aczenia JDBC u¿ywa przy tworzeniu bazy danych
+db.jdbc.username=login u¿ytkownika u¿yte przy po³±czeniu z u¿yciem JDBC
+db.jdbc.password=has³o u¿ytkownika u¿yte przy po³±czeniu z u¿yciem JDBC
+db.changelog.file=changelog.xml nazwa pliku wskazuj±ca na migracje danych
+db.name=nazwa bazy danych
+\end{lstlisting}
+} 
+
+
+Zmienne serwera master (Glassfish):
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+glassfish.lib=katalog zawieraj±cy biblioteki serwera
+glassfish.home=katalog g³ówny serwera glassfish
+glassfish.admin.username=login u¿ytkownika administracyjnego 
+glassfish.admin.passwd=has³o u¿ytkownika administracyjnego
+glassfish.admin.passwdfile=lokacja pliku z has³em do celów administracyjnych 
+glassfish.domain.name=nazwa domeny administracyjnej
+\end{lstlisting}
+}
+Zmienne serwera slave (Tomcat)
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+nodeClient.app.path=scie¿ka kontekstowa aplikacji
+nodeClient.tomcat.manager.user=login u¿ytkownika administracyjnego serwera
+nodeClient.tomcat.manager.password=has³o u¿ytkownika administracyjnego serwera
+nodeClient.tomcat.url=URL panelu administracyjnego serwera
+nodeClient.root=G³ówny katalog projektu
+nodeClient.dist=katalog zawieraj±cy dystrybucjê projektu
+\end{lstlisting}
+}
+Zmienne serwera pocztowego
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+mail.from=pole from wiadomo¶ci email
+mail.smtp.user=u¿ytkownik serwera SMTP
+mail.smtp.host=adres serwera SMTP
+mail.smtp.port=port serwera SMTP
+mail.smtp.password=has³o serwera SMTP
+\end{lstlisting}
+}
+Zmienne konfiguracyjne projektów
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+application.url=http://localhost:8080/procc
+core.name=ProcessCore
+core.root=/home/malczyk/Devel/Java/taskworkflow/ProcessCore
+core.dist=/home/malczyk/Devel/Java/taskworkflow/ProcessCore/dist
+core.build=/home/malczyk/Devel/Java/taskworkflow/ProcessCore/build
+core.tests=/home/malczyk/Devel/Java/taskworkflow/ProcessCore/buildtest
+common.lib=/home/malczyk/Devel/Java/taskworkflow/ProcessCore/lib
+computationApi.root=/home/malczyk/Devel/Java/taskworkflow/ProcessComputationApi
+computationApi.dist=/home/malczyk/Devel/Java/taskworkflow/ProcessComputationApi/dist
+computation.root=/home/malczyk/Devel/Java/taskworkflow/ProcessComputation
+computation.dist=/home/malczyk/Devel/Java/taskworkflow/ProcessComputation/dist
+computation.build=/home/malczyk/Devel/Java/taskworkflow/ProcessComputation/build
+computation.tests=/home/malczyk/Devel/Java/taskworkflow/ProcessComputation/buildtest
+auth.root=/home/malczyk/Devel/Java/taskworkflow/ProcessAuth
+auth.dist=/home/malczyk/Devel/Java/taskworkflow/ProcessAuth/dist
+auth.build=/home/malczyk/Devel/Java/taskworkflow/ProcessAuth/build
+auth.tests=/home/malczyk/Devel/Java/taskworkflow/ProcessAuth/buildtest
+test.data=/home/malczyk/Devel/Java/taskworkflow/TestData
+\end{lstlisting}
+}
+
+\section{Konfiguracja Aplikacji}
+\subsection{Konfiguracja Serwera Bazodanowego}
+Do inicjalizacji bazy danych oraz wykoanania wszystkich przyrostowych skryptów
+SQL odpowiedzialnych za stworzenie schematu oraz wykonanie wszystkich migracji
+odpowiedzialne s± kolejne cele ANT'a.
+Ich uruchomienie mo¿liwe jest z katalogu ProcessWeb
+
+\subsubsection{Tworzenie bazy danych.}
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant create-database
+Buildfile: build.xml
+
+create-database:
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+
+BUILD SUCCESSFUL
+Total time: 1 second
+\end{lstlisting}
+}
+
+\subsubsection{Tworzenie schematu i wykonanie przyrostowych migracji danych}
+Tutaj process uaktualniany jest przez narzêdzie LiquiBase gwarantuj±ce wykonanie
+wszystkich przyrostowych skryptów SQL, stworzonych we wszystkich
+zale¿nych projektach.
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant update-database
+Buildfile: build.xml
+
+update-database:
+
+prepare-liquibase:
+
+update-database:
+[updateDatabase] Create Database Lock Table
+[updateDatabase] Lock Database
+[updateDatabase] Successfully acquired change log lock
+[updateDatabase] Create Database Change Log Table
+[updateDatabase] Creating database history table with name: databasechangelog
+[updateDatabase] Reading from databasechangelog
+[updateDatabase] Changeset classpath:/changelog.xml::core_1::Pawel Malczyk::(MD5Sum: 9134232fa6ec6c9ad6d7e2b3e4ece34)
+[updateDatabase] Changeset classpath:/changelog.xml::core_2::Pawel Malczyk::(MD5Sum: 7f18e87081b4d4b5329eec9c83d5e91)
+[updateDatabase] Changeset classpath:/changelog.xml::core_3::Pawel Malczyk::(MD5Sum: 92bdd1cf3ea7aee4427bb85594c4196f)
+[updateDatabase] Changeset classpath:/changelog.xml::core_4::Pawel Malczyk::(MD5Sum: cda3759dabcd714a43ff6f85595984a4)
+[updateDatabase] Changeset classpath:/changelog.xml::core_5::Pawel Malczyk::(MD5Sum: 6c85c17c5c7a8bc8c3d792c0d780ded7)
+[updateDatabase] Release Database Lock
+[updateDatabase] Successfully released change log lock
+
+.................................................................................................
+
+BUILD SUCCESSFUL
+Total time: 7 seconds
+
+\end{lstlisting}
+}
+
+\subsubsection{Usuwanie bazy danych.}
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant drop-database
+Buildfile: build.xml
+
+drop-database:
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+
+BUILD SUCCESSFUL
+Total time: 1 second
+\end{lstlisting}
+}
+
+
+
+
+\subsection{Konfiguracja Serwera Master}
+\subsubsection{Tworzenie domeny administracyjnej serwera glassfish}
+Domena administracyjne serwera Glassfish definiuje skonfigurowane
+izolowane ¶rodowisko umo¿liwiaj±ce uruchamianie aplikacji. Dostêp do panelu
+administracyjnego dostêpny jest za po¶rednictwem protoko³u HTTP poprzez port
+4848 i ile ten port nie zosta³ jawnie wyspecyfikowany w momenci tworzenia domeny
+administracyjnej. Ka¿da domena administracyjna posiada w³asn± konfiguracjê,
+pliki dzienników. Zmiany wprowadzone w obrêbie jednej z domen nie maj± wp³ywu na
+dzia³±nie aplikacji osadzonych w obrêbie innych domen administracyjnych.
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant create-domain
+Buildfile: build.xml
+
+create-domain:
+     [exec] Using port 4848 for Admin.
+     [exec] Using default port 8080 for HTTP Instance.
+     [exec] Using default port 7676 for JMS.
+     [exec] Using default port 3700 for IIOP.
+     [exec] Using default port 8181 for HTTP_SSL.
+     [exec] Using default port 3820 for IIOP_SSL.
+     [exec] Using default port 3920 for IIOP_MUTUALAUTH.
+     [exec] Using default port 8686 for JMX_ADMIN.
+     [exec] Domain being created with profile:developer, as specified by variable AS_ADMIN_PROFILE in configuration file.
+     [exec] ------ Using Profile [developer] to create the domain ------
+     [exec] XML processing for profile: Base document 
+     [/home/malczyk/Devel/tools/glassfish/lib/install/templates/default-domain.xml.template].
+     Profile name [developer].\\ Processing property [domain.xml.style-sheets].
+     [exec] [exec] The file in given locale [pl_PL] at:
+     \\[/home/malczyk/Devel/tools/glassfish/lib/install/templates/locales/pl_PL/index.html]
+     could not be found. Using default (en_US) index.html instead.
+     [exec]Security Store uses: JKS [exec] Domain testdomain created.
+
+BUILD SUCCESSFUL
+Total time: 23 seconds
+
+\end{lstlisting}
+}
+\subsubsection{Usuwanie domeny administracyjnej serwera glassfish}
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant drop-domain
+Buildfile: build.xml
+
+drop-domain:
+     [exec] Domain testdomain deleted.
+
+BUILD SUCCESSFUL
+Total time: 1 second
+\end{lstlisting}
+}
+\subsubsection{Tworzenie puli po³±czeñ JDBC}
+
+Pula po³±czeñ JDBC jest przetrzymuje pewn± ilo¶æ po³±czeñ bazodanowych. 
+Ustanowienie po³±czenia z serwerem bazodanowym jest
+czasoch³onne tote¿ pula po³aczeñ zarz±dzane przez siebie po³±czenia podtrzymuje.
+W momencie gdy aplikacja kliencka zarz±da dostêpu do serwera bazodanowego, pula
+po³±czeñ udostêpni jedno z zarz±dzanych przez siebie po³±czeñ. Po zakoñczeniu
+dza³ania aplikacji klienckiej po³±czenie zwracane jest do puli,
+samo po³±czenie pozostaje aktywne.
+
+\includegraphics[scale=0.5]{gfx/pool.png}
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant create-jdbc-pool
+Buildfile: build.xml
+
+create-jdbc-pool:
+     [exec] Command create-jdbc-connection-pool executed successfully.
+
+BUILD SUCCESSFUL
+\end{lstlisting}
+}
+
+W zale¿no¶ci od potrzeb istnieje mo¿liwo¶æ dodatowej zmiany parametrów puli
+po³±czen.
+\begin{itemize}
+  \item Initial and Minimum Pool Size - Okre¶la startow± ilo¶æ po³±czeñ
+  jaka bêdzie zarz±dzana przez pulê.
+  \item Maximum Pool Size - Okre¶la maksymaln± ilo¶æ po³±czeñ jak± pula mo¿e
+  obs³ugiwaæ.
+  \item Pool Resize Quantity - Warto¶æ ta okre¶la ile nowych po³±czeñ do serwera
+  bazodanowego zostanie ustanowionych w momencie kiedy wszystkie obecnie
+  zarz±dzane po³±czenia s± zajête i nadal istnieje mo¿liwo¶æ ustanowienia nowych
+  tj ilo¶æ zarz±dzanych po³±czeñ jest mniejsza niz przewiduje parametr Maximum
+  Pool Size.
+  \item Idle Timeout - Maskymalny czas braku aktywno¶ci po którym po³±czenie
+  zostanie zwrócone do puli.
+  \item Max Wait Time - Maksymalny czas jaki aplikacja kliencka bêdzie oczekiwaæ
+  na udostêpnienie po³aczenia z puli.
+\end{itemize}
+
+\subsubsection{Usuwanie puli po³±czeñ JDBC}
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant drop-jdbc-pool
+Buildfile: build.xml
+
+drop-jdbc-pool:
+     [exec] Command delete-jdbc-connection-pool executed successfully.
+
+BUILD SUCCESSFUL
+Total time: 1 second
+\end{lstlisting}
+}
+\subsubsection{Tworzenie zasobu JDBC w JNDI}
+
+JNDI (Java Naming and Directory Interface) dostarcza us³ug katalogowania równych
+typów obiektów ich wyszkukiwania oraz nadawania im atrybutów. Interfejs JNDI
+pozwala na odnalezienie referencji do zdalnego obiektu, z którego aplikacja
+kliencka mo¿e skorzystaæ.
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant create-jndi-jdbc-resource
+Buildfile: build.xml
+
+create-jndi-jdbc-resource:
+     [exec] Command create-jdbc-resource executed successfully.
+
+BUILD SUCCESSFUL
+Total time: 1 second
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> 
+\end{lstlisting}
+}
+
+Aplikacja Java EE mo¿e uzyskiwaæ dostêp do zasobów stworzonych zarónwno przez
+u¿ytkownika jak i przez srodowisko uruchomieniowe gdzie obiekty te znajduj± siê
+w przestrzeni nazw java:com/env. Zasobami od których mo¿na uzyskaæ dostêp za
+po¶rednictwem JNDI mog± byæ oniekty które dostarczaj± niskopoziow± logikê
+zarz±dzania transkacjami JTA UserTransaction, b±d¼ jak w tym przypadku ¼ród³o
+danych JDBC. Poniewa¿ JNDI jest interfejsem zatem istniej± implementecje, które
+udostêpniaj± dostêp do innych us³ug katalogowych jak LDAP, DNS czy NIS.
+\subsubsection{Usuwanie zasobu JDBC w JNDI}
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant drop-jndi-jdbc-resource
+Buildfile: build.xml
+
+drop-jndi-jdbc-resource:
+     [exec] Command delete-jdbc-resource executed successfully.
+
+BUILD SUCCESSFUL
+Total time: 1 second
+\end{lstlisting}
+}
+\subsubsection{Tworzenie zasobu JNDI dla zdañ cylicznych}
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant create-job-scheduler
+Buildfile: build.xml
+
+create-job-scheduler:
+     [exec] Command create-jndi-resource executed successfully.
+
+BUILD SUCCESSFUL
+Total time: 1 second
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> 
+\end{lstlisting}
+}
+\subsubsection{Tworzenie fabryki po³±czeñ JMS}
+JMS (Java Message Service) Interfejs programowania JMS umo¿liwia tworzenie
+aplikacji mog±cych tworzyæ, wysy³±æ, odbieraæ wiadomo¶ci. JMS API
+programowania dostarcza zestaw interfejsów posiadaj±cych okre¶lon± semantykê,
+które umo¿liwiaj± komunikajê z ró¿nymi implementacjami specyfikacji.
+Cechami komunikacji za po¶rednictwem technologii JMS jest 
+\begin{itemize}
+  \item Asynchroniczno¶æ - Wiadomosc mo¿e zostaæ dostarczona przez 
+  \item Niezawodno¶æ - Infrastruktura JMS zapewnie dostarczenie wiadomo¶ci JMS
+  raz i tylko raz.
+\end{itemize}
+
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant create-jms-connection-factory
+Buildfile: build.xml
+
+create-jms-connection-factory:
+     [exec] Command create-jms-resource executed successfully.
+
+BUILD SUCCESSFUL
+Total time: 1 second
+\end{lstlisting}
+}
+\subsubsection{Tworzenie zasobu JMS dla kolejki obliczeñ}
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant create-jms-runner
+Buildfile: build.xml
+
+create-jms-runner:
+     [exec] Command create-jms-resource executed successfully.
+
+BUILD SUCCESSFUL
+Total time: 1 second
+\end{lstlisting}
+}
+\subsubsection{Tworzenie zasobu JMS dla kolejki wiadomo¶ci email}
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+malczyk@linux-ln5n:~/Devel/Java/taskworkflow/ProcessWeb> ant create-jms-mailer
+Buildfile: build.xml
+
+create-jms-mailer:
+     [exec] Command create-jms-resource executed successfully.
+
+BUILD SUCCESSFUL
+Total time: 1 second
+\end{lstlisting}
+}
+\subsection{Konfiguracja Serwera Slave}
+\subsection{Konfiguracja dziennikowania log4j na serwerze Glassfish}
+Serwer glassfish w domy¶lnie nie posiada wsparcia dla tworzenia dzennikwowania z
+u¿yciem narzêdzia log4j. W zwi±zku z tym faktem konieczne jest podjêcie kilku
+prostych kroków maj±cych na celu odpowiednie skonfigurowanie serwera aby
+wiadaomo¶ci generowane przez aplikacjê za po¶rednictwem log4j by³y
+przechwytywane a nastêpnie umiedzczane w przeznaczonym do tego pliku.
+Pierwszym krokem jest umieszczenie utworzenie w katalogu lib instalacji serwera
+podkatalogu logging, a nastêpnie umieszczenie w nim dwóch plików. Pierwszym z
+plików jest plik u¿ytej biblioteki log4j np. log4j-1.2.15.jar drugim z koleji
+jest plik konfiguracyjny systemu dziennikowania log4.xml. 
+Po dokonaniu tych czynno¶cie nale¿y w nastêpnej kolejno¶ci uruchomiæ serwera i
+zalogowaæ siê do panelu zadministracyjnego.
+Bêd±c zalogowanym w panelu administracyjnym konieczne jest dodanie wpisu w
+Path Settings parametrów wirtualnej maszyny Javy (JVM Settings) zawierj±cy pe³n±
+scie¿kê do katalogu logging gdzie uprzednio umieszone zosta³y odpowiednie pliki.
+
+\subsubsection{Udostêpnianie monitorowania}
+Na ka¿dym z wêz³ów obliczeniowych konieczne jest wprowadzenie pewnych zmian
+w koniguracji serwera Tomcat. Zmiany te maj± na celu udostêpnienie monitorowania
+za po¶rednictwem JMX informacji o bie¿±cych parametrach wirtualnej maszmy javy
+(JVM), oraz ustawienie scie¿ki przeszukiwañ (CLASSPATH) klas. 
+W celu udostêpniea us³ug monitoruj±cych na serwerze slave konieczna jest
+modyfikacja skryptu startowego catalina.sh znajduj±cego siê w katalogu bin
+pod g³ównych katalogiem instalacji.\newline
+
+Pierwszym krokiem jest stworzenie dwóch plików koniecznych do uruchomienia
+monitorowania JMS.
+Oba pliki powinny znajdowaæ siê w katalogu \$\{TOMCAT\}/conf
+Istorn± kwesti± s± tutaj uprawnienia
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+-r-------- 1 taskflow taskflow    43 2010-10-28  jmxremote.access
+-r-------- 1 taskflow taskflow    38 2010-10-28  jmxremote.password
+\end{lstlisting}
+}
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+[taskflow@P4 conf]$ cat jmxremote.access 
+monitorRole readonly
+controlRole readwrite
+[taskflow@P4 conf]$ cat jmxremote.password 
+monitorRole tomcat
+controlRole tomcat
+\end{lstlisting}
+}
+
+
+
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+CATALINA_OPTS="-Dcom.sun.management.jmxremote 
+        -Dcom.sun.management.jmxremote.port=5555 
+        -Dcom.sun.management.jmxremote.ssl=false 
+        -Dcom.sun.management.jmxremote.authenticate=true
+        -Dcom.sun.management.jmxremote.password.file=../conf/jmxremote.password 
+        -Dcom.sun.management.jmxremote.access.file=../conf/jmxremote.access
+\end{lstlisting}
+}
+Powy¿sze parametry przekazywane s± wirtualnej maszyny Javy i u¿yte s± do
+zarejestrowania wêz³a obliczeniowego w systemie.
+
+\begin{itemize} 
+  \item com.sun.management.jmxremote - udostêpnia mo¿liwo¶æ zdalnego
+  monitorowania wirtualnej maszyny Javy.
+  \item com.sun.management.jmxremote.port - okre¶la udostêpniony port, za
+  po¶rednictwem którego udostêpnione zostan± us³ugi JMX.
+  \item com.sun.management.jmxremote.ssl - decyduje czy komunikacja powinna
+  odbywaæ siê za po¶rednictwem bezpiecznego kana³u SSL (Secure Sockets Layer).
+  \item com.sun.management.jmxremote.authenticate - gdy w³±czone konieczne jest
+  uprzednie uwie¿ytelnienie siê klienta nim udostêpnione zostan± us³ugi JMX.
+  \item com.sun.management.jmxremote.password.file - plik z uprawnieniami tylko
+  od odczytu przechowuj±cy has³a dla ról monitorRole, controlRole
+  \item com.sun.management.jmxremote.access.file - plik przechowuj±cy informacjê
+  o uprawnianiach dla ról monitorRole, controlRole. 
+\end{itemize}
+Specyfikacja JMX przewiduje dwie role monitorRole, controlRole które gwarantuj±
+ró¿ny zestaw uprawnieñ, z których u¿ytkownik, b±d¼ aplikacja kliencka mo¿e
+skorzystaæ.  Grupa monitorRole - gwarantuje dostêp do danych przydatnych przy
+monitorowaniu w trybie tylko do odczytu. Grupa controlRole - umo¿liwia zarówno monitorowanie jak i modyfikacjê parametrów
+wirtualnej maszyny Javy.
+
+\subsubsection{Weryfikacja ustawieñ JMX serwera Slave}
+Najprostsz± metod± sprawdzenia mo¿liwoe¶c dostêpu do us³ug JMX jest u¿ycie
+narzêdzia JConsole. \newline
+\includegraphics[scale=0.5]{gfx/jconsole.png} 
+
+\subsubsection{Ustawianie ¶cie¿ki przeszukiwañ klas}
+Aby mo¿liwe by³o dynamiczne ³adowanie klas obliczeñ konieczne jest wskazanie
+scie¿ki przeszukiwañ klas (CLASSPATH). Pod t± scie¿k± znajduj± siê wszelkie 
+achiva JAR, zawieraj±ce poszczególne klasy w których zawarta jest logika
+obliczeñ. Tak¿e i w tym przypadku konieczna jest modyfikacja skryptu startowego
+catalina.sh w którym nale¿y dodaæ nastêpuj±cy wpis.
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+CLASSPATH=/opt/tasklibs/*
+\end{lstlisting}
+}
+
+Aplikacja osadzona na wêz³ach slave zawiera w pliku web.xml cztery parametry
+koniguracyjne opisuj±ce gdzie powinna szukaæ plików bibliotek jak i plików
+konfiguracji obliczeñ.
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+	<context-param> 
+    	<param-name>libLocation</param-name> 
+    	<param-value>/opt/tasklibs</param-value> 
+	</context-param> 
+
+	<context-param> 
+    	<param-name>confLocation</param-name>
+    	<param-value>/opt/tasklibs/configs</param-value> 
+	</context-param> 
+	
+	<context-param> 
+    	<param-name>sshUser</param-name> 
+    	<param-value>taskflow</param-value> 
+	</context-param> 
+
+	<context-param> 
+    	<param-name>sshPassword</param-name>
+    	<param-value>taskflow</param-value> 
+	</context-param> 
+\end{lstlisting}
+}
+
+\begin{itemize}
+  \item libLocation - zmienna ta pe³ni dwie funkcje. Pierwsz± z nich jest
+  dostarczenie informacji sk±d dynamicznie wczytywaæ konieczne klasy w momencie
+  otrzymania ¿±dania wykonania jakiego¶ obliczenia. Drugim zastosowaniem tej
+  zmiennej jest dostarczenie informacji serwerowi master do jakiego katalogu
+  powinien skopiowaæ archiwum JAR pakietu obliczeñ na serwerze slave przy u¿yciu
+  protoko³u SFTP.
+  \item confLocation - podobnie jak zmienna libLocation mam za zadanie
+  poinformowaæ aplikacjê dzia³±j±c± na serwerze slave sk±d wczytaæ poszczególne
+  konfiguracje obliczeñ, oraz warto¶æ tej zmiennej zostanie tak¿e u¿ytka przy
+  wczytywaniu kolejnych plików konfiguracji i umieszoczone w odpowiednim
+  katalogu na serwerze slave.
+  \item sshUser oraz sshPassword - okre¶la login i has³o u¿ytkwonika na serwerze
+  slave który mo¿e zostaæ u¿yty w celu przetranportowania pliku b±d¼ konfiguracji b±d¼ pakietu
+  obliczenia za po¶rednictwem protoko³u SFTP.
+\end{itemize}
+
+Ostatnim elementem konfiguracji aplikacji na serwerach slave jest wpropwadzenie
+popwarnych opcji w pliku config.properties (PRZENIESC DO ANT'a).
+
+{\tiny
+\begin{lstlisting}[style=console, caption=A command] 
+node.jmx.port=5555
+node.address=127.0.0.1
+node.operation.port=8888
+process.server.inetaddr=192.168.2.2
+process.server.port=8080
+\end{lstlisting}
+}
+
+\begin{itemize}
+  \item node.jmx.port - okre¶la port na który serwer salve bêdzie móg³ siê
+  ³±czyæ w celu pobrania informacji na temat obecnych parametrów wirtualnej
+  maszyny Javy servera slave.
+  \item node.address - okre¶la adres IP serwera slave, pole to jest
+  konfigurowalne a nie automatycznie wczytywane z uwagi na fakt, ¿e mo¿a sobie
+  wyobraziæ slave umieszczony za rozwi±zaniem typu NAT, b±d¼ dostêp do niego
+  mo¿e byæ realizowany za po¶rednictwem tunelu SSH, b±d¼ innego tego typu
+  rozwi±zanie. W takim przypadku adress IP oraz port za po¶rednictwem których
+  dostêp jest mo¿liwy mog± siê ró¿niæ od tych ustawieñ lokalnych.
+  \item node.operation.port - port na którym serwer master bêdzie zleca³
+  wykonanie poszczególnych zadañ obliczeniowych.
+  \item process.server.inetaddr - wskazuje na adres IP serwera master który
+  zostanie u¿yty w momencie rejestracji serwera slave.
+  \item process.server.port - okre¶la port serwera master i po³±czeniu ze
+  zmienna process.server.interaddr do zarejestrowania siê jakos serwer slave.
+\end{itemize}
+
+\subsection{Konfiguracja dzienników log4j}
+Server glassfish nie posiada wbudowanej obs³ugi systemu dziennikowania log4j.
+
+

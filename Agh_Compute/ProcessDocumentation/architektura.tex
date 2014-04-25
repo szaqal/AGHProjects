@@ -1,0 +1,170 @@
+\chapter{Architektura}
+Obliczenia wykonywane s± na w schemacie Master-Slave. Serwer master
+odpowiedzialny jest za przygotownie obliczenia, do realizacji na
+wêz³ach slave, koordynacji wykonania procesu obliczenia, logowanie zdarzeñ
+zachodz±cych w trakcie realizacji obliczenia. Po zakoñczeniu obliczenia 
+dokonuje zapisu wyników obliczeñ w bazie danych a nastêpnie wysy³any zostaje
+email powiadamiaj±cy z zakoñczeniu obliczenia wraz z linkiem do miejsca gdzie te
+wyniki s± osi±galne.
+
+Platforma obliczeniowa sk³ada siê z g³ównego serwera master, osadzonego na
+serwerze Glassfish i zrealizowany w specyfikacji Java EE w wersji 5.
+Na specyfikacje JEE sk³ada siê wiele interfejsów programowania takch jak EJB,
+JPA, JMS, JNDI i wiele innych. Czê¶c z tych interfejsów tworzenia
+oprogramownia u¿yta to realizacji aplikacji. Jedna z technologii która zosta³a
+u¿yta jest technologia EJB. Komponenety stworzone za po¶rednictwem tej
+technologi maj± za zadanie realizacjê w³a¶ciwej logiki biznesowej aplikacji.
+Specyfikacja przewiduje tworzenie dwóch typów kompoenentów stanowych, oraz
+bezstanowych. Bezstanowe kompoenenty mog± byæ wymieniane pomiêdzy wieloma
+aplikacjami klienckimi, natomiast komponenety stanowe s± dowi±zane do
+konkretnego klienta do czasu zakoñczenia realizacji okre¶onej logiki. Niemal
+wsztkie funkcjonalno¶ci platformy obliczeniowej zrealizowane s± za pomoc±
+bezstanowych kompoenentów EJB. Drugi z istotniejszych interfejsów programownia
+jest JPA. Specyfikacja ta opisuje metody otrwalania obiektów Javy w trwa³ym
+repozytorium np. relacyjnej bazie danych. Ponadto dostarczony jest jêzyk do
+realizacji zapytañ, oraz zestaw adnotaji Javy do opisu relacji pomiêdzy
+utrwalanymi obiektami. Aplikacja rob u¿ytek z dodatkowej warstwy
+mapowania obiektowo relacyjnego (ORM)jak± w prowadza JPA do utrwalania wszelkich
+potrzebnych obiektów. Funkcjonalno¶ci które z ich natury musz± byæ realizowane w
+sposób asynchroniczny realizaowane s± za po¶rednictwem wymiany komunikatów i
+specyfikacji JMS (cos wiecej?).
+
+Wszystkie wez³y obliceniowe Slave posiadaj± zainstalowany serwer apache tomcat,
+oraz prost± bezstanow± aplikacjê która dostarcza kliku prostych funkcjonalno¶ci. 
+Pierwsza  nich jest udostêpnianie informacji o bie¿acych parametrach wirtualnej
+maszyny na której jest uruchomiona. Kolejne funkcjonalno¶ci dostarczane przez
+aplikacjê dotycz± realizacji obliceñ tj. przyjmowania ¿adañ realizacji
+obliczenia, dynamicznego wyszukiwania i wczytywania klas obliczeñ, w³a¶ciwej
+realizacji obliczenia oraz zwracania wynikó³ do serwera master.
+
+
+  
+
+\includegraphics[scale=0.7]{gfx/MainView.png}
+
+\section{Podzia³ Projektów}
+\includegraphics[scale=0.7]{gfx/packages.png}
+\begin{enumerate}
+  \item NodeClient - Zewnêtrzna aplikacja dzia³aj±ca na serwerch slave
+  udostêpniaj±ca za po¶rednictwem protoko³u HTTP poszczególne obliczenia.
+  Odpowiedzialna jest za ³adowanie potrzebnych bibliotek na rz±dzanie wykonanie
+  obliczenia oraz serializacjê wyników. Drug± funkcjonalno¶ci± jest
+  udostêpnianie informacji o aktualnych parametrach wirtualnej maszyny Javy za
+  po¶rednictwem ava Management Extensions (JMX).
+  \item ProcessCore - dostarcza nastêpuj±ce funkcjonalno¶ci
+  	\subitem Obs³uga plików konfiguracyjnych aplikacji
+  	\subitem Obs³uga parametrów konfiguracynych aplikacji
+  	\subitem Obs³uga plików
+  	\subitem Ob³suga plików JAR przeszukiwanie zawarto¶ci wydobywanie
+  	konfiguracji.
+  	\subitem Zdalne wywo³ywanie zadañ na serwerach slave
+  	\subitem Obs³uga cyklicznie powtarzalnych zadañ
+  	\subitem Generowanie plików PDF
+  	\subitem Obs³uga szablonów za po¶rednictwem Veolcity
+  	\subitem Obs³uga transformacji XSLT
+  \item ProcessAuth dostarcza us³ugi zwi±zane z zarz±dzaniem grupami
+  u¿ytkownikow, oraz pojedynczymi u¿ytkownikami. Zarz±dza histori± logowañ
+  u¿ytkowników, oraz ich uprawnieniami. \newline
+  \includegraphics[scale=0.5]{gfx/auth.png}
+  \item ProcessComputationApi - Dostarcze wszystkie s³adowe w postaci
+  interfejsów, adnotacji Javy koniecznych do tworzenia aplikacji obliczeniowych
+  daj±cych siê uruchomiæ na platformie.
+  \item PrecessComputation - Enkapsuluje ca³kowit± logikê tworzenia obliczeñ z
+  pakietów obliczeñ jak i konfiguracji. Ponadto w projekcie tym zawarta jest
+  logika silnika realizuj±cego obliczenie wedle okre¶lonej konfiguracji. 
+  \item ProcessWeb - Stanowi warstê prezentacji projektu. Dostarcze graficzny
+  interfejs u¿ytkownika u¿ytkownika.
+\end{enumerate}
+\section{Monitorowanie wêz³ów slave}
+Monitorowanie wêz³ów odbywa siê za po¶rednictwem technologi JMX (Java Management
+Extensions). Aby mo¿liwe by³o monitorowanie konieczne jest odpowiednie
+skoniguraowanie zarówno wêz³ów slave oraz serwera master. Ka¿dy z serwerów
+slave powienien mieæ udostêpnione us³ugi JMX (wpisac gdzie to jest napisane), a
+ponadto serwer Master powinienmiec zdefiniowane (napisane dalej co).
+Monitorowanie wêz³a odbywa sie siê w nastêpuj±cych krokach
+\begin{itemize}
+  \item Ka¿dy z serwerów wysy³a ¿adanie rejestruj±ce go w puli dostêpnych
+  serwerów slave, po tym jak zostaje zarejestrowany co pewien czas od¶wierza
+  swoja rejestracjê.
+  \item Serwer master ma zaimplementowane zadanie zgodne z wytycznymi biblioteki
+  Quartz, które to ma za zadanie pobieranie informacji o aktualnych parametrach
+  wirtualnej maszyny Javy na serwerach slave. Czestotliwo¶æ wyknania adania jest
+  konfigurowalna przy pomocy odpowiedniego wyra¿enia zblio¿one syntaktyk± to
+  tych stosowanych w narzêdziu CRON.
+  \item Ka¿da zebrana informacja na temat aktualnego obci±¿enia serwera jest
+  zapisywana bazie danych. Na podstawie zebranych historycznych danych mo¿liwa
+  jest wizualzacja obicia¿enie poszczególnych wêz³ów za po¶rednictwem
+  graficznego interfejsu u¿ytkownika.
+\end{itemize}
+\subsection{Monitorowane parametry}
+Specyfikacja JMX udostêpnia nazwane obiekty których atrybuty mo¿na
+odczytywaæ/zmieniaæ. W przypadku projektu wykorzystane zosta³y trzy z nich:
+\begin{itemize}
+  \item java.lang:type=Runtime - za po¶rednictwem tego obiektu pobierane sa
+  informacje typie i dostawcy wirtualnej maszyny Javy.
+  \item java.lang:type=Threading - za po¶rednictwem tego obiektu pobierane sa
+  informacje  ilo¶æ aktwnych w±tków.
+  \item java.lang:type=OperatingSystem - atrybuty jakie s± osi±galne poprzez ten
+  obiekt dostarczaj± informacji o typie systemu operacyjnego, architekturze
+  systemu, ilo¶æ dostêpnych procesorów, ilo¶æ pamieci fizycznej/wolnej,
+  obci±¿enie procesorów itp\ldots
+\end{itemize}
+\newpage
+
+\subsection{Model danych}
+\includegraphics[scale=0.4]{gfx/db_model.png}
+\newline
+\begin{itemize}
+  \item computation\_packages - dodanie pakietu obliczenie powoduje stworzenie
+  odpowienieg wpisu w tej tabeli. Pole title zawiera czytelny dla cz³owieka
+  tytu³ obliczenia, który bêdzie wy¶wietlany na elementach graficznego
+  interfejsu u¿ytkownika. W³a¶ciwa zawarto¶æ pliku pakietu obliczeñ przchowywana
+  jest w tabeli file\_contents.
+  \item validation\_schemas - przechowuje informacje o zaimportowanych plikach
+  walidacyjnych.
+  \item xsl\_transforms - pliki transformat XSLT które zosta³y zaimporotwane do
+  systemu posiadaj± odpowiedni wpis w tej tabeli. Podobnie jak w przypadku
+  innych plików tak¿e i zawarto¶æ tych jest przechowywana w tabeli
+  file\_contents.
+  \item computation\_settings - przechowuje ustawienia specyficzne dla
+  poszczególnego procesu obliczenia (zawarte w pomiêdzy elementami settings
+  pliku konfiguracyjnego).
+  \item computation\_transitions - przechwuje informacje o wszystkich
+  przej¶ciach pomiêdzy sk³adowymi obliczeniami.
+  \item computation\_task\_inputs - przechwouje informacje o wej¶ciach
+  poszczególnych dzia³añ o ich identifikatorze oraz zmiennej wej¶ciowej
+  obliczenia któr± reprezentuja.
+  \item computation\_task\_outputs - przchowuje informacje o wyj¶ciach
+  obliczenia oraz zmiennej której warto¶æ bêdzie znajowa³a siê na wyj¶ciu. 
+  \item computation\_tasks - tu znajduj± siê wszystkie pojedyncze zadania
+  obliczeniowe które stanowi±ce reu¿ywalna czê¶æ, z których mo¿na komponowaæ
+  procesy obliczeñ.
+  \item computation\_for\_Tasks - tabela ³±cznikowa ³±cz±ca pojedyncze zadanie
+  obliczeniowe z procesem obliczeniowym.
+  \item computations - zawiera wszystkie utworzone reprezentacje obliczeñ
+  bazuj±c na zaimortowanych pakietach obliczeñ b±d¼ konfiguracji obliczeñ.
+  \item application\_configuration\_files - 
+  \item file\_contents - Przechowuje wszystkie binarne pliki które zosta³y
+  za³adowane do platformy obliczeñ.
+  \item computation\_configurations przechowuje oddzielenie zaimportowane
+  konfiguracje obliczeñ w formacie XML. Tak¿e i tu zawarto¶æ pliku ma swoje
+  miejsce w tabeli file\_contents.
+  \item login\_entries Wszystkie zdarzenia logowanie u¿ytkowników s±
+  rejestrowane w tej tabeli.
+  \item users tabela u¿ytkowników.
+  \item user\_groups tabela ³±cznikowa ³±cz±ca u¿ytkowników z grupami.
+  \item groups lista group u¿ytkowników
+  \item registrations- zawiera informacje o przeprowadzonej rejstracji
+  u¿ytkownika. Na podastawie wpisów tej tabeli dokonywana jest aktywacja konta.
+  \item configuration\_items - przechowuje zmienne i warto¶ci kofiuguracyjne dla
+  ca³ej aplikacji.
+  \item computation\_node\_histories zawiera wpisy z odczytami parametrów
+  zdalnych wirtualnych maszyn JAVy na serwerach slave.
+  \item computation\_log\_entries - poszczególne zdarzenia zwi±zane z realizacj±
+  procesu obliczeniowego s± rejestrowane i wpisy tego typu znajduj± siê w tej
+  tabeli.
+  \item performed\_computations  wszyskie historycznie wykonane obliczenia maj±
+  odpowiedni wpis w tej tabeli.
+  \item computation\_results  po uprzednim wykonaniu obliczenia wyniki obliczeñ
+  s± przechowywane w tej tabeli.
+\end{itemize}

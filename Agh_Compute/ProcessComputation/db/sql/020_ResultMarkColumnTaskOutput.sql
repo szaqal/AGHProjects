@@ -1,0 +1,1 @@
+ALTER TABLE computation_task_outputs ADD COLUMN result boolean;

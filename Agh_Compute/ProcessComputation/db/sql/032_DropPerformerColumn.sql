@@ -1,0 +1,1 @@
+ALTER TABLE computation_for_tasks DROP COLUMN performer; 

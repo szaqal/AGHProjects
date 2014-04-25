@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"
+                   logicalFilePath="classpath:/changelog.xml">
+ 	<changeSet id="comp_1" author="Pawel Malczyk">
+        <sqlFile path="sql/000_ComputationsTable.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_2" author="Pawel Malczyk">
+        <sqlFile path="sql/001_ComputationPackagesTable.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_3" author="Pawel Malczyk">
+        <sqlFile path="sql/002_ComputationTasksTable.sql"/>
+    </changeSet>    
+    
+    <changeSet id="comp_4" author="Pawel Malczyk">
+    	<sqlFile path="sql/003_TaskIdUniqueContraint.sql"/>
+    </changeSet>   
+    
+    <changeSet id="comp_5" author="Pawel Malczyk">
+    	<sqlFile path="sql/004_TransitionsTable.sql"/>
+    </changeSet> 
+    
+     <changeSet id="comp_6" author="Pawel Malczyk">
+    	<sqlFile path="sql/005_CompTaskStartColumn.sql"/>
+    </changeSet>          
+    
+     <changeSet id="comp_7" author="Pawel Malczyk">
+    	<sqlFile path="sql/006_ComputationTasksClassColumn.sql"/>
+    </changeSet>       
+    
+     <changeSet id="comp_8" author="Pawel Malczyk">
+    	<sqlFile path="sql/007_ComputationTaskInputsTable.sql"/>
+    </changeSet>  
+    
+     <changeSet id="comp_9" author="Pawel Malczyk">
+    	<sqlFile path="sql/008_ComputationTaskOutputsTable.sql"/>
+    </changeSet>  
+    
+    <changeSet id="comp_10" author="Pawel Malczyk">
+    	<sqlFile path="sql/009_ComputationResultTable.sql"/>
+    </changeSet>  
+    
+    
+    <changeSet id="comp_11" author="Pawel Malczyk">
+    	<sqlFile path="sql/010_PerformedComputationTable.sql"/>
+    </changeSet>
+    
+    
+    <changeSet id="comp_12" author="Pawel Malczyk">
+    	<sqlFile path="sql/011_ComputationResultReference.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_13" author="Pawel Malczyk">
+		<sqlFile path="sql/012_ComputationNodeHistory.sql"/>    
+    </changeSet>
+    
+    <changeSet id="comp_14" author="Pawel Malczyk">
+		<sqlFile path="sql/013_ComputationLogTable.sql"/>    
+    </changeSet>
+    
+    <changeSet id="comp_15" author="Pawel Malczyk">
+		<sqlFile path="sql/014_NodeMappingTable.sql"/>    
+    </changeSet>
+    
+    <changeSet id="comp_16" author="Pawel Malczyk">
+    	<sqlFile path="sql/015_TransitionsInputsChange.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_17" author="Pawel Malczyk">
+    	<sqlFile path="sql/016_ComputationConfiguration.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_18" author="Pawel Malczyk">
+    	<sqlFile path="sql/017_computation_for_tasks.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_19" author="Pawel Malczyk">
+    	<sqlFile path="sql/018_validation_schemas_table.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_20" author="Pawel Malczyk">
+    	<sqlFile path="sql/019_ComputationResultBlobColumn.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_21" author="Pawel Malczyk">
+    	<sqlFile path="sql/020_ResultMarkColumnTaskOutput.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_22" author="Pawel Malczyk">
+    	<sqlFile path="sql/021_ValidatedColumns.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_23" author="Pawel Malczyk">
+    	<sqlFile path="sql/022_Inputoutputids.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_24" author="Pawel Malczyk">
+    	<sqlFile path="sql/023_ComputationSettingsTable.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_25" author="Pawel Malczyk">
+    	<sqlFile path="sql/024_TransitionIdColumn.sql"/>
+    </changeSet>
+    
+    <changeSet id="comp_26" author="Pawel Malczyk">
+    	<sqlFile path="sql/025_valueNameColumns.sql"/>
+    </changeSet>
+    
+     <changeSet id="comp_27" author="Pawel Malczyk">
+    	<sqlFile path="sql/026_TransitionConstraints.sql"/>
+    </changeSet>  
+    
+    <changeSet id="comp_28" author="Pawel Malczyk">
+    	<sqlFile path="sql/027_LogEntryMessageText.sql"/>
+    </changeSet> 
+    
+    <changeSet id="comp_29" author="Pawel Malczyk">
+    	<sqlFile path="sql/028_ComputationResultOwner.sql"/>
+    </changeSet> 
+    
+    <changeSet id="comp_30" author="Pawel Malczyk">
+    	<sqlFile path="sql/029_UniqueConstraintTaskClass.sql"/>
+    </changeSet> 
+    
+    <changeSet id="comp_31" author="Pawel Malczyk">
+    	<sqlFile path="sql/030_UniqueContraintTransitions.sql"/>
+    </changeSet> 
+    
+    <changeSet id="comp_32" author="Pawel Malczyk">
+    	<sqlFile path="sql/031_PerformerMovement.sql"/>
+    </changeSet> 
+    
+    
+    <changeSet id="comp_33" author="Pawel Malczyk">
+    	<sqlFile path="sql/032_DropPerformerColumn.sql"/>
+    </changeSet> 
+    
+    <changeSet id="comp_34" author="Pawel Malczyk">
+        <sqlFile path="sql/033_descriptionColumn.sql"/>
+    </changeSet> 
+    
+    
+    
+    
+    
+</databaseChangeLog>

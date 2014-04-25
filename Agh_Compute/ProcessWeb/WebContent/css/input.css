@@ -1,0 +1,20 @@
+@CHARSET "ISO-8859-2";
+input[type="text"] { 
+	width: 200px;
+	border-color: #818181;
+	border-style: solid;
+	border-width: 1px;
+}
+
+input[type="password"] { 
+	width: 200px;
+	border-color: #818181;
+	border-style: solid;
+	border-width: 1px;
+}
+
+input[type="submit"] { 
+	border-color: #818181;
+	border-style: solid;
+	border-width: 1px;
+}

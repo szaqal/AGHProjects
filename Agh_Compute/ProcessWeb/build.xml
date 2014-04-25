@@ -1,0 +1,595 @@
+<project name="ProcessWeb" basedir="." default="dist">
+	<description>Moduł Webowy</description>
+	<property environment="env"/>
+	<property file="${env.TASK_HOME}/config.properties" />
+	<property name="src" location="src" />
+	<property name="src.test" location="test"/>
+	<property name="build.test" location="buildtest"/>
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="conf" location="cfg" />
+	<property name="lib" location="WebContent/WEB-INF/lib" />
+	<property name="webcontent" location="WebContent" />
+	<property name="messages" location="messages" />
+	<property name="jdocs" location="jdocs"/>
+	<property name="cs" location="cs"/>
+
+	<taskdef resource="cactus.tasks">
+		<classpath>
+			<fileset dir="${common.lib}">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>
+	</taskdef>
+
+	<taskdef resource="checkstyletask.properties" 
+			classpath="${common.lib}/checkstyle-5.3-all.jar"/>
+
+	<path id="jdbc.classpath">
+		<fileset dir="${common.lib}"/>
+	</path>
+
+	<target name="all-docs" depends="all-dists">
+		<antcall target="docs"/>
+		<ant dir="${computationApi.root}" inheritall="false" target="docs" />
+		<ant dir="${computation.root}" inheritall="false" target="docs" />
+		<ant dir="${core.root}" inheritall="false" target="docs" />
+		<ant dir="${auth.root}" inheritall="false" target="clean" />
+	</target>
+
+	<target name="docs" depends="init">
+		<javadoc destdir="${jdocs}" sourcepath="${src}" packagenames="process.*">
+			<classpath>
+
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+
+				<fileset dir="${auth.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+
+				<fileset dir="${core.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${computation.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${nodeClient.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${computationApi.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javadoc>
+	</target>
+
+	<target name="checkstyle">
+		<!--<checkstyle config="${cs}/cs.xml" failonviolation="false">
+			<fileset dir="${src}" includes="**/*.java"/>
+		</checkstyle>-->
+	</target>
+
+	<target name="pmd">
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="jdbc.classpath"/>
+		<pmd shortFilenames="true">
+			<ruleset>basic</ruleset>
+			<ruleset>unusedcode</ruleset>
+			<ruleset>typeresolution</ruleset>
+			<ruleset>strings</ruleset>
+			<ruleset>strictexception</ruleset>
+			<ruleset>naming</ruleset>
+			<ruleset>imports</ruleset>
+			<ruleset>design</ruleset>
+			<ruleset>coupling</ruleset>
+			<ruleset>codesize</ruleset>
+			<ruleset>braces</ruleset>
+			<formatter type="html" toFile="${dist}/pmd_report.html" linkPrefix="http://pmd.sourceforge.net/xref/" />
+			<fileset dir="${src}">
+				<include name="**/*.java" />
+			</fileset>
+		</pmd>
+	</target>
+
+	<target name="drop-database">
+		<sql driver="${db.jdbc.driverClassName}" url="${db.jdbc.url.pg}" userid="${db.jdbc.username}" password="${db.jdbc.password}" autocommit="true">
+			<classpath refid="jdbc.classpath"/>
+			<![CDATA[
+            DROP DATABASE ${db.name};
+            ]]>
+		</sql>
+	</target>
+
+	<target name="create-database">
+		<sql driver="${db.jdbc.driverClassName}" url="${db.jdbc.url.pg}"
+             userid="${db.jdbc.username}" password="${db.jdbc.password}" autocommit="true">
+			<classpath refid="jdbc.classpath"/>
+			<![CDATA[
+            CREATE DATABASE ${db.name} WITH OWNER ${db.jdbc.username} ENCODING 'UTF-8';
+            ]]>
+		</sql>
+	</target>
+
+
+	<!--Init -->
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${jdocs}" />
+		<mkdir dir="${build.test}"/>
+
+		<copy todir="${basedir}" overwrite="true">
+			<fileset dir="${conf}" includes="build.properties" />
+			<filterset>
+				<filtersfile file="${env.TASK_HOME}/config.properties" />
+			</filterset>
+		</copy>
+	</target>
+
+	<!--Kompilacja -->
+	<target name="compile" depends="init, all-dists, checkstyle, pmd">
+
+		<javac srcdir="${src}" destdir="${build}" debug="true">
+
+			<classpath>
+
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+
+				<fileset dir="${auth.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+
+				<fileset dir="${core.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${computation.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${nodeClient.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${computationApi.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+
+		<copy file="${conf}/struts/struts.xml" todir="${build}" />
+		<copy file="${conf}/struts/struts-users.xml" todir="${build}" />
+		<copy file="${conf}/struts/struts-ajax.xml" todir="${build}" />
+		<copy file="${conf}/struts/struts-process.xml" todir="${build}" />
+		<copy file="${conf}/struts/struts-computation.xml" todir="${build}" />
+		<copy file="${conf}/struts/struts.properties" todir="${build}" />
+
+	</target>
+
+
+
+
+	<!--Tworzenie wara -->
+	<target name="dist" depends="compile">
+
+		<native2ascii dest="${build}" src="${messages}" includes="*" encoding="UTF-8">
+		</native2ascii>
+
+		<war destfile="${dist}/${ant.project.name}.war" webxml="${webcontent}/WEB-INF/web.xml">
+			<fileset dir="${webcontent}" />
+			<classes dir="${build}" />
+			<lib dir="${lib}">
+				<include name="*.jar" />
+			</lib>
+		</war>
+	</target>
+
+	<target name="redeploy">
+		<antcall target="undeploy">
+		</antcall>
+		<antcall target="stop-domain"/>
+		<antcall target="drop-database"/>
+		<antcall target="create-database"/>
+		<antcall target="update-database"/>
+		<antcall target="start-domain"/>
+		<antcall target="clean"/>
+		<antcall target="test"/>
+	</target>
+
+	<!-- Budowanie wszystich modułów -->
+	<target name="all-dists">
+		<ant dir="${core.root}" inheritall="false" target="dist" />
+		<ant dir="${computation.root}" inheritall="false" target="dist" />
+		<ant dir="${auth.root}" inheritall="false" target="dist" />
+	</target>
+
+	<!-- Przygotowanie paczek do testow -->
+	<target name="all-perpare-tests">
+		<ant dir="${auth.root}" inheritall="false" target="prepare-tests" />
+		<ant dir="${computation.root}" inheritall="false" target="prepare-tests"/>
+		<ant dir="${core.root}" inheritall="false" target="prepare-tests"/>
+	</target>
+
+
+	<!-- tworzy EAR bez testow-->
+	<target name="ear" depends="dist">
+		<ear destfile="${dist}/${ant.project.name}.ear" appxml="ant/application.xml">
+			<fileset dir="${core.dist}" includes="*.jar,*.war" />
+			<fileset dir="${computation.dist}" includes="*.jar,*.war" />
+			<fileset dir="${auth.dist}" includes="*.jar,*.war" />
+			<fileset dir="${dist}" includes="*.jar,*.war" />
+		</ear>
+	</target>
+
+	<!-- tworzy EAR do testow-->
+	<target name="eartest" depends="dist">
+		<ear destfile="${dist}/${ant.project.name}.ear" appxml="ant/application_test.xml">
+			<fileset dir="${core.dist}" includes="*.jar,*.war" />
+			<fileset dir="${computation.dist}" includes="*.jar,*.war" />
+			<fileset dir="${auth.dist}" includes="*.jar,*.war" />
+			<fileset dir="${dist}" includes="*.jar,*.war" />
+		</ear>
+	</target>
+
+	<target name="quick-deploy">
+		<antcall target="dist"/>
+		<antcall target="deploy"/>
+	</target>
+
+	<!-- doploy na glassfisha -->
+	<target name="deploy">
+
+		<exec executable="${glassfish.home}/bin/asadmin">
+			<arg value="deploy" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="${dist}/${ant.project.name}.ear" />
+		</exec>
+	</target>
+
+	<target name="undeploy">
+		<exec executable="${glassfish.home}/bin/asadmin">
+			<arg value="undeploy" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="${ant.project.name}" />
+		</exec>
+	</target>
+
+	<target name="create-jdbc-pool">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="create-jdbc-connection-pool" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="--datasourceclassname" />
+			<arg value="org.postgresql.ds.PGSimpleDataSource" />
+			<arg value="--restype" />
+			<arg value="javax.sql.ConnectionPoolDataSource" />
+			<arg value="--property" />
+			<arg value="user=${db.jdbc.username}:password=${db.jdbc.password}:serverName=localhost:databaseName=processdb:url=&quot;${db.jdbc.url}&quot;" />
+			<arg value="postgrepool" />
+		</exec>
+	</target>
+
+	<target name="drop-jdbc-pool">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="delete-jdbc-connection-pool" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="postgrepool" />
+		</exec>
+	</target>
+
+	<target name="create-jndi-jdbc-resource">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="create-jdbc-resource" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="--connectionpoolid"/>
+			<arg value="postgrepool" />
+			<arg value="jdbc/psql" />
+		</exec>
+	</target>
+
+	<target name="drop-jndi-jdbc-resource">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="delete-jdbc-resource" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="jdbc/psql" />
+		</exec>
+	</target>
+
+	<target name="create-jms-connection-factory">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="create-jms-resource" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="--restype"/>
+			<arg value="javax.jms.ConnectionFactory"/>
+			<arg value="--property"/>
+			<arg value="Password=guest:UserName=guest"/>
+			<arg value="jms/ConnectionFactory" />
+		</exec>
+	</target>
+
+	<target name="create-jms-mailer">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="create-jms-resource" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="--restype" />
+			<arg value="javax.jms.ConnectionFactory" />
+			<arg value="--property" />
+			<arg value="Name=Mailer" />
+			<arg value="jms/Mailer" />
+		</exec>
+	</target>
+
+	<target name="create-jms-runner">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="create-jms-resource" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="--restype" />
+			<arg value="javax.jms.Queue" />
+			<arg value="--property" />
+			<arg value="Name=ComputationRunner" />
+			<arg value="jms/ComputationRunner" />
+		</exec>
+	</target>
+
+	<target name="create-job-scheduler">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="create-jndi-resource" />
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="--factoryclass" />
+			<arg value="process.schedulers.SchedulerFactory" />
+			<arg value="--restype" />
+			<arg value="org.quartz.Scheduler" />
+			<arg value="--jndilookupname" />  
+			<arg value="JobScheduler" />
+			<arg value="JobScheduler" />
+		</exec>
+	</target>
+
+
+
+
+	<target name="create-domain">
+		<exec executable="${glassfish.home}/bin/asadmin" failonerror="true">
+			<arg value="create-domain"/>
+			<arg value="--user" />
+			<arg value="admin" />
+			<arg value="--passwordfile" />
+			<arg value="${glassfish.admin.passwdfile}" />
+			<arg value="--adminport" />
+			<arg value="4848" />
+			<arg value="${glassfish.domain.name}"/>
+		</exec>
+	</target>
+
+	<target name="drop-domain">
+		<exec executable="${glassfish.home}/bin/asadmin">
+			<arg value="delete-domain"/>
+			<arg value="--domaindir" />
+			<arg value="${glassfish.home}/domains" />
+			<arg value="${glassfish.domain.name}"/>
+		</exec>
+	</target>
+
+	<!-- Startuje domene -->
+	<target name="start-domain">
+		<exec executable="${glassfish.home}/bin/asadmin">
+			<arg value="start-domain" />
+			<arg value="--passwordfile" />
+			<arg value="${conf}/passwdfile" />
+			<arg value="taskflow" />
+		</exec>
+	</target>
+
+	<!-- Stopuje domene -->
+	<target name="stop-domain">
+		<exec executable="${glassfish.home}/bin/asadmin">
+			<arg value="stop-domain" />
+			<arg value="taskflow" />
+		</exec>
+	</target>
+
+
+	<target name="deploy-no-test">
+		<antcall target="undeploy">
+		</antcall>
+		<antcall target="ear"/>
+		<antcall target="deploy" />
+		<!--<antcall target="stop-domain"/>
+		<antcall target="start-domain"/>-->
+	</target>
+
+	<!--
+	 Update EAR'a
+	 1. Dodanie wara z testami
+	 2. Uzycie application_test.xml 
+	-->
+	<target name="test" depends="eartest, all-perpare-tests, compile-ui-tests">
+
+		<ear update="true" destfile="${dist}/${ant.project.name}.ear" appxml="ant/application_test.xml">
+			<fileset dir="${auth.dist}">
+				<include name="AuthTests.war" />
+			</fileset>
+			<fileset dir="${computation.dist}">
+				<include name="ComputationTests.war" />
+			</fileset>
+
+			<fileset dir="${core.dist}">
+				<include name="CoreTests.war" />
+			</fileset>
+
+		</ear>
+		<antcall target="deploy" />
+		<antcall target="prepare-data-files"/>
+		<antcall target="perform-users-tests"/>
+		<antcall target="perform-computation-tests"/>
+		<antcall target="perform-core-tests"/>
+		<antcall target="perform-ui-tests"/>
+	</target>
+	
+	<target name="prepare-data-files">
+		<copy file="${genetic.root}/cfg/computation.xml" tofile="${test.data}/computation.xml"/>
+		<copy file="${genetic.root}/dist/GeneticCore.jar" tofile="${test.data}/GeneticCore.jar"/>
+		<copy file="${computationApi.root}/cfg/computation.xsd" tofile="${test.data}/computation.xsd"/>
+		<copy file="${computationApi.root}/cfg/computationStart.xsd" tofile="${test.data}/computationStart.xsd"/>
+		<copy file="${computationApi.root}/cfg/tocsv.xsl" tofile="${test.data}/tocsv.xsl"/>
+		<copy file="${computationApi.root}/cfg/tohtml.xsl" tofile="${test.data}/tohtml.xsl"/>
+		<copy file="${computationApi.root}/cfg/topdf.xsl" tofile="${test.data}/topdf.xsl"/>
+	</target>
+
+	<target name="compile-ui-tests">
+		<javac srcdir="${src.test}" destdir="${build.test}" debug="true">
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+		<copy file="${core.root}/cfg/log4j.xml" todir="${build.test}">
+		</copy>
+	</target>
+
+
+	<target name="perform-ui-tests">
+		<ant dir="${core.root}" inheritall="false" target="setup-admin-password" />
+		<junit haltonerror="true">
+			<test name="process.actions.test.LoginActionTest"/>
+			<test name="process.actions.test.RegisterUserActionTest" />
+			<test name="process.actions.test.EditMappingActionTest" />
+			<test name="process.actions.test.EditGroupActionTest" />
+			<test name="process.actions.test.ValidationActionTest" />
+			<test name="process.actions.test.EditProcessActionTest" />
+			<test name="process.actions.test.ProcessConfigurationActionTest" />
+			<test name="process.actions.test.EditTransformActionTest" />
+
+			<formatter type="brief" usefile="false" />
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${build.test}"/>
+			</classpath>
+		</junit>
+	</target>
+
+	<target name="perform-core-tests">
+		<echo>${core.build}</echo>
+		<echo>${core.tests}</echo>
+		<cactus earfile="${dist}/${ant.project.name}.ear" fork="yes" printsummary="yes" haltonerror="true" haltonfailure="true">
+			<sysproperty key="cactus.contextURL" value="http://localhost:8080/CoreTests" />
+			<formatter type="plain" usefile="false" />
+			<test name="core.tests.ConfigurationWorkerTest" />
+			<test name="core.tests.TemplateWorkerTest" />
+			<test name="core.tests.FileContentWorkerTest" />
+			<test name="core.tests.TransformWorkerTest" />
+			<test name="core.tests.ApplicationConfigurationFilesWorkerTest" />
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${core.build}"/>
+				<pathelement location="${core.tests}" />
+			</classpath>
+		</cactus>
+	</target>
+
+	<target name="perform-computation-tests">
+		<echo>${computation.build}</echo>
+		<cactus earfile="${dist}/${ant.project.name}.ear" fork="yes" printsummary="yes" haltonerror="true" haltonfailure="true">
+			<sysproperty key="cactus.contextURL" value="http://localhost:8080/ComputationTests" />
+			<formatter type="plain" usefile="false" />
+			<test name="computation.tests.ComputationPackageWorkerTest"/>
+			<test name="computation.tests.ComputationWorkerTest"/>
+			<!--<test name="computation.tests.ComputationPerformerWorkerTest"/>-->
+			<test name="computation.tests.PerformedComputationWorkerTest"/>
+			<test name="computation.tests.ComputationResultWorkerTest"/>
+			<test name="computation.tests.NodeHistoryWorkerBeanTest"/>
+			<test name="computation.tests.ComputationLogWorkerTest"/>
+			<test name="computation.tests.NodeMappingWorkerTest"/>
+			<test name="computation.tests.ComputationConfigurationWorkerTest"/>
+			<test name="computation.tests.ComputationTaskWorkerBeanTest"/>
+			<test name="computation.tests.ValidationWorkerTest"/>
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${computation.build}"/>
+				<pathelement location="${computation.tests}" />
+			</classpath>
+		</cactus>
+	</target>
+
+	<target name="perform-users-tests">
+		<cactus earfile="${dist}/${ant.project.name}.ear" fork="yes" printsummary="yes" haltonerror="true" haltonfailure="true">
+			<sysproperty key="cactus.contextURL" value="http://localhost:8080/AuthTests" />
+			<formatter type="plain" usefile="false" />
+			<test name="auth.tests.RegUserWorkerTest"/>
+			<test name="auth.tests.UsersWorkerTest"/>
+			<test name="auth.tests.GroupsWorkerTest"/>
+			<test name="auth.tests.UserGroupWorkerTest"/>
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${auth.build}"/>
+				<pathelement location="${auth.tests}" />
+			</classpath>
+		</cactus>
+	</target>
+
+
+	<target name="update-database">
+		<ant dir="${core.root}" inheritall="false" target="update-database" />
+		<ant dir="${auth.root}" inheritall="false" target="update-database" />
+		<ant dir="${computation.root}" inheritall="false" target="update-database" />
+	</target>
+
+	<!-- Czysci wszystko -->
+	<target name="clean">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+		<delete dir="${jdocs}" />
+		<delete dir="${build.test}"/>
+		<delete file="build.properties"/>
+		<ant dir="${computation.root}" inheritall="false" target="clean" />
+		<ant dir="${core.root}" inheritall="false" target="clean" />
+		<ant dir="${auth.root}" inheritall="false" target="clean" />
+	</target>
+</project>

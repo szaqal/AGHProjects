@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:element name="computation-configuration">
+        <xsd:complexType>	
+			<xsd:sequence>
+				<xsd:element name="settings">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="setting" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:attribute name="name" use="required"/>
+									<xsd:attribute name="value" use="optional" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="inputs">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="input" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:attribute name="name" use="required"/>
+									<xsd:attribute name="value" use="optional" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+    </xsd:element>
+</xsd:schema>

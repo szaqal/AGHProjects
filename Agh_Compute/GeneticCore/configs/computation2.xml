@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<computation id="Genetic Computation-Rastrigin">
+	<description>
+		Algorytmy genetyczne (Rastrigin)
+	</description>
+	<settings>
+	    <setting name="generationsCount" value="2" description="Ilosc pokolen"/>
+        <setting name="mutationProbability" value="0.5" description="Prawdopodobienstwo krzyzowania"/>
+        <setting name="individualLowerBound" value="-10" description="Dolny limit wartosci"/>
+        <setting name="individualUpperBound" value="10" description="Gorny limit wartosci" />
+        <setting name="individualVariableCount" value="10" description="Dlugosc wektora chromosomu"/>
+	</settings>
+	<tasks>
+		<task id="PopulationCreator" name="PopulationCreator" start="1" className="genetic.tasks.PopulationCreatorTask">
+			<input id="in_pop_size" name="populationSize" valueName="populationSize"/>
+			<output id="out_pop" name="population" valueName="population"/>
+			<description>Tworzy poczatkowa populacje osobnikow</description>
+		</task>
+		
+		<task id="RastriginEvaluator" name="RastriginEvaluator" className="genetic.tasks.RastriginEvaluator">
+			<input id="in_rastrigin_pop" name="population" valueName="population"/>
+			<output id="out_rastrigin_pop" name="population" valueName="population"/>
+			<description>Oblicza wartosc funkcji dla kazdego z osobnikow</description>
+		</task>
+		
+		<task id="ParentChooser" name="ParentChooser" className="genetic.tasks.ChooseParentsTask">
+			<input id="in_parent_pop" name="population" valueName="population"/>
+			<output id="out_parent_1" name="parent1" valueName="parent1"/>
+			<output id="out_parent_2" name="parent2" valueName="parent2"/>
+			<description>Wybiera dwoje rodzicow</description>
+		</task>
+		
+		<task id="CrossoverTask" name="CrossoverTask" className="genetic.tasks.CrossoverTask">
+			<input id="in_cross_parent1" name="parent1" valueName="parent1"/>
+			<input id="in_cross_parent2" name="parent2" valueName="parent2"/>
+			<output id="out_cross_off" name="offspring" valueName="offspring"/>
+			<description>Krzyzowanie </description>
+		</task>
+		
+		<task id="MutationTask" name="MutationTask" className="genetic.tasks.MutationTask">
+			<input id="in_mut" name="individuals" valueName="offspring"/>
+			<output id="out_mut" name="individuals" valueName="offspring"/>
+			<description>Mutacja </description>
+		</task>
+		
+		<task id="MergePopulation" name="OffspringMergeTask" className="genetic.tasks.OffspringMergeTask">
+			<input id="in_merge_pop" name="population" valueName="population"/>
+			<input id="in_merge_off" name="offspring" valueName="offspring"/>
+			<output id="merge_out" name="population" valueName="population"/>
+			<description>Laczenie populacji </description>
+		</task>
+		
+		<task id="RankPopulation" name="RankingTask" className="genetic.tasks.RankingTask">
+			<input id="rank_in" name="population" valueName="population"/>
+            <input id="pop_size" name="populationSize" valueName="populationSize"/>
+			<output id="rank_out" name="population" valueName="population" result="true"/>
+			<description>Ranking populacji </description>
+		</task>
+	</tasks>
+	
+	
+	<transitions>
+		<transition id="population" from="out_pop" to="in_rastrigin_pop" />
+		<transition id="evaluation" from="out_rastrigin_pop" to="in_parent_pop" />
+		<transition id="cross00" from="out_parent_1" to="in_cross_parent1" />
+		<transition id="cross01" from="out_parent_2" to="in_cross_parent2" />
+		<transition id="muta" from="out_cross_off" to="in_mut" />
+		<transition id="mg" from="out_mut" to="in_merge_off" />
+		<transition id="rnk" from="merge_out" to="rank_in" />
+	</transitions>
+
+</computation>

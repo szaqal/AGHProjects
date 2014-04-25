@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+        <persistence-unit name="procPU">
+                <provider>org.hibernate.ejb.HibernatePersistence</provider>
+                <jta-data-source>jdbc/psql</jta-data-source>                
+                <class>core.model.ConfigurationItem</class>
+                <class>core.model.FileContent</class>
+                <properties>
+                        <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+                        <property name="hibernate.show_sql" value="true" />
+                        <property name="hibernate.hbm2ddl.auto" value="validate" />
+                        <property name="hibernate.ejb.naming_strategy" value="core.utils.NamingStrategy"/>
+                </properties>
+
+        </persistence-unit>
+</persistence>

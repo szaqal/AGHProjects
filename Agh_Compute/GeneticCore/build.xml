@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="GeneticCore" basedir="." default="dist">
+	<description>Podstawowy pakiet obliczen genetycznych</description>
+	<property environment="env"/>
+	<property file="${env.TASK_HOME}/config.properties" />
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist" location="dist"/>
+	<property name="conf" location="cfg"/>
+ 
+
+	<target name="init">
+		<tstamp/> 
+		<mkdir dir="${build}"/>
+		<mkdir dir="${dist}"/>
+	</target>
+ 
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}" debug="true">
+			<classpath>
+				<fileset dir="${computationApi.dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+		<copy file="${conf}/computation.xml" todir="${build}" />
+	</target>
+
+	<target name="dist" depends="compile">
+		<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}">
+		</jar>
+		<echo>Utworzono  -> ${ant.project.name}.jar</echo>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+	</target>
+
+</project>

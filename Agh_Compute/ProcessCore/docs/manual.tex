@@ -1,0 +1,621 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[latin2]{inputenc}
+\usepackage{graphicx}
+
+\title{Taskflow manual}
+\author{Pawe� Malczyk}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Technologie}
+
+{\small
+\begin{enumerate}
+  \item Apache Ant (1.7.1) http://ant.apache.org/
+  \item Apache Tomcat (7.0) http://tomcat.apache.org/
+  \item Apache Velocity (1.6.4) http://velocity.apache.org/
+  \item Apache Struts (2.1.8) http://struts.apache.org/
+  \item Apache Tiles (2.0.6) http://tiles.apache.org/
+  \item Apache Digester (2.0) http://digester.apache.org/
+  \item Jakarta Cactus (1.8.1) http://jakarta.apache.org/cactus/
+  \item Java 1.6 http://www.oracle.com/technetwork/java/index.html
+  \item Liquibase (1.9.5) http://www.liquibase.org/
+  \item PostgreSQL (9.0) http://www.postgresql.org/
+  \item Quartz (1.7.1) http://www.quartz-scheduler.org/
+  \item Glassfish Enterprise Server v.2.1.1 http://glassfish.java.net/
+  \item Hessian (4.0.7) http://hessian.caucho.com/
+  \item XStram (1.3.1) http://xstream.codehaus.org/
+  \item EJB (3.0) http://www.oracle.com/technetwork/java/index-jsp-140203.html
+  \item JPA (1.0) http://www.oracle.com/technetwork/articles/javaee/jpa-137156.html
+  \item Amcharts http://www.amcharts.com/
+  \item Jquery (1.4.1) http://jquery.com/
+\end{enumerate}
+}
+\newpage
+\newline 
+ \newline
+\newline
+\newline
+\newline
+Jquery-\newline
+\section{Projekty}
+{\small
+\begin{enumerate}
+  \item ProcessCore - Zawiera wsp�dzielon� przez pozosta�e projekty.
+  \item ProcessAuth - Zawiera logik� uwie�ytelniania i autoryzacji u�ytkownik�w. 
+  \item ProcessComputation - Dostarcza funkcjonalno�ci do zarz�dzanie obliczeniami ich uruchamieniem itp.
+  \item ProcessComputationApi - Dostarcza podstawowy interfejs programistyczny. 
+  \item ProcessWeb - Wszystko co zwi�zane z graficznym interfejsem u�ytkownika
+  \item NodeClient - Aplikacja osadzana na w�z�ach obliczeniowych udost�pniaj�ca mo�liwo�� wykonywania na nich oblicze�.
+\end{enumerate}
+}
+\section{Zmienne Konfiguracyjne}
+{\small
+\begin{enumerate}
+
+\item db.jdbc.driverClassName - klasa sterownika JDBC
+\item db.jdbc.url - URL po��czenia do bazy danych aplikacji
+\item db.jdbc.url.pg - URL po��czenia do bazy postgres
+\item db.jdbc.username - Nazwa u�ytkownika u�ywanego przy po��czeniu z baz�
+\item db.jdbc.password - Haslo u�ytkownika u�ywanego przy po��czeniu z baz�
+\item db.changelog.file - Nazwa pliku z przyrostowymi migracjami w schemacie bazy danych
+\item db.name - Nazwa bazy danych
+
+\item glassfish.lib - katalog z bibliotekami serwera glassfish
+\item glassfish.home - katalog g��wny instalacji serwera glassfish
+\item glassfish.admin.username - u�ytkownik administracyjny serwera glassfish
+\item glassfish.admin.passwd - has�o u�ytkownika administracyjnego serwera glassfish
+\item glassfish.admin.passwdfile - plik hase� u�ywany do cel�w administracyjnych
+\item glassfish.domain.name - nazwa domeny administracyjnej serwera glassfish
+
+\item nodeClient.app.path - punkt zaczepenia aplikacji 
+\item nodeClient.tomcat.manager.user - nazwa u�ytkownika administracyjnego glassfish
+\item nodeClient.tomcat.manager.password - has�o u�ytkownika administracyjnego glassfish
+\item nodeClient.tomcat.url - URL do mand�era aplikacji tomcat
+\item nodeClient.root - katalog g��wny projektu NodeClient
+\item nodeClient.dist - katalog z dystrybucj� projektu NodeClient
+
+\item core.name - nazwa projektu ProcessCore
+\item core.root - katalog g��wny projektu ProcessCore
+\item core.dist - katalog z dystrybucj� projektu ProcessCore
+\item core.build - katalog z skompilowanymi klasami projektu ProcessCore
+\item core.tests - katalog z skompilowanymi klasami test�w ProcessCore
+\item common.lib - wp�dzielony katalog z bibliotekami 
+
+\item mail.from - nadawca emaila wys�anego z aplikacji
+\item mail.smtp.user - u�ytkownik serwera SMTP
+\item mail.smtp.host - host serwera SMTP
+\item mail.smtp.port - port serwera SMTP
+\item mail.smtp.password - has�o u�ytkownika SMTP
+\item application.url - url aplikacji kt�ry b�dzie za��czony w wiadomo�ciach email
+
+\item computationApi.root - katalog g��wny projektu ProcessComputationApi
+\item computationApi.dist - katalog z dystrybucj� projektu ProcessComputationApi
+
+\item computation.root - katalog g��wny projektu ProcessComputation
+\item computation.dist - katalog z dystrybucj� projektu ProcessComputation
+\item computation.build - katalog z skompilowanymi klasami projektu ProcessComputation
+\item computation.tests - katalog z skompilowanymi klasami test�w projektu ProcessComputation
+
+\item auth.root - katalog g��wny projektu ProcessAuth
+\item auth.dist - katalog z dystrybucj� projektu ProcessAuth
+\item auth.build - katalog ze skompilowanymi klasami projektu ProcessAuth
+\item auth.tests - katalog ze skompilowanymi klasami test�w projektu ProcessAuth
+
+
+\end{enumerate}
+}
+
+\section{Cele ANT}
+
+\subsection{ProcessCore}
+{\small
+\begin{enumerate}
+  \item clean
+  \item compile
+  \item compile-test
+  \item copy-libs
+  \item copy-templates
+  \item dist
+  \item init
+  \item prepare-liquibase
+  \item prepare-test
+  \item update-database
+  \item setup-email
+\end{enumerate}
+}
+\subsection{ProcessAuth}
+{\small
+\begin{enumerate}
+  \item clean
+  \item compile
+  \item compile-test
+  \item dist
+  \item init
+  \item prepare-liquibase
+  \item prepare-test
+  \item update-database
+\end{enumerate}
+}
+\subsection{ProcessComputation}
+{\small
+\begin{enumerate}
+  \item clean
+  \item compile
+  \item compile-test
+  \item dist
+  \item init
+  \item prepare-liquibase
+  \item prepare-test
+  \item update-database
+\end{enumerate}
+}
+\subsection{ProcessComputationApi}
+{\small
+\begin{enumerate}
+  \item clean
+  \item compile
+  \item dist
+  \item init
+\end{enumerate}
+}
+\subsection{ProcessWeb}
+{\small
+\begin{enumerate}
+  \item all-dists
+  \item all-prepare-tests
+  \item clean
+  \item compile
+  \item create-database
+  \item deploy
+  \item deploy-no-test
+  \item dist
+  \item drop-database
+  \item ear
+  \item eartest
+  \item init
+  \item perform-computation-tests
+  \item perform-core-tests
+  \item perform-user-tests
+  \item redeploy
+  \item start-domain
+  \item stop-domain
+  \item create-domain
+  \item drop-domain
+  \item test
+  \item update-database
+\end{enumerate}
+}
+\subsection{NodeClient}
+
+{\small
+\begin{enumerate}
+  \item clean
+  \item compile
+  \item dist
+  \item init
+\end{enumerate}
+}
+\section{Uruchamianie}
+
+Pierszym krokiem jest stworzenie zmienne �rodowiskowej o nazwie TASK\_HOME, w kt�rym nale�y utworzy� plik o nazwie config.properties.
+
+\subsection{Utworzenie domeny administracyjnej serwera Glassfish}
+
+{\tiny
+\begin{verbatim}
+[malczyk@lenovo ant]$ ant create-domain
+Buildfile: build.xml
+
+create-domain:
+     [exec] Using port 4848 for Admin.
+     [exec] Using default port 8080 for HTTP Instance.
+     [exec] Using default port 7676 for JMS.
+     [exec] Using default port 3700 for IIOP.
+     [exec] Using default port 8181 for HTTP_SSL.
+     [exec] Using default port 3820 for IIOP_SSL.
+     [exec] Using default port 3920 for IIOP_MUTUALAUTH.
+     [exec] Using default port 8686 for JMX_ADMIN.
+     [exec] Domain being created with profile:developer, as specified by variable AS_ADMIN_PROFILE in configuration file.
+     [exec] ------ Using Profile [developer] to create the domain ------
+     [exec] XML processing for profile: Base document [/home/malczyk/Devel/tools/glassfish/lib/install/templates/default-domain.xml.template]. 
+           Profile name [developer]. Processing property [domain.xml.style-sheets].
+     [exec] 
+     [exec] The file in given locale [pl_PL] at: [/home/malczyk/Devel/tools/glassfish/lib/install/templates/locales/pl_PL/index.html] 
+           could not be found. Using default (en_US) index.html instead.
+     [exec] Security Store uses: JKS
+     [exec] Domain testdomain created.
+
+BUILD SUCCESSFUL
+Total time: 23 seconds
+\end{verbatim}
+}
+
+\subsection{Utworzenie puli po��cze�}
+W tym celu nale�y si� zalogowa� do domeny administracyjnej serwera glassfish dost�pnej pod adresem http://localhost:4848/.
+Z drzewa po lewej stronie wybrac Resources->Connection Pools
+Tam nale�y uwtorzy� pul� po��cze� wprowadzaj�c odpowiednie dane dotycz�ce danych s�u��cych do po��czenia z baz� danych oraz 
+parametery konfiguracyjne samej puli.
+\newline
+\newline
+\includegraphics[scale=0.4]{img/admin00.png}
+\newline
+\newline
+Po skonfigurowaniu powinna by� mo�liwo�� sprawdzenia po��czenia poprzez u�ycie polecenia Ping.
+\subsection{Utworzenie zasobu JDBC}
+Aby umo�liwi� serwerowi glassfish dost�p do serwera bazy danych pierwsza czynno�ci� b�dzie utworzenie zasobu JDBC, kt�ry odost�pniany 
+b�dzie aplikacji za po�rednictwem JNDI. W celu utworzenia zasobu nale�y zalogowa� si� do panelu administracyjnego serwera glassfish
+dost�pnego pod adresem http://localhost:4848/ nazwa zasobu powinna by� ustawiona na jdbc/psql gdy� takiej nazwy oczekuje Entity manager u�ywany w 
+aplikacji, natowmiast z listy rozwijalnej nale�y wybrac utworzan� uprzednio pul� po��cze�.
+\newline
+\newline
+\includegraphics[scale=0.4]{img/admin01.png}
+\newline
+\newline
+\subsection{Utworzenie zasobu na potrzeby Quartz scheduler}
+W celu stworzenia mo�liwo�ci cyklicznego monitorowania obici��enia w�z��w obliczeniowych konieczne jest dodanie dodatkowego zasobu JNDI z kt�rego
+korzysta� b�dzie Quartz Scheduler.
+Dodatkowo nale�y quertz.properties dodac, oraz modyfikacja server.policy
+\newline
+\newline
+\includegraphics[scale=0.4]{img/admin02.png}
+\newline
+\newline
+
+\subsection{Konfiguracja JMS}
+\subsubsection{Tworzenie fabryki po��cze� JMS}
+\newline
+\newline
+\includegraphics[scale=0.4]{img/admin05.png}
+\newline
+\newline
+Dodatkowo trzeba doda� dwa klucze konfiguracji UserName, Password
+\subsubsection{Kolejka oblicze�}
+Obliczenia na platformie wykonywane s� w spos�b asynchroniczny, zlecenia wykonania obliczenia kierowane s� do kolejki sk�d
+w odpowiej kolejno�ci s� wykonywane.
+\newline
+\newline
+\includegraphics[scale=0.4]{img/admin04.png}
+\newline
+\newline
+\subsubsection{Kolejka emaili}
+\newline
+\newline
+\includegraphics[scale=0.4]{img/admin03.png}
+\newline
+\newline
+
+\subsection{Inicjalizacja bazy danych}
+{\tiny
+\begin{verbatim}
+[malczyk@lenovo ant]$ ant create-database update-database;
+Buildfile: build.xml
+
+create-database:
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+
+update-database:
+
+prepare-liquibase:
+
+update-database:
+[updateDatabase] Create Database Lock Table
+[updateDatabase] Lock Database
+[updateDatabase] Successfully acquired change log lock
+[updateDatabase] Create Database Change Log Table
+[updateDatabase] Creating database history table with name: databasechangelog
+[updateDatabase] Reading from databasechangelog
+[updateDatabase] Changeset classpath:/changelog.xml::core_1::Pawel Malczyk::(MD5Sum: 30db847218d756a62290d4def9b6a44e)
+[updateDatabase] Changeset classpath:/changelog.xml::core_2::Pawel Malczyk::(MD5Sum: cb5ff4542946b1b9ae03a14271159fd)
+[updateDatabase] Release Database Lock
+[updateDatabase] Successfully released change log lock
+
+prepare-liquibase:
+
+update-database:
+[updateDatabase] Lock Database
+[updateDatabase] Successfully acquired change log lock
+[updateDatabase] Reading from databasechangelog
+[updateDatabase] Changeset classpath:/changelog.xml::auth_1::Pawel Malczyk::(MD5Sum: 9377cf30c0d38981fa8c8dee16d0148a)
+[updateDatabase] Changeset classpath:/changelog.xml::auth_2::Pawel Malczyk::(MD5Sum: cc881fe5957c3cb8ee845d267a83ff)
+[updateDatabase] Changeset classpath:/changelog.xml::auth_3::Pawel Malczyk::(MD5Sum: 99d0d494b3e833e6e7f52724b7729cf9)
+[updateDatabase] Changeset classpath:/changelog.xml::auth_4::Pawel Malczyk::(MD5Sum: 6a82205a871544a1b628db5dd58e6b3)
+[updateDatabase] Release Database Lock
+[updateDatabase] Successfully released change log lock
+
+prepare-liquibase:
+
+update-database:
+[updateDatabase] Lock Database
+[updateDatabase] Successfully acquired change log lock
+[updateDatabase] Reading from databasechangelog
+[updateDatabase] Changeset classpath:/changelog.xml::comp_1::Pawel Malczyk::(MD5Sum: 299ba28e6fc3896539f1b5e28fffff6)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_2::Pawel Malczyk::(MD5Sum: a0a4453b3ad404382ada3c44c14a53)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_3::Pawel Malczyk::(MD5Sum: 861fff4729cba2c555fceed3414a89)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_4::Pawel Malczyk::(MD5Sum: 588081105c7b22d733716f598dd21)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_5::Pawel Malczyk::(MD5Sum: 11a8ba5ab4d04fe7df9d8b9ca4d96025)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_6::Pawel Malczyk::(MD5Sum: e8595b15f38a3e2d724157fcbad843)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_7::Pawel Malczyk::(MD5Sum: 6140a92256cc87abb5a261a97d21d71)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_8::Pawel Malczyk::(MD5Sum: ab2b351e80a84e07b991e6517a89b4)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_9::Pawel Malczyk::(MD5Sum: 8b6523461f1b276f54734654d89f179)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_10::Pawel Malczyk::(MD5Sum: e7a4ace29a66277e75cdea1ef513e35f)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_11::Pawel Malczyk::(MD5Sum: 9143fffe1bafe694845182cec7bfe2)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_12::Pawel Malczyk::(MD5Sum: 35c4cbc73424d5ea6590f173cf6f83)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_13::Pawel Malczyk::(MD5Sum: bb8b3ba0182bf59b80d5654a9ef91f2f)
+[updateDatabase] Changeset classpath:/changelog.xml::comp_14::Pawel Malczyk::(MD5Sum: 837bc9bd9f91729f3225423d1bb4ee98)
+[updateDatabase] Release Database Lock
+[updateDatabase] Successfully released change log lock
+
+BUILD SUCCESSFUL
+Total time: 7 seconds
+\end{verbatim}
+}
+
+
+
+\subsection{Uruchomienie serwera aplikacji}
+W celu uruchomienia serwera glassfish nale�y uruchomi� cel start-domain
+{\tiny
+
+\begin{verbatim}
+[malczyk@lenovo ant]$ ant start-domain
+Buildfile: build.xml
+
+start-domain:
+     [exec] Starting Domain taskflow, please wait.
+     [exec] Default Log location is /home/malczyk/Devel/tools/glassfish/domains/taskflow/logs/server.log.
+     [exec] Redirecting output to /home/malczyk/Devel/tools/glassfish/domains/taskflow/logs/server.log
+     [exec] Listening for transport dt_socket at address: 9009
+     [exec] Application server is listening at address 9009 for debugger to attach using transport dt_socket
+     [exec] Domain taskflow is ready to receive client requests. Additional services are being started in background. 
+     [exec] Domain [taskflow] is running [Sun GlassFish Enterprise Server v2.1.1 ((v2.1 Patch06)(9.1_02 Patch12)) (build b31g-fcs)] with its configuration and logs at: [/home/malczyk/Devel/tools/glassfish/domains].
+     [exec] Admin Console is available at [http://localhost:4848].
+     [exec] Use the same port [4848] for "asadmin" commands.
+     [exec] User web applications are available at these URLs:
+     [exec] [http://localhost:8080 https://localhost:8181 ].
+     [exec] Following web-contexts are available:
+     [exec] [/web1  /__wstx-services ].
+     [exec] Standard JMX Clients (like JConsole) can connect to JMXServiceURL:
+     [exec] [service:jmx:rmi:///jndi/rmi://lenovo:8686/jmxrmi] for domain management purposes.
+     [exec] Domain listens on at least following ports for connections:
+     [exec] [8080 8181 4848 3700 3820 3920 8686 ].
+     [exec] Domain does not support application server clusters and other standalone instances.
+     [exec] 
+
+BUILD SUCCESSFUL
+Total time: 25 seconds
+\end{verbatim}
+}
+
+\subsection{Zatrzymywanie serwera}
+{\tiny
+\begin{verbatim}
+[malczyk@lenovo ant]$ ant stop-domain
+Buildfile: build.xml
+
+stop-domain:
+     [exec] Domain taskflow stopped.
+
+BUILD SUCCESSFUL
+Total time: 5 seconds
+
+\end{verbatim}
+}
+\subsection{Osadzenie aplikacji}
+{\tiny
+\begin{verbatim}
+[malczyk@lenovo ant]$ ant deploy
+Buildfile: build.xml
+
+deploy:
+     [exec] Command deploy executed successfully.
+
+BUILD SUCCESSFUL
+Total time: 10 seconds
+
+\end{verbatim}
+}
+
+\subsection{Konfigurowanie serwera poczty}
+Z projektu ProcessCore:
+{\tiny
+\begin{verbatim}
+[malczyk@lenovo ProcessCore]$ ant setup-email
+Buildfile: build.xml
+
+setup-email:
+      [sql] Executing commands
+      [sql] 10 of 10 SQL statements executed successfully
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+\end{verbatim}
+}
+
+\subsection{Generowanie dokumentacji}
+Ka�dy z projekt�w posiada odpowiedni do tego cel ANT'a.
+
+{\tiny
+\begin{verbatim}
+[malczyk@lenovo ant]$ ant docs
+Buildfile: build.xml
+
+init:
+
+docs:
+  [javadoc] Generating Javadoc
+  [javadoc] Javadoc execution
+  [javadoc] Loading source files for package core.messaging.workers...
+  [javadoc] Loading source files for package core.model...
+  [javadoc] Loading source files for package core.session...
+  [javadoc] Loading source files for package core.utils...
+  [javadoc] Loading source files for package core.workers...
+  [javadoc] Constructing Javadoc information...
+  [javadoc] Standard Doclet version 1.6.0_16
+  [javadoc] Building tree for all the packages and classes...
+  [javadoc] Building index for all the packages and classes...
+  [javadoc] Building index for all classes...
+
+BUILD SUCCESSFUL
+Total time: 2 seconds
+\end{verbatim}
+}
+
+\subsection{Udost�pnianie us�ug JMX na w�z�ach obliczeniowych}
+W tym celu na ka�dym z serwer�w nale�y doda� nast�puj�ce wpisy w skrypcie catalina.sh
+{\tiny
+\begin{verbatim}
+CATALINA_OPTS="-Dcom.sun.management.jmxremote
+        -Dcom.sun.management.jmxremote.port=5555
+        -Dcom.sun.management.jmxremote.ssl=false
+        -Dcom.sun.management.jmxremote.authenticate=true
+        -Dcom.sun.management.jmxremote.password.file=../conf/jmxremote.password
+        -Dcom.sun.management.jmxremote.access.file=../conf/jmxremote.access"
+\end{verbatim}
+}
+
+\subsection{Ustawienie zmiennej CLASSPATH dla pakiet�w oblicze�}
+Aby Tomacat m�g� dynamicznie i porpawnie �adowa� klasy oblicze� konieczne jest dodanie nast�puj�cego wpisu w catalina.sh
+\begin{verbatim}
+ CLASSPATH=/home/malczyk/tasklibs/*
+\end{verbatim}
+
+\section{Architektura}
+
+Podstawowa architektura wygl�da jak na poni�szym obrazie.\newline
+\includegraphics[scale=0.5]{img/overview.png} 
+\newline
+Na centralny serwerze glassfish wdro�one s� projekty odpowiedzialne za interfejs u�ytkownika, uwie�ytelnianie, autoryzacj� u�ytkownik�w,
+oraz zarz�dzanie obliczeniami. Na poszczeg�lnych w�z�ach obliczeniowych dzia�a serwer tomcat, na kt�rych osadzona jest aplikacja kliencka.
+Aplikacja przekazuje ��danie wykonania obliczenia do odpowiedniej bilioteki. Stad na ka�dym z serwer�w musz� znajdowa� si� wszystkie konieczne
+do wykonania obliczenia biblioteki.
+\newline
+\includegraphics[scale=0.5]{img/projects.png}
+
+\section{U�ytkownicy}
+W systemie mo�na definiowa� grupy u�ytkownik�w, z r�nymi uprawnieniami takimi jak
+\begin{enumerate}
+\item Administracja u�ytkownikami
+\item Administracja procesami
+\item Administracja obliczeniami
+\end{enumerate} 
+\subsection{Tworzenie u�ytkownika administracyjnego}
+W projekcie ProcessAuth nale�y wykona�
+
+{\tiny
+\begin{verbatim}
+[malczyk@lenovo ProcessAuth]$ ant create-admin
+Buildfile: build.xml
+
+create-admin:
+    [input] Password for admin user
+admin321
+      [sql] Executing commands
+      [sql] 3 of 3 SQL statements executed successfully
+
+BUILD SUCCESSFUL
+Total time: 2 seconds
+[malczyk@lenovo ProcessAuth]$ 
+
+\end{verbatim}
+}
+
+\subsection{Rejstracja u�ytkownika}
+
+\subsubsection{Wype�nienie formularza}
+\includegraphics[scale=0.4]{img/reg1.png}
+\subsubsection{Odebranie wiadomo�ci z linkiem aktywacyjnym}
+\includegraphics[scale=0.4]{img/reg2.png}
+\subsubsection{Aktywacja konta}
+\includegraphics[scale=0.4]{img/reg3.png}
+
+
+\section{Grupy u�ytkownik�w}
+\subsection{Tworzenie i nadawanie upawnie�}
+\includegraphics[scale=0.4]{img/grp1.png}
+\subsection{Dodawanie u�ytkownik�w do grupy}
+Z widoku edycji u�ytkownika mo�na dodawa� grupy przypisane do u�ytkownika.
+\includegraphics[scale=0.4]{img/grp2.png}
+
+\section{Obliczenia}
+
+\subsection{Wgrywanie obliczenia}
+\includegraphics[scale=0.4]{img/prc1.png}
+
+\subsection{Tworzenie obliczenia}
+\includegraphics[scale=0.4]{img/prc2.png}
+
+\subsection{Uruchamianie obliczenia}
+\includegraphics[scale=0.4]{img/prc3.png}
+
+\subsection{Wykonane obliczenia}
+\includegraphics[scale=0.4]{img/prc4.png}
+
+\section{W�z�y obliczeniowe}
+W systemie mo�na podgl�da� po��czone z serwer g��wnym w�z�y obliczeniowe.\newline
+\newline
+\includegraphics[scale=0.4]{img/nodes.png}
+\newline
+Z tego wdoku mo�liwy jest podgl�d informacji takich jak obci��enie, ilo�� uruchomionych w�tk�w, urzytej pami�ci na w�z�ach obliczeniowych.
+\newpage
+Podgl�d historii obci��enia w�z�a.\newline \newline
+\includegraphics[scale=0.4]{img/nodes_load.png}
+
+\subsection{Tworzenie mapowania}
+Silnik oblicze� do zlecania obliczenia poszczeg�lnym w�z�om bazuj�c na ich nazwie. Aby stworzy� mapowanie pomi�dzy w�z�ami a ich nazw� nale�y 
+wybra� z menu Wez�y -> Mapowania w�z��w.
+\newline \newline
+\includegraphics[scale=0.4]{img/mapping01.png}
+\newline \newline
+\includegraphics[scale=0.4]{img/mapping00.png}
+
+
+\section{API realizacja oblicze�}
+\subsection{Pakiet oblicze�}
+Przez pakiet oblicze� rozumiane jest archiwum JAR zawieracj�ce klasy oblicze�, oraz plik konfiguracji computation.xml
+\subsection{Konfiguracja}
+Obliczenia na platformie realizowane s� w spos�b opisany w pliku XML kt�ry stanowi konfiguracj� obliczenia.
+\subsubsection{Elementy konfiguracji}
+\begin{enumerate}
+\item{Computation} -
+G��wny element konfiguracji, opisuje obliczenie w ca�o�ci jako graf sk��daj�cy si� wierzcho�k�w, kt�rymi s� podstawowe atomowe obliczenia, oraz kraw�dzi
+kt�re ��cz� poszczeg�lne mniejsze obliczenia wchodz�ce w sk�ad g��wnego obliczenia. Atrybutem tego elementu XML jest id kt�ry musi by� unikalny.
+\item{Task} -
+Pojedyncze atomowe obliczenie. Kazde obliczenie opisuj� wej�cia i wyj�cia elementy inputs outputs. Inputs stanowi� dane wej�ciowe obliczenia, outputs
+przechwuj� warto�ci wynik�e w wyniku realizacji obliczenia. Istotne atrybuty elementu to id b�d�cy identyfikowalnym identyfikatorem obliczenia, name
+b�d�cy czyteln� nazw� obliczenia, className pe�na kwalifikowana nazwa klasy zawieraj�ca implementacj� obliczenia. 
+\item{Input} -
+Nazwane wej�cie pojedynczego obliczenia.
+\item{Output} -
+Nazwane wyjscie pojedynczego obliczenia.
+\item{Performer} -
+Nazwany weze� obliczeniowy dedykowany do realizacji pojedynczego obliczenia.
+\item{Transitions} -
+Element konfiguracji przechwuj�cy elementy typu transition
+\item{Transition} -
+Odpowiednik kraw�dzi w grafie, przechowuje informacj� o tym w jaki spos�b wyniki obliczen s� przekazywane do kolejnego obliczenia.
+\end{enumerate}
+\subsubsection{U�ywane adnotacje}
+\begin{enumerate}
+\item{@Value} - pola klasy zadnotowane t� adnotacj� s� odpowiadaj� wej�ciom / wyj�ciom obliczenia. To co determinuje, co jest podastawiane 
+pod odpowiednie pola to atrybut name adnotacji, kt�ry jest to�samy z atrybutem name elementu input/output dokumentu XML konfiguracji obliczenia.
+\item{@Computable} - Klasy oznaczone t� adnotacj� powinny implementowa� interfejs ComputableTask a warto�� taskName atrybutu adnotacji powinna odpowiada�
+warto�ci atrybutu name elementu Task konfiguracji.
+\end{enumerate}
+\subsubsection{Istotne interfejsy}
+\begin{enumerate}
+\item{ComptableTask} - Iterfejs pojedynczego atomowego obliczenia. 
+\item{ComputationResult} - Klasa wrapujaca wynik obliczenia.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="auhmodel" size="1012,765" id="auth.model" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302050726F63657373417574682F6D616C637A796B">
+  <children xsi:type="editmodel:EnumerationEditModel" name="Rights" location="50,639" size="128,106" id="auth.model/Rights" runTimeClassModel="GROUP_ADMIN%,USER_ADMIN%,PROCESS_ADMIN%">
+    <children xsi:type="editmodel:CompartmentEditModel" size="105,54">
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="USER_ADMIN" id="auth.model/Rights#USER_ADMIN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="PROCESS_ADMIN" id="auth.model/Rights#PROCESS_ADMIN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="GROUP_ADMIN" id="auth.model/Rights#GROUP_ADMIN%"/>
+    </children>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="User" location="656,234" size="161,355" id="auth.model/User" runTimeClassModel="lastName,nORMAL,getLabel(),getJsonData(),password,bY_EMAIL,userType,uniqueId,eXISTING,eXISTING_COUNT,email,sUPER,active,sYSTEM,firstName,User()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,252">
+      <children xsi:type="editmodel:AttributeEditModel" name="active" id="auth.model/User#active"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_EMAIL" id="auth.model/User#bY_EMAIL"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING" id="auth.model/User#eXISTING"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING_COUNT" id="auth.model/User#eXISTING_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="email" id="auth.model/User#email"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="firstName" id="auth.model/User#firstName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lastName" id="auth.model/User#lastName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nORMAL" id="auth.model/User#nORMAL"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="password" id="auth.model/User#password"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="sUPER" id="auth.model/User#sUPER"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="sYSTEM" id="auth.model/User#sYSTEM"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/User#uniqueId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="userType" id="auth.model/User#userType"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,54">
+      <children xsi:type="editmodel:MethodEditModel" name="User" id="auth.model/User#User()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/User#getJsonData()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLabel" id="auth.model/User#getLabel()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="core.model/AbstractEntity&lt;-auth.model/User" source="//@children.1" target="//@children.3/@sourceConnections.0" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Registration" location="456,234" size="170,175" id="auth.model/Registration" runTimeClassModel="registrationDate,Registration(),getJsonData(),bY_USER,completeRegistration,uniqueId">
+    <children xsi:type="editmodel:CompartmentEditModel" size="147,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_USER" id="auth.model/Registration#bY_USER"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="completeRegistration" id="auth.model/Registration#completeRegistration"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="registrationDate" id="auth.model/Registration#registrationDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/Registration#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,36">
+      <children xsi:type="editmodel:MethodEditModel" name="Registration" id="auth.model/Registration#Registration()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/Registration#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="core.model/AbstractEntity&lt;-auth.model/Registration" source="//@children.2" target="//@children.3/@sourceConnections.0" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="85,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Group" location="50,234" size="161,211" id="auth.model/Group" runTimeClassModel="eXISTING,eXISTING_COUNT,Group(Ljava.lang.String;),name,rights,Group(),getJsonData(),uniqueId">
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,108">
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING" id="auth.model/Group#eXISTING"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING_COUNT" id="auth.model/Group#eXISTING_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="auth.model/Group#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rights" id="auth.model/Group#rights"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/Group#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,54">
+      <children xsi:type="editmodel:MethodEditModel" name="Group" id="auth.model/Group#Group()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Group" id="auth.model/Group#Group(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/Group#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.4/@sourceConnections.0 //@children.2/@sourceConnections.0 //@children.1/@sourceConnections.0 //@children.5/@sourceConnections.0" autoLocated="true" id="core.model/AbstractEntity&lt;-auth.model/Group" source="//@children.3" target="//@children.6" targetEnd="//@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="64,134" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="LoginEntry" location="241,234" size="185,193" id="auth.model/LoginEntry" runTimeClassModel="LoginEntry(),loginFrom,bY_USER_AND_DATE,getJsonData(),loginDate,toString(),uniqueId">
+    <children xsi:type="editmodel:CompartmentEditModel" size="162,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_USER_AND_DATE" id="auth.model/LoginEntry#bY_USER_AND_DATE"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="loginDate" id="auth.model/LoginEntry#loginDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="loginFrom" id="auth.model/LoginEntry#loginFrom"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/LoginEntry#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,54">
+      <children xsi:type="editmodel:MethodEditModel" name="LoginEntry" id="auth.model/LoginEntry#LoginEntry()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/LoginEntry#getJsonData()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="auth.model/LoginEntry#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="core.model/AbstractEntity&lt;-auth.model/LoginEntry" source="//@children.4" target="//@children.3/@sourceConnections.0" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="92,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="UserGroup" location="847,234" size="145,175" id="auth.model/UserGroup" runTimeClassModel="bY_GROUP,bY_GRP_USR,UserGroup(),getJsonData(),bY_USER,uniqueId">
+    <children xsi:type="editmodel:CompartmentEditModel" size="122,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_GROUP" id="auth.model/UserGroup#bY_GROUP"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_GRP_USR" id="auth.model/UserGroup#bY_GRP_USR"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_USER" id="auth.model/UserGroup#bY_USER"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/UserGroup#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,36">
+      <children xsi:type="editmodel:MethodEditModel" name="UserGroup" id="auth.model/UserGroup#UserGroup()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/UserGroup#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="core.model/AbstractEntity&lt;-auth.model/UserGroup" source="//@children.5" target="//@children.3/@sourceConnections.0" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="72,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.3/@sourceConnections.0" name="AbstractEntity" location="468,50" size="128,134" id="core.model/AbstractEntity" runTimeClassModel="getJsonData(),AbstractEntity(),uniqueId">
+    <children xsi:type="editmodel:CompartmentEditModel" size="98,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="core.model/AbstractEntity#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="98,36">
+      <children xsi:type="editmodel:MethodEditModel" name="AbstractEntity" id="core.model/AbstractEntity#AbstractEntity()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="core.model/AbstractEntity#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

@@ -1,0 +1,400 @@
+@CHARSET "UTF-8";
+
+.container-panel {
+	padding: 10px;
+}
+
+.logindata-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+	border-radius: 20px;
+	position: relative;
+	top: 30px;
+	left: 6px;
+	height: 150px;
+	width: 1110px;
+	font-size: small;
+}
+
+.login-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 190px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+    width: 500px;
+}
+
+
+.run-with-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 190px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+    width: 500px;
+}
+
+.computation-result-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 190px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+    width: 500px;
+}
+
+
+.run-computation-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 240px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+    width: 555px;
+}
+
+.new-validation-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 190px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+    width: 500px;
+}
+
+
+.validate-process-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 190px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+    width: 500px;
+}
+
+.upload-process-panel {
+		-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 190px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+    width: 500px;
+}
+
+.register-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+	height: 210px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+    width: 500px;
+}
+
+.main-admin-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	font-size: small;
+	height: 105px;
+	left: 290px;
+	position: relative;
+	top: -66px;
+	width: 255px;
+	z-index: 0;
+}
+
+.computations-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	font-size: small;
+	height: 108px;
+	left: 549px;
+	position: relative;
+	top: -171px;
+	width: 280px;
+	z-index: 0;
+}
+
+.nodes-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	font-size: small;
+	height: 108px;
+	left: 835px;
+	position: relative;
+	top: -280px;
+	width: 280px;
+	z-index: 0;
+}
+
+.main-process-panel {
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	font-size: small;
+	height: 105px;
+	left: 6px;
+	position: relative;
+	top: 40px;
+	width: 280px;
+	z-index: 0;
+}
+
+.content-panel {
+	padding-left: 10px;
+	left: 0%;
+	padding-left: 10px;
+	position: relative;
+	top: 2%;
+}
+
+.content-panel-performed {
+	padding-left: 10px;
+	left: 10%;
+	padding-left: 113px;
+	position: relative;
+	top: 25%;
+}
+
+.content-panel-list {
+	padding-left: 10px;
+	left: 0%;
+	position: relative;
+	top: 2%;
+}
+
+.edit-user-panel {
+	border: 1px solid blue;
+	font-size: small;
+	height: 130px;
+	left: 50px;
+	position: inherit;
+	top: 30px;
+	width: 340px;
+}
+
+.edit-user-group {
+	border: 1px solid blue;
+	font-size: small;
+	height: 500px;
+	left: 395px;
+	position: absolute;
+	top: 70px;
+	width: 500px;
+	z-index: 0;
+}
+
+.list-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	font-size: small;
+	height: 450px;
+	left: 50px;
+	position: inherit;
+	top: 30px;
+	width: 545px;
+}
+
+.performed-comutation-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	height: 500px;
+	width: 983px;
+}
+
+.performed-computation-list-panel {
+	font-size: small;
+	height: 250px;
+	left: -199px;
+	position: relative;
+	top: -45px;
+	width: 1000px;
+}
+
+.performed-computation-list-log-panel {
+	font-size: small;
+	height: 250px;
+	left: -199px;
+	position: relative;
+	top: -55px;
+	width: 1000px;
+}
+
+.details-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	font-size: small;
+	height: 550px;
+	left: 580px;
+	position: absolute;
+	top: 70px;
+	width: 550px;
+	z-index: 0;
+	font-size: small;
+	height: 450px;
+	left: 580px;
+	position: absolute;
+	top: 70px;
+	width: 550px;
+	z-index: 0;
+}
+
+.title-panel {
+	background-image: url("/procc/gfx/blue_h1_repeater2.png") ;
+	background-repeat:repeat-x;
+	color: white;
+	font-size: small;
+	font-weight: bold;
+	position: relative;
+	text-align: center;
+	top: 0%;
+	-webkit-border-top-left-radius: 20px;
+	-webkit-border-top-right-radius: 20px;
+	-moz-border-radius-topleft: 20px;
+	-moz-border-radius-topright: 20px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	height: 20px
+}
+
+.group-edit-main {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 230px;
+    width: 400px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+	z-index: 0;
+}
+
+
+.failed-validation-panel {
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	background-image: url("/procc/gfx/soft-brushing.jpg");
+	box-shadow: 5px 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 5px black;
+    font-size: small;
+    height: 200px;
+    width: 350px;
+    left: 30%;
+    position: absolute;
+    top: 24%;
+	z-index: 0;
+}

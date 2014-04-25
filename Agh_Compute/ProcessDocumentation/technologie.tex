@@ -1,0 +1,190 @@
+\chapter{Wprowadzenie}
+\label{cha:wprowadzenie}
+
+Od pewnego czasu daje siê zaobserwowaæ systemów opartych rozwi±zania typu
+Workflow. Systemy te pozwalaj± na realizacjê pewnej logiki zwanej procesem w
+okre¶lony definiowalny sposób. Do definiowania procesu stosuje siê struktury
+grafowe opisuj±ce algorytm realizacji okre¶lonego zadania. Opis grafu procesu
+mo¿e byæ realizowany wieloraki sposób jednak najcze¶ciej s± to dokumenty XML o
+semantyce opisuj±cej graf procesu. Obecnie najbardzie rozwijane jezyki definicji
+opisu procesu to BPEL rozijany przez IBM, Microsof czy Bea Systems
+(obecnie Oracle) czy XPDL rozwijany i standarywzowany przez organizacjê
+workflow management coallition. W sk³ad WfMC wchodz± obecnie takie firmy jak
+Fujitsu Computer Corporation, NEC Software limited, czy TIBCO Software, Inc.
+W tym miejscu nasuwa siê pytanie czy rozwi±zania typu workflow mo¿na by
+wykorzystaæ do zastosowañ naukowych, realizacji obliczeñ zw³aszcza ewolucyjnych.
+Otó¿ wiêkszo¶æ algorytmów zw³aszcza obliczeñ ewolucyjnych daje siê przedstawiæ w
+postaci grafu, a co za tym idzie, mo¿na opisaæ jak±¶ form± jêzyka definicji
+procesów oraz zaporzyczyæ niektóre koncepcje z klasycznych rozwi±zañ workflow.
+Przedstawienie obliczenia w postaci grafy daje mo¿liwo¶æ ³atwej zmiany
+implementacji poszczególnych framentów obliczenia np. Metody krzy¿owania, czy
+selekcji bez konieczno¶ci zmiany kodu. G³ównym celem pracy jest dostarczenie
+rozwi±zania które bêdzie da mo¿liwo¶c realizacji obliczeñ przy u¿yciu modelu
+przedstawionego powy¿ej. Platforma realizowana jako cze¶æ praktyczna bêdzie
+zawieraæ w sobie implementacja silnika, który maj±c opis realizacji obliczenie
+przeprowadzie je odpoiedni sposób. Interfejs programistyczny zawieraj±æy zestaw
+interfejsów oraz adnotacji Javy. Jako cze¶æ projektu zaimplementowany zostanie
+modu³ zarz±dzajaæe wez³ami obliczenowymi i zlecaniem poszczególnych zadañ
+obliczeniowych. Graficzny interfejs u¿ytkownika zaimplementowany zostanie w
+¶rodowisku WWW i udostêpniny bêdzie za po¶rednictwem protoko³u HTTP. Rozwi±zanie
+to udostêpni dostêp do systemu ka¿demu u¿ytkownikowi któryma sposobno¶æ u¿ycia
+przegl±drki internetowej niezale¿nie od ¶rodowiska w jakim na codzieñ pracuje.
+Zastosowanie procesu obliczeñ jako modelu ich realizacji sprzyja realizacji
+koncepcji ponownego u¿ycia poszczególnych fragmentów kodu obliczeñ. Poszczególne
+obliczenia bêd± wspó³dzielone pomiêdzy u¿ytkowników. Takie podej¶cie pozwoli
+u¿ytkownikom u¿ycie zaimplementowanych ju¿ obliczeñ jako czê¶æ ich w³asnego
+procesu obliczeniowego. Istotna kwestia jest tak¿e sposób konfigurowalno¶æ
+prezentacji wyników obliczeñ co umo¿liwi potencjaln± integracjê z zewnêtrznymi
+systemami.
+
+\section{U¿yte Technologie}
+\label{sec:technologie}
+\begin{enumerate}
+  \item Apache Ant (1.7.1) http://ant.apache.org/ Apache ANT - narzêdzie
+  pocz±tkowo stworzone w celu automatyzacji procesów budowania oprogramowania.
+  Proces budowania opisany jest w dokumencie XML zawieraj±cym cele oraz
+  zale¿no¶ci miêdzy nimi. Narzêdzie ANT dostarczone jest z ca³ym pakietem
+  wbudowanych implementacji zadañ które mog± byæ u¿yte do kompilacji, budowania
+  wynikowej dystrybucji, testowania aplikacji oraz wielu innych typowych zadañ
+  realizowanych w procesie tworzenia oprogramowania. Narzêdzie to jest silnie
+  rozszerzalne poprzez system wtyczek oraz oraz bibliotek. W projektcie poza
+  typowymi zadaniami zwi±zanymi z kompilacj± i tworzeniem dystrybucji
+  testowaniem aplikacji i tworzeniem dokumentacji, u¿ywany jest tak¿e to
+  generowania schematów bazy danych oraz realizacji dalszych migracji,
+  konfiguracji serwera aplikacji.
+  \item Apache Tomcat (7.0) http://tomcat.apache.org/ Jeden z
+  najpopularniejszych kontenerow aplikacji web zbudowanych z Servletów oraz
+  Stron JSP. W tym projektcie jest zainstalowany na wêz³ach typu Slave i
+  udostpênia logikê obliczeniow± za po¶rednictwem protoko³u Hessian\newline
+  Pocz±tki Serwera Tomcat siêgaj± pocz±tków technologii Serwletów. W 1999 roku
+  Sun Microsystems przekaza³ kod kontenera serwletów Fundacji Apache,która
+  wcze¶niej ju¿ pracowa³a nad podobnym projektem o nazwie JServ. Z po³±czenia
+  obu produktów powasta³o oprogramownie kontenera serwerletów o nazwie Tomcat.
+  Server Tomcat rozpowrzechniany jest na licencjach GPL oraz LGPL.( zr
+  Proffesional apache tomcat 5)
+  \item Apache Velocity (1.6.4) http://velocity.apache.org/ Silnik szablonów
+  pozwalaj±cy na wype³nianie zadanego szablonu odpowiednimi warto¶ciami w miescu
+  gdzie zdefinowana jest odpowiednia zmienna. W aplikacji szeroko stosowany to
+  generowania tresci HTML wiadomo¶ci email, a tak¿e do tworzenia dokumentów
+  XML które zasilaj± danymi bibliotekê generuj±c± wykresy obci±¿eñ serwerów.
+  Innymi typowymi zastosowaniami biblioteki mog± byæ generatory kodu oraz strony
+  html zawieraj±ce odpowiednie miejsca które w momencie wy¶wietlenia strony
+  zostan± wype³nione dynamicznymi danymi.
+  \item Apache Struts (2.1.8) http://struts.apache.org/ Apache Struts - Framwork
+  realizuj±cy wzorzec MVC (Model-View-Controller) u¿ywany do realizacji
+  graficznego interfejsu u¿ytkownika aplikacji. Struts dostarcza wygodne
+  mechnizmy konfiguracji frameworka za pomoc± plików konfiguracyjnych XML, lub
+  za pomocn± adnotaci Javy. Istotn± zalet± jest model programowania, oraz
+  ³atwo¶æ mapowania danych formularza na na odpowiadaj± im reprezentacj± w
+  modelu. Tak¿e i w tym frameworku istnieje mo¿liwo¶æ do³±czania wtyczek
+  rozszerzaj±ych jego funkcjonalnosc w zale¿no¶ci od istniej±cych potrzeb.
+  Przyk³adem mog± byæ tutaj u¿yte wtyczki które umo¿liwiaj± konwersjê
+  zwracanych obiektów Javy do formatu JSON u¿ywanego przez widok, b±d¼ wtyczka
+  integruj±ca Struts z Velocity na potrzeby tworzenia wykresów, b±d¼ Tiles. 
+  \item Apache Tiles (2.0.6) http://tiles.apache.org/ Dostarcza dogodnych
+  narzêdzi definiowania wygl±du graficznego interfejsu u¿ytkownika. Framework
+  pozawla na osi±gniêcie wysokiego stopnia ponownego u¿ycia
+  dowolnych fragmentów elementów grafcznego inerfejsu u¿ytkownika. 
+  \item Apache Digester (2.0) http://digester.apache.org/ Biblioteka u¿ywana do
+  zastosowañ realizuj±cych mapowanie dokumentów XML na obieky Javy. Istotn±
+  zalet± jest szybko¶æ jego dzia³ania wynikaj±ca z faktu, ¿e mapowanie odbywa
+  siê na bie¿±co w trakcie czytania dokumentu XML (nie ma potrzeby tworznia
+  reprezentacji dokumentu w pamieci). Mapowanie w trakcie czytania jest sterowane zdarzeniowo, 
+  a metoda mapowania konfigurwana jest przy pomocy okre¶lonych regu³
+  opisuj±cych wzore które s± mapowane przez silnik na odpowiednie operacje
+  realizowane na mapowanym obiekcie.
+  \item Jakarta Cactus (1.8.1) http://jakarta.apache.org/cactus/ Jakarta Cactus
+  - biblioteka umo¿liwiaj±ce realizacjê testów automatycznych komponentów
+  osadzonych na serwerze. W projekcie u¿ywane do realizacji automatycznych
+  testów komponentów EJB realizuj±cych w³a¶ciw± logikê biznesow±.
+  \item Java 1.6 http://www.oracle.com/technetwork/java/index.html jest
+  obiektowym jêzykiem programowania ogólnego przeznaczenia. Kod wykonywane jest
+  w obrêbie wirtualnej maszyny javy (JVM), tote¿ kod napisy w Java mo¿e byæ
+  wykonywany w dowolnym ¶rodowisku na który zainstalowana jest maszyna.
+  \item Liquibase (1.9.5) http://www.liquibase.org/ Liquibase - umo¿liwia
+  wygodne zarz±dzanie zmianami w modelu danych  w trakcie realizacji projektu.
+  Biblioteka u¿ywana do tworzenia schematu bazy danych, a nastêpnie wprowadzaniu
+  przytostowych zmian w schemacie.
+  \item PostgreSQL (9.0) http://www.postgresql.org/ PostgreSQL - szeroko stosowany,
+  otwarto¼ród³owych system zarz±dzania relacyjnymi bazami danych. Pocz±tkowo
+  rozwijany pocz±wszy od lat siedemdziesi±tych na Uniwersytecie kalifornijskim
+  Berkeley. Silnik bazodanowy wspiera model realacyjny umo¿liwia tworzenie
+  widoków nak³adania ograniczeñ zapewniaj±cych integralno¶æ danych w tym
+  wsparcie na stosowanie kluczy obcych. Silnik wspiera tworzenie procedur które
+  mog± byæ zaimplementowane w jêzykach takich jak PL/Perl, plPHP, pl/Python,
+  PL/Java. Kolejn± cech± jest mo¿liwo¶æ stosowania indeksów które szybszy dostêp
+  do potrzebnych danych. Mo¿liwe typy indeksów z których mo¿na skorzystaæ
+  budowane s± w oparciu o B-Drzewo, R-Drzewo b±d¼ Hash. Silnik bazodanowy
+  postgreSQL dostarcza twa podstawowe mechanizmy realizacji transakcyjno¶ci. Sa
+  nimi MVCC (MultiVersion Concurrency Control) oraz Two Phase Commit Protocol
+  stosowany g³ówny gdy mamy do czynienia z transakcjami obejmuj±cymi wiêksza
+  liczbê zasobów transkacyjnych. Dodatkowymi istotnymi cechami tego silnika s±
+  otwarta licencja (BSD) oraz mo¿liwo¶æ kompilacji silnika na wiele róznych
+  typów platform.
+  \item Quartz (1.7.1) http://www.quartz-scheduler.org/  Quartz - ma za zadanie
+  cykliczne wyzwalane zdefiniowanych zadañ. Pe³ni role podobn± do tej jak± pe³ni 
+  CRON w systemach UNIX. Zalet± s± wysokie mo¿liwo¶ci konfiguracyjne.
+  \item Glassfish Enterprise Server v.2.1.1 http://glassfish.java.net/ Glassfish
+  Enterprise Server - Jest serwerem aplikacji, który implementuje interfejsy w
+  ramach specifikacji JEE5. Do tych zaliczaj± siê kompnenty EJB(Enterprise Java
+  Beans), oraz MDB(Message Driven Beans), JMS(Java Messaging Services) itp.
+  Wen±trz serwera wbudowany jest tak¿e kontener Tomcat, który udostêpnia
+  graficzny interfejs u¿ytkownika aplikacji.
+  \item Hessian (4.0.7) http://hessian.caucho.com/ Hessian-Jest protoko³e,
+  u¿ywanym do zdalnego uruchamiania operacji. Istotn± zalet± jest to, ¿e nie jest ca³kowicie binarny jak RMI, 
+  tylko bazuje na wymianie dokumentów XML. Wymieniane dokumenty, s±znacznie
+  prostrze i którsze ni¿ te z znane protoko³u SOAP.
+  \item XStream (1.3.1) http://xstream.codehaus.org/ - Biblioteka u¿ywana do
+  serializacji i deserializacji zwracanych wyników obliczeñ z wez³ów slave.
+  \item EJB (3.0) http://www.oracle.com/technetwork/java/index-jsp-140203.html EJB-Stosowane do realizacji logiki biznesowej aplikacji. 
+  Zale¿nie czy stanowe, czy nie mog± byæ wymieniane pomiêdzy klientami, b±d¼
+  mog±  byæ zaw³aszczone na czas trawania sesji. Zwykle realizowane w kontekscie
+  transakcyjnym. W wersji 3 znacznie l¿esze ni¿ te znane z wersji 2.x. Wygoda
+  ich u¿ycia sta³a siê g³ówn± przyczyn± ich u¿ycia.
+  \item JPA(1.0) http://www.oracle.com/technetwork/articles/javaee/jpa-137156.html
+  -Jest specyfikacja utrwalania obiektów w bazie danych za pomoc± mapowania obiektowo relacyjnego. Wygodna konfiguracja przy pomocy adnotacji Javy nie wymaga tworzenia dlugich dokumentów mapowañ jak to ma miejsce w
+  przypadku Hibernate. JPA czesto jako silnika utrwalania u¿ywa w³a¶nie
+  Hibernate.
+  \item Amcharts http://www.amcharts.com/ Amcharts-U¿ywane do generowania
+  wszelakiego typu wykresów. Narzêdzie dostarcza du¿e mo¿liwo¶ci konfiguracji
+  prezentowanych wykresu. Szeroki jest tak¿e wachlarz dostêpnych typów wykresów.
+  Aby wygenerowaæ wykres wystarczy zasiliæ bibliotekê dwoma dokumentami XML.
+  PIerwszy ma za zadanie skonigurowanie wykresu pod k±tem jego typu oraz
+  wygl±du, drugi ma za zadanie zasilic wykres danymi. Amcharts jakos dane
+  akceptuj± zarówno pliki XML jak i CSV.
+  \item Jquery (1.4.1) http://jquery.com/ Biblioteka Java script ogólnego
+  przeznaczenia. Jquery dostarcza wygodne techniki manipulowania drzewem DOM
+  wy¶wietlanej strony poprzez zestaw wbudowanych selektorów. Dodatkowo dostarcza
+  mo¿liwo¶æ ³atwego tworzenia ¿±dañ ajax i obs³ugi zwracanych danych. Istotn±
+  spraw± jest tak¿e to i¿ jego architektura jest rozszerzalna poprzez mechanizm
+  wtyczek. 
+  \item Jqgrid - Jest wtyczk± do frameworka Jquery która umo¿liwa ³atwe
+  tworzenie tabel, stronicowania sortowanie itp. Tabele zasilane s± poprzez dane
+  w formacie JSON.
+  \item Apache FOP - http://xmlgraphics.apache.org/fop/ Implementacja standardu
+  XSL-FO u¿ywany do generowania plików PDF z dokumentów XML.
+  \item Checkstyle - Jest narzêdziem deweloperskim, które pozawala na
+  degfinowanie regu³, które musz± byæ przestrzegane w trakcie tworzenia
+  oprogramowania. Sprawadzanie kodu pod k±tem zdefiniowanych uprzednio regu³
+  odbywa siê w trakcie budowania dystrybucji oprogramowania. Dodatkowo narzêdzie
+  to posiada zestaw wtyczek do popularnych ¶rodowisk programistycznych takich
+  jak eclipse b±d¼ netbeans. 
+  \item PMD - pe³ni zbli¿on± funkcjê do tej tej realizowanej przez checkstyle.
+  Dodatkowo u³atwia analizuje kod pod k±tem mo¿liwych b³êdów na podstawie
+  pustych blocków try/catch/finally, zduplikowanego i ma³o optymalnego kodu a
+  tak¿e zbyt skomplikowanych mo¿liwych scie¿ek realizacji programu. 
+  \item JSch - Biblioteka implementuj±ca operacje protoko³u SSH/SFTP. Za jej
+  pomoc± zaimplementowane jest rozsy³anie konfiguracji oraz pakietów obliczeñ
+  na serwery Slave przy u¿yciu protoko³u SFTP.
+  \item Servlety, JSP (Java Server Pages) - Obie technologie s³u¿± do
+  realizacji dynamicznych stron WWW. Serwlety dostarczaj± pewn± porcjê logiki,
+  która w dynamiczny sposób tworzy pewn± dynamiczn± tre¶æ. 
+  Pomimo faktu, ¿e specyfikacja serwletów nie ogranicza ich u¿ycia przy zastosowaniu protoko³u
+  HTTP, to zdecydowana wiêkszo¶æ tworzonych serweletów zawsze obs³uguje ¿±dania
+  protoko³u HTTP jak GET/POST/PUT/DELETE. Strony JSP na osadzanie pewnej
+  dynamicznej zawarto¶ci w zwyk³ych statycznych stronach HTML. Strona JSP jest
+  kompilowana przez kontener do postaci serwletu w momencie pierwszego wywo³ania
+  takiej strony. Specyfikacja JSP pozwala na stosowanie tzw. bibliotek Tagów
+  które dostarczaj± pewn± reu¿ywalna logikê udostêpnian± za po¶rednictwem
+  odpowiednich tagów.
+\end{enumerate}

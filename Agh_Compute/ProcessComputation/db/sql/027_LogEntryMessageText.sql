@@ -1,0 +1,1 @@
+ALTER TABLE computation_log_entries ALTER COLUMN message TYPE text;

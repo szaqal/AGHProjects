@@ -1,0 +1,1 @@
+ALTER TABLE computation_results ADD COLUMN owner serial REFERENCES users(unique_id);

@@ -1,0 +1,1 @@
+ALTER TABLE computation_tasks ADD UNIQUE(task_id);

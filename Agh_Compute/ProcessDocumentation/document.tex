@@ -1,0 +1,87 @@
+\documentclass[pdflatex,11pt]{aghdpl}
+% \documentclass{aghdpl}               % przy kompilacji programem latex
+% \documentclass[pdflatex,en]{aghdpl}  % praca w jezyku angielskim
+\usepackage[polish]{babel}
+\usepackage[latin2]{inputenc}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{listings}
+
+% dodatkowe pakiety
+\usepackage{enumerate}
+\usepackage{listings}
+\lstloadlanguages{TeX}
+
+\definecolor{gray92}{gray}{.92}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+\lstdefinestyle{source_code}
+{
+numbers=left,
+stepnumber=5, 
+basicstyle=\tiny, 
+captionpos = b, %bottom 
+keywordstyle=\color[rgb]{0,0,1}, 
+commentstyle=\color[rgb]{0.133,0.545,0.133}, 
+stringstyle=\color[rgb]{0.627,0.126,0.941}, 
+backgroundcolor=\color{gray92}, 
+frame=lrtb, 
+framerule=0.5pt, 
+linewidth = \textwidth 
+}
+ 
+\lstdefinestyle{console} 
+{ 
+numbers=none, 
+basicstyle=\bf\ttfamily, 
+backgroundcolor=\color{gray92}, 
+frame= lrtb, 
+framerule=0.5pt, 
+linewidth=\textwidth, 
+}
+
+%---------------------------------------------------------------------------
+
+\author{Pawe³ Malczyk}
+\shortauthor{Pawe³ Malczyk}
+
+\titlePL{Przygotowanie pracy dyplomowej w~systemie \LaTeX}
+\titleEN{Thesis in \LaTeX}
+
+\shorttitlePL{Przygotowanie pracy dyplomowej w~systemie \LaTeX} 
+\shorttitleEN{Thesis in \LaTeX}
+
+\thesistypePL{Praca magisterska}
+\thesistypeEN{Master of Science Thesis}
+
+\supervisorPL{dr Aleksander Byrski}
+\supervisorEN{Aleksander Byrski Ph.D}
+
+\date{2011}
+
+\departmentPL{Katedra Automatyki}
+\departmentEN{Department of Automatics}
+
+\facultyPL{Wydzia³ Elektrotechniki, Automatyki, Informatyki i Elektroniki}
+\facultyEN{Faculty of Electrical Engineering, Automatics, Computer Science and Electronics}
+
+\acknowledgements{Serdeczne dzieki itp.}
+
+
+
+\setlength{\cftsecnumwidth}{10mm}
+
+\begin{document}
+\titlepages
+\tableofcontents
+\clearpage
+\include{technologie}
+\include{architektura}
+\include{configuration}
+\include{obliczenia}
+
+
+\bibliography{bibliografia}
+
+\end{document}

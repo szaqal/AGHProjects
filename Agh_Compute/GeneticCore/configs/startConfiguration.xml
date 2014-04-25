@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<computation-configuration>
+	<settings>
+        <setting name="individualUpperBound" value="10"/>
+        <setting name="individualLowerBound" value="-10"/>
+        <setting name="individualVariableCount" value="25"/>
+        <setting name="mutationProbability" value="0.7"/>
+	</settings>
+	<inputs>
+		<input name="populationSize" value="20000"/>
+	</inputs>
+</computation-configuration>

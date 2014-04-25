@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="process" extends="struts-default">
+	
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="plaintext"
+				class="org.apache.struts2.dispatcher.PlainTextResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="authInterceptor"
+				class="process.interceptors.AuthenticationInterceptor" />
+			<interceptor name="authzInterceptor" class="process.interceptors.AuthorizationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="authzInterceptor"/>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="secureStack"/>
+		
+		<action name="EditProcess" class="process.web.actions.edit.EditProcessAction">
+			<result name="new" type="tiles">newProcess</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="EditProcessConfiguration" class="process.web.actions.edit.EditProcessConfiguration">
+			<result name="new" type="tiles">newProcessConfiguration</result>
+			<result name="save" type="redirectAction">
+				<param name="actionName">ComputationConfigList</param>
+			</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="PackagesList" class="process.web.actions.lists.PackagesListAction">
+			<result name="list" type="tiles">packageList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="ComputationList" class="process.web.actions.lists.ComputationListAction">
+			<result name="list" type="tiles">computationList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="ComputationConfigList" class="process.web.actions.lists.ComputationConfigList">
+			<result name="list" type="tiles">computationConfigList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="ValidateProcess" class="process.web.actions.ValidatateProcessAction">
+			<result name="success" type="tiles">processValidation</result>
+			<result name="fail" type="tiles">failedProcessValidation</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+            <result name="config_validated" type="redirectAction">
+                <param name="actionName">ComputationConfigList</param>
+            </result>
+            <result name="package_validated" type="redirectAction">
+                <param name="actionName">PackagesList</param>
+            </result>
+		</action>
+				
+		<action name="PackagesDownload" class="process.web.actions.PackageDownloadAction">
+			<result name="download" type="stream">
+				<param name="contentType">${contentType}</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<action name="CreateProcess" class="process.web.actions.CreateProcessAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">PackagesList</param>
+			</result>
+			<result name="notvalidated" type="tiles">notValidated</result>
+			<result name="error" type="tiles">processCreateFailed</result>
+		</action>
+		
+		<action name="CreateFromConfig" class="process.web.actions.CreateFromConfigAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">ComputationList</param>
+			</result>
+			<result name="notvalidated" type="tiles">notValidated</result>
+		</action>
+
+	</package>
+</struts>

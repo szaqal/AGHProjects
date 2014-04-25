@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="computation">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="description" type="xsd:string" />
+                <xsd:element name="settings">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="setting" minOccurs="0" maxOccurs="unbounded" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="tasks">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="task"
+                                minOccurs="1" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="input" minOccurs="1" maxOccurs="unbounded">
+                                            <xsd:complexType>
+                                                <xsd:attribute name="id" use="required" />
+                                                <xsd:attribute name="name" use="optional" />
+                                                <xsd:attribute name="valueName" use="required" />
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="output"
+                                            minOccurs="1" maxOccurs="unbounded">
+                                            <xsd:complexType>
+                                                <xsd:attribute name="id" use="required" />
+                                                <xsd:attribute name="name" use="optional" />
+                                                <xsd:attribute name="valueName" use="required" />
+                                                <xsd:attribute name="result" use="optional" />
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="description" type="xsd:string" />
+                                    </xsd:sequence>
+                                    <xsd:attribute name="id" use="required" />
+                                    <xsd:attribute name="start" use="optional" />
+                                    <xsd:attribute name="name" use="required" />
+                                    <xsd:attribute name="className" use="required" />
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <xsd:element name="transitions">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="transition"
+                                minOccurs="1" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:attribute name="id" use="required" />
+                                    <xsd:attribute name="from" use="required" />
+                                    <xsd:attribute name="to" use="required" />
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="id"></xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

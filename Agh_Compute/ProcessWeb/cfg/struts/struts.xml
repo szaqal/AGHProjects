@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="processdefault" extends="struts-default">
+	
+		<result-types>
+  			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+		</result-types>
+		
+		<interceptors>
+			<interceptor name="authInterceptor" class="process.interceptors.AuthenticationInterceptor"/>
+			<interceptor name="authzInterceptor" class="process.interceptors.AuthorizationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authInterceptor"/>
+				<interceptor-ref name="authzInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		                                              
+		<default-interceptor-ref name="secureStack"/>
+		
+		<action name="Index" class="process.web.actions.IndexAction">
+			<result name="view" type="tiles">tilesmain</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+		
+		<action name="Unauthorized" class="process.web.actions.UnauthorizedAction">
+			<result name="success" type="tiles">tilesunauthorize</result>
+		</action>
+		
+		<action name="Upload" class="process.web.actions.UploadAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">Index</param>
+			</result>
+		</action>
+		
+		<action name="Download" class="process.web.actions.DownloadAction">
+			<result name="download" type="stream">
+				<param name="contentType">${contentType}</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<action name="RegisterNode" class="process.web.actions.RegisterNodeAction">
+			<result name="success" type="dispatcher">
+			 	<param name="location">/jsp/success.jsp</param>
+			</result>
+		</action>
+
+        <action name="NodeOperations" class="process.web.actions.NodeOperationsAction">
+            <result name="success">/jsp/nodeoperations.jsp</result>
+        </action>
+		
+		<action name="CompleteRegistration" class="process.web.actions.CompleteRegistrationAction">
+			<result name="completed" type="tiles">regstrationCompleted</result>
+			<result name="notcompleted" type="tiles">regstrationNotCompleted</result>
+		</action>
+		
+		<action name="ValidationList" class="process.web.actions.lists.ValidationListAction">
+			<result name="list" type="tiles">validationList</result>
+		</action>
+		
+		<action name="TransformList" class="process.web.actions.lists.TransformListAction">
+			<result name="list" type="tiles">transformList</result>
+		</action>
+		
+		<action name="EditValidation" class="process.web.actions.edit.EditValidation">
+			<result name="new" type="tiles">newValidation</result>
+			<result name="input" type="tiles">newValidation</result>
+			<result name="save" type="redirectAction">
+				<param name="actionName">ValidationList</param>
+			</result>
+		</action>
+		
+		<action name="EditTransform" class="process.web.actions.edit.EditTransformAction">
+			<result name="new" type="tiles">newTransform</result>
+			<result name="input" type="tiles">newTransform</result>
+			<result name="save" type="redirectAction">
+				<param name="actionName">TransformList</param>
+			</result>
+		</action>
+		
+		<action name="NodeLoadChart" class="process.web.actions.charts.NodeLoadChartDataAction">
+			<result name="success" type="dispatcher">
+				<param name="location">/jsp/charts/nodeLoadChart.jsp</param>
+     			<param name="charSet">UTF-8</param>
+			</result>
+			<result name="process" type="velocity">/vm/nodeLoadData.vm</result>
+            <result name="memory" type="velocity">/vm/nodeLoadDataMem.vm</result>
+		</action>
+
+	</package>
+
+	<include file="struts-users.xml"/>
+	<include file="struts-computation.xml"/>
+	<include file="struts-process.xml"/>
+	<include file="struts-ajax.xml"/>
+
+</struts>

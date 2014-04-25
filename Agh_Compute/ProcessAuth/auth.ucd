@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="2138,1994" id="auth" metadata="uml2-1.0" initialized="true" zoom="0.75" scrolledX="83" scrolledY="931" tag="1000" key="32303037303533312D313030302050726F63657373417574682F6D616C637A796B">
+  <children xsi:type="editmodel:InterfaceEditModel" name="AuthWorker" location="1513,1765" size="117,80" id="auth/AuthWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,18">
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveUser" id="auth/AuthWorker#retrieveUser(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="166,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth/AuthWorker-Soyatec::Import->auth.model/User" source="//@children.0" target="//@children.9" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="28,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="161,283"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="UserGroupWorker" location="1055,1380" size="176,170" id="auth/UserGroupWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="153,108">
+      <children xsi:type="editmodel:MethodEditModel" name="addUserToGroup" id="auth/UserGroupWorker#addUserToGroup(ILauth.model.User;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="removeUserFromGroup" id="auth/UserGroupWorker#removeUserFromGroup(ILauth.model.User;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveAvailable" id="auth/UserGroupWorker#retrieveAvailable(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveByUser" id="auth/UserGroupWorker#retrieveByUser(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveByUserAndGroup" id="auth/UserGroupWorker#retrieveByUserAndGroup(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retriveByGroup" id="auth/UserGroupWorker#retriveByGroup(I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="204,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth/UserGroupWorker-Soyatec::Import->auth.model/User" source="//@children.1" target="//@children.9" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,84" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,84"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.7/@sourceConnections.0" name="LoginEntry" location="1557,1490" size="185,188" id="auth.model/LoginEntry">
+    <children xsi:type="editmodel:CompartmentEditModel" size="162,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_USER_AND_DATE" id="auth.model/LoginEntry#bY_USER_AND_DATE"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="loginDate" id="auth.model/LoginEntry#loginDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="loginFrom" id="auth.model/LoginEntry#loginFrom"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/LoginEntry#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,54">
+      <children xsi:type="editmodel:MethodEditModel" name="LoginEntry" id="auth.model/LoginEntry#LoginEntry()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/LoginEntry#getJsonData()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="auth.model/LoginEntry#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth.model/LoginEntry-Standard::Call->auth.model/User*auth.model/LoginEntry-Soyatec::Import->auth.model/User" source="//@children.2" target="//@children.9" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,93" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="161,203"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="UsersWorker" location="1069,1575" size="147,170" id="auth/UsersWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="124,108">
+      <children xsi:type="editmodel:MethodEditModel" name="authenticate" id="auth/UsersWorker#authenticate(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="deleteUser" id="auth/UsersWorker#deleteUser(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="find" id="auth/UsersWorker#find(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveUsers" id="auth/UsersWorker#retrieveUsers(Lcore.utils.PagingInfo;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveUsersCount" id="auth/UsersWorker#retrieveUsersCount()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="saveUser" id="auth/UsersWorker#saveUser(Lauth.model.User;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="171,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth/UsersWorker-Soyatec::Import->auth.model/User" source="//@children.3" target="//@children.9" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="147,77" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,272"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0 //@children.10/@sourceConnections.0" name="Group" location="1308,1145" size="161,206" id="auth.model/Group">
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING" id="auth.model/Group#eXISTING"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING_COUNT" id="auth.model/Group#eXISTING_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="auth.model/Group#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rights" id="auth.model/Group#rights"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/Group#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,54">
+      <children xsi:type="editmodel:MethodEditModel" name="Group" id="auth.model/Group#Group()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Group" location="52,-9" id="auth.model/Group#Group(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/Group#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="RegUserWorker" location="1055,1773" size="183,134" id="auth/RegUserWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="160,72">
+      <children xsi:type="editmodel:MethodEditModel" name="completeRegistration" id="auth/RegUserWorker#completeRegistration(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="deleteRegistrationByUserId" id="auth/RegUserWorker#deleteRegistrationByUserId(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getByUser" id="auth/RegUserWorker#getByUser(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="storeUser" id="auth/RegUserWorker#storeUser(Lauth.model.User;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="190,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth/RegUserWorker-Soyatec::Import->auth.model/User" source="//@children.5" target="//@children.9" targetEnd="//@children.5/@sourceConnections.0/@children.2" label="//@children.5/@sourceConnections.0/@children.0" sourceEnd="//@children.5/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="147,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,271"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth/RegUserWorker-Soyatec::Import->auth.model/Registration" source="//@children.5" target="//@children.8" targetEnd="//@children.5/@sourceConnections.1/@children.2" label="//@children.5/@sourceConnections.1/@children.0" sourceEnd="//@children.5/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="183,66" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,66"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="GroupsWorker" location="1557,1155" size="154,152" id="auth/GroupsWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="131,90">
+      <children xsi:type="editmodel:MethodEditModel" name="deleteGroup" id="auth/GroupsWorker#deleteGroup(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveGroup" id="auth/GroupsWorker#retrieveGroup(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveGroups" id="auth/GroupsWorker#retrieveGroups(Lcore.utils.PagingInfo;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveGroupsCount" id="auth/GroupsWorker#retrieveGroupsCount()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="saveGroup" id="auth/GroupsWorker#saveGroup(Lauth.model.Group;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="182,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth/GroupsWorker-Soyatec::Import->auth.model/Group" source="//@children.6" target="//@children.4" targetEnd="//@children.6/@sourceConnections.0/@children.2" label="//@children.6/@sourceConnections.0/@children.0" sourceEnd="//@children.6/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,76" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="161,86"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="LoginEntryWorker" location="1557,1320" size="171,116" id="auth/LoginEntryWorker">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="148,54">
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveLatestLoginEntry" id="auth/LoginEntryWorker#retrieveLatestLoginEntry(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="retrieveLoginEntries" id="auth/LoginEntryWorker#retrieveLoginEntries(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="storeLoginEntry" id="auth/LoginEntryWorker#storeLoginEntry(Lauth.model.LoginEntry;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="205,88"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth/LoginEntryWorker-Soyatec::Import->auth.model/LoginEntry" source="//@children.7" target="//@children.2" targetEnd="//@children.7/@sourceConnections.0/@children.2" label="//@children.7/@sourceConnections.0/@children.0" sourceEnd="//@children.7/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="85,116" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="85,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.1" name="Registration" location="1304,1773" size="170,170" id="auth.model/Registration">
+    <children xsi:type="editmodel:CompartmentEditModel" size="147,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_USER" id="auth.model/Registration#bY_USER"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="completeRegistration" id="auth.model/Registration#completeRegistration"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="registrationDate" id="auth.model/Registration#registrationDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/Registration#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,36">
+      <children xsi:type="editmodel:MethodEditModel" name="Registration" id="auth.model/Registration#Registration()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/Registration#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth.model/Registration-Soyatec::Import->auth.model/User" source="//@children.8" target="//@children.9" targetEnd="//@children.8/@sourceConnections.0/@children.2" label="//@children.8/@sourceConnections.0/@children.0" sourceEnd="//@children.8/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,350"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0 //@children.2/@sourceConnections.0 //@children.5/@sourceConnections.0 //@children.8/@sourceConnections.0 //@children.1/@sourceConnections.0 //@children.10/@sourceConnections.1 //@children.3/@sourceConnections.0" name="User" location="1304,1380" size="161,350" id="auth.model/User">
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,234">
+      <children xsi:type="editmodel:AttributeEditModel" name="active" id="auth.model/User#active"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_EMAIL" id="auth.model/User#bY_EMAIL"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING" id="auth.model/User#eXISTING"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="eXISTING_COUNT" id="auth.model/User#eXISTING_COUNT"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="email" id="auth.model/User#email"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="firstName" id="auth.model/User#firstName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lastName" id="auth.model/User#lastName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nORMAL" id="auth.model/User#nORMAL"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="password" id="auth.model/User#password"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="sUPER" id="auth.model/User#sUPER"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="sYSTEM" id="auth.model/User#sYSTEM"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/User#uniqueId"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="userType" id="auth.model/User#userType"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,54">
+      <children xsi:type="editmodel:MethodEditModel" name="User" id="auth.model/User#User()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/User#getJsonData()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLabel" id="auth.model/User#getLabel()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="UserGroup" location="1056,1156" size="145,170" id="auth.model/UserGroup">
+    <children xsi:type="editmodel:CompartmentEditModel" size="122,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_GROUP" id="auth.model/UserGroup#bY_GROUP"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_GRP_USR" id="auth.model/UserGroup#bY_GRP_USR"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bY_USER" id="auth.model/UserGroup#bY_USER"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="uniqueId" id="auth.model/UserGroup#uniqueId"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,36">
+      <children xsi:type="editmodel:MethodEditModel" name="UserGroup" id="auth.model/UserGroup#UserGroup()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getJsonData" id="auth.model/UserGroup#getJsonData()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth.model/UserGroup-Soyatec::Import->auth.model/Group" source="//@children.10" target="//@children.4" targetEnd="//@children.10/@sourceConnections.0/@children.2" label="//@children.10/@sourceConnections.0/@children.0" sourceEnd="//@children.10/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="145,85" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,96"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="auth.model/UserGroup-Soyatec::Import->auth.model/User" source="//@children.10" target="//@children.9" targetEnd="//@children.10/@sourceConnections.1/@children.2" label="//@children.10/@sourceConnections.1/@children.0" sourceEnd="//@children.10/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="141,170" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,77"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=4;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

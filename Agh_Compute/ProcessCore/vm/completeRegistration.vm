@@ -1,0 +1,6 @@
+<html>
+	<body>
+		<b> Kliknij poniższy link aby potwierdzić rejestrację </b> <hr><br>
+		<a href="$completeRegistrationUrl">$completeRegistrationUrl</a>
+	</body>
+</html>

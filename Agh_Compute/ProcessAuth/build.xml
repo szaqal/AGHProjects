@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ProcessAuth" basedir="." default="dist">
+	<description>Modul Auth</description>
+	<property environment="env"/>
+	<property file="${env.TASK_HOME}/config.properties" />
+	<property name="src" location="src"/>
+	<property name="src.test" location="test"/>
+	<property name="build" location="build"/>
+	<property name="build.test" location="buildtest"/>
+	<property name="dist" location="dist"/>
+	<property name="cfg" location="cfg"/>
+	<property name="jdocs" location="jdocs"/>
+	<property name="cs" location="cs"/>
+		
+	<taskdef resource="checkstyletask.properties" 
+		classpath="${common.lib}/checkstyle-5.3-all.jar"/> 
+	
+
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${build.test}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${jdocs}" />
+	</target>
+	
+	<target name="checkstyle">
+		<!--<checkstyle config="${cs}/cs.xml" failonviolation="true">
+		  <fileset dir="${src}" includes="**/*.java"/>
+		 </checkstyle>-->
+	</target>
+	
+	<target name="pmd">
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="build.classpath"/>
+		<pmd shortFilenames="true">
+			<ruleset>basic</ruleset>
+			<ruleset>unusedcode</ruleset>
+			<ruleset>typeresolution</ruleset>
+			<ruleset>strings</ruleset>
+			<ruleset>strictexception</ruleset>
+			<ruleset>naming</ruleset>
+			<ruleset>imports</ruleset>
+			<ruleset>design</ruleset>
+			<ruleset>coupling</ruleset>
+			<ruleset>codesize</ruleset>
+			<ruleset>braces</ruleset>
+			<formatter type="html" toFile="${dist}/pmd_report.html" linkPrefix="http://pmd.sourceforge.net/xref/" />
+			<fileset dir="${src}">
+				<include name="**/*.java" />
+			</fileset>
+		</pmd>
+	</target>
+	
+	<path id="jdbc.classpath">
+		<fileset dir="${common.lib}"/>
+	</path>
+	
+	<target name="create-admin">
+		  
+		<input message="Password for admin user" addproperty="admin.passwd" />
+		<sql driver="${db.jdbc.driverClassName}" url="${db.jdbc.url}"
+		  	    userid="${db.jdbc.username}" password="${db.jdbc.password}" autocommit="false">
+		  		<classpath refid="jdbc.classpath"/>
+		  		<![CDATA[
+						INSERT INTO groups(unique_id, name, deleted, rights) VALUES ('admin_group','admin_group',false, 'user_admin;group_admin;process_admin');
+						INSERT INTO users(unique_id, email, password, first_name, last_name, deleted) VALUES ('admin','admin',md5('${admin.passwd}'),'admin','admin',false);
+						INSERT INTO user_groups (unique_id, usr, grp, deleted) VALUES ('admin_join','admin','admin_group',false);						
+		  	    ]]>
+		 </sql>
+	</target>
+
+	<path id="build.classpath">
+		<fileset dir="${common.lib}"/>
+	</path>
+
+	<path id="liquibase.classpath">
+		<fileset dir="${common.lib}"/>
+		<path path="${basedir}/db"/>
+	</path>
+
+	<taskdef resource="cactus.tasks">
+		<classpath>
+			<fileset dir="${common.lib}">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>
+	</taskdef>
+
+
+
+	<target name="docs" depends="init">
+		<javadoc destdir="${jdocs}" sourcepath="${src}" packagenames="auth.*">
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${core.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javadoc>
+	</target>
+
+	<target name="compile" depends="init, checkstyle, pmd">
+		<ant dir="${core.root}" inheritall="false" target="dist" />
+		<javac srcdir="${src}" destdir="${build}" debug="true">
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${core.dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="prepare-liquibase">
+		<taskdef resource="liquibasetasks.properties">
+			<classpath refid="build.classpath"/>
+		</taskdef>
+
+	</target>
+
+	<target name="update-database" depends="prepare-liquibase">
+		<updateDatabase changeLogFile="${db.changelog.file}"
+                        driver="${db.jdbc.driverClassName}"
+                        url="${db.jdbc.url}"
+                        username="${db.jdbc.username}"
+                        password="${db.jdbc.password}"
+                        classpathref="liquibase.classpath"/>
+	</target>
+
+	<target name="compile-test" depends="dist">
+		<javac srcdir="${src.test}" destdir="${build.test}" debug="true">
+			<classpath>
+				<fileset dir="${dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${core.dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile">
+		<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}">
+			<fileset dir="${cfg}">
+				<include name="*"/>
+				<exclude name="persistence.xml"/>
+			</fileset>
+			<metainf dir="${cfg}">
+				<include name="persistence.xml"/>
+			</metainf>
+		</jar>
+		<echo>Utworzono  -> ${ant.project.name}.jar</echo>
+	</target>
+
+	<target name="prepare-tests" depends="compile-test">
+		<cactifywar context="/AuthTests" version="2.3" destfile="${dist}/AuthTests.war">
+			<classes dir="${build.test}"/>
+		</cactifywar>
+		<copy file="${core.root}/cfg/log4j.xml" todir="${build.test}"></copy>
+		<echo>Utworzono Testy do -> ${ant.project.name}.jar</echo>
+	</target>
+
+
+
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${build.test}"/>
+		<delete dir="${dist}"/>
+		<delete dir="${jdocs}"/>
+		<delete file="${basedir}/build.properties"/>
+	</target>
+
+</project>

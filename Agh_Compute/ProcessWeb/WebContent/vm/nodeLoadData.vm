@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chart>
+  <!--<message><![CDATA[You can broadcast any message to chart from data XML file]]></message> -->
+	<series>
+		#foreach( $item in $items )
+			<value xid="$velocityCount">$item.stringRecordDate</value>
+		#end
+	</series>
+	<graphs>
+		<graph gid="1">
+			#foreach( $item in $items )
+				<value xid="$velocityCount">$item.processorLoad</value>
+			#end
+		</graph>
+	</graphs>
+</chart>

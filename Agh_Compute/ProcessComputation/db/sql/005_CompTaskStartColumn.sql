@@ -1,0 +1,1 @@
+ALTER TABLE computation_tasks ADD COLUMN sstart boolean DEFAULT 'false';

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="simplelayout" template="/jsp/layout/main.jsp">
+		<put-attribute name="header" value="/jsp/layout/header.jsp"></put-attribute>
+		<put-attribute name="footer" value="/jsp/layout/footer.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow"></put-attribute>
+	</definition>
+
+	<definition name="tilesmain" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/main.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Main"></put-attribute>
+	</definition>
+	
+	<definition name="tilesunauthorize" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/403.jsp"></put-attribute>
+	</definition>
+
+	<definition name="validationList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/admin/validationlist.jsp"/>
+		<put-attribute name="titleText" value="Taskflow-Lista Walidacji"></put-attribute>
+	</definition>
+	
+	<definition name="newValidation" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/admin/newValidation.jsp"/>
+		<put-attribute name="titleText" value="Taskflow-Dodawanie walidacji"></put-attribute>
+	</definition>
+	
+	<definition name="transformList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/admin/transformlist.jsp"/>
+		<put-attribute name="titleText" value="Taskflow-Lista Transformat"></put-attribute>
+	</definition>
+	
+	<definition name="newTransform" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/admin/newTransform.jsp"/>
+		<put-attribute name="titleText" value="Taskflow-Dodawanie Transformaty"></put-attribute>
+	</definition>
+	
+</tiles-definitions>

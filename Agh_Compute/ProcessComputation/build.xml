@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ProcessComputation" basedir="." default="dist">
+	<description>Modul Computation</description>
+	<property environment="env"/>
+	<property file="${env.TASK_HOME}/config.properties" />
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="src.test" location="test"/>
+	<property name="build.test" location="buildtest"/>
+	<property name="dist" location="dist"/>
+	<property name="lib" location="lib"/>
+	<property name="cfg" location="cfg"/>
+	<property name="jdocs" location="jdocs"/>
+	<property name="cs" location="cs"/>
+	
+	<taskdef resource="checkstyletask.properties" 
+		classpath="${common.lib}/checkstyle-5.3-all.jar"/>
+
+
+	<path id="build.classpath">
+		<fileset dir="${common.lib}"/>
+	</path>
+
+	<path id="liquibase.classpath">
+		<fileset dir="${common.lib}"/>
+		<path path="${basedir}/db"/>
+	</path>
+
+	<taskdef resource="cactus.tasks">
+		<classpath>
+			<fileset dir="${common.lib}">
+				<include name="**/*.jar" />
+			</fileset>
+		</classpath>
+	</taskdef>
+
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${build.test}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${jdocs}" />
+	</target>
+	
+	<target name="checkstyle">
+		<!--<checkstyle config="${cs}/cs.xml" failonviolation="false">
+		  <fileset dir="${src}" includes="**/*.java"/>
+		 </checkstyle>-->
+	</target>
+	
+	<target name="pmd">
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="build.classpath"/>
+		<pmd shortFilenames="true">
+			<ruleset>basic</ruleset>
+			<ruleset>unusedcode</ruleset>
+			<ruleset>typeresolution</ruleset>
+			<ruleset>strings</ruleset>
+			<ruleset>strictexception</ruleset>
+			<ruleset>naming</ruleset>
+			<ruleset>imports</ruleset>
+			<ruleset>design</ruleset>
+			<ruleset>coupling</ruleset>
+			<ruleset>codesize</ruleset>
+			<ruleset>braces</ruleset>
+			<formatter type="html" toFile="${dist}/pmd_report.html" linkPrefix="http://pmd.sourceforge.net/xref/" />
+			<fileset dir="${src}">
+				<include name="**/*.java" />
+			</fileset>
+		</pmd>
+	</target>
+
+	<target name="docs" depends="init">
+		<javadoc destdir="${jdocs}" sourcepath="${src}" packagenames="computation.*">
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${core.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${computationApi.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+
+			</classpath>
+		</javadoc>
+	</target>
+
+
+	<target name="prepare-liquibase">
+		<taskdef resource="liquibasetasks.properties">
+			<classpath refid="build.classpath"/>
+		</taskdef>
+
+	</target>
+
+	<target name="update-database" depends="prepare-liquibase">
+		<updateDatabase changeLogFile="${db.changelog.file}"
+                        driver="${db.jdbc.driverClassName}"
+                        url="${db.jdbc.url}"
+                        username="${db.jdbc.username}"
+                        password="${db.jdbc.password}"
+                        classpathref="liquibase.classpath"/>
+	</target>
+
+	<target name="compile" depends="init, checkstyle, pmd">
+		<ant dir="${computationApi.root}" inheritall="false" target="dist" />
+		<ant dir="${auth.root}" inheritall="false" target="dist" />
+		<javac srcdir="${src}" destdir="${build}" debug="true">
+			<classpath>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${core.dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${computationApi.dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${auth.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="compile-test" depends="dist">
+		<javac srcdir="${src.test}" destdir="${build.test}" debug="true">
+			<classpath>
+				<fileset dir="${dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${computationApi.dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${common.lib}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${core.dist}">
+					<include name="**/*.jar"/>
+				</fileset>
+				<fileset dir="${auth.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="prepare-tests" depends="compile-test">
+		<cactifywar context="/ComputationTests" version="2.3" destfile="${dist}/ComputationTests.war">
+			<classes dir="${build.test}"/>
+		</cactifywar>
+		<copy file="${core.root}/cfg/log4j.xml" todir="${build.test}"></copy>
+		<echo>Utworzono Testy do -> ${ant.project.name}.jar</echo>
+	</target>
+
+	<target name="dist" depends="compile">
+		<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}">
+			<metainf dir="${cfg}">
+				<include name="persistence.xml"/>
+			</metainf>
+		</jar>
+		<echo>Utworzono  -> ${ant.project.name}.jar</echo>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+		<delete dir="${jdocs}" />
+	</target>
+
+</project>

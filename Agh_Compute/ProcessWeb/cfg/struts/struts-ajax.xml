@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ajaxActions" extends="json-default">
+		<action name="AjaxUsersList" class="process.web.actions.ajax.AjaxUsersListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+
+		<action name="AjaxGroupsList" class="process.web.actions.ajax.AjaxGroupsListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+
+		<action name="AjaxNodesList" class="process.web.actions.ajax.AjaxNodesListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxMappingsList" class="process.web.actions.ajax.AjaxMappingsListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxUserDetails" class="process.web.actions.ajax.AjaxUserDetailsAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">user.jsonData</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxGroupDetails" class="process.web.actions.ajax.AjaxGroupDetailAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">group.jsonData</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxPackagesDetails" class="process.web.actions.ajax.AjaxPackageDetailAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">comPackage.jsonData</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxConfigDetails" class="process.web.actions.ajax.AjaxConfigurationDetailsAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">configData.jsonData</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxValidationDetails" class="process.web.actions.ajax.AjaxValidationDetailsAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">configData.jsonData</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		
+		
+		<action name="AjaxProcessDetails" class="process.web.actions.ajax.AjaxProcessDetailAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">computation.jsonData</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxComputationsList" class="process.web.actions.ajax.AjaxComputationsListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="NodeDetails" class="process.web.actions.ajax.AjaxNodeDetailAction">
+			<result name="success" type="json">
+				<param name="root">computingNode.fullJson</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		
+		<action name="AjaxPackagesList" class="process.web.actions.ajax.AjaxPackagesListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxPerformedComputationsList" class="process.web.actions.ajax.AjaxPerformedComputationsList">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxComputationResultList" class="process.web.actions.ajax.AjaxComputationResultListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxComputationLogList" class="process.web.actions.ajax.AjaxComputationLogAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		
+		<action name="AjaxComputationConfigList" class="process.web.actions.ajax.AjaxComputationConfigListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		
+		<action name="AjaxValidationList" class="process.web.actions.ajax.AjaxValidationListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxTransformList" class="process.web.actions.ajax.AjaxTransformListAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">pageContent</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		
+		<action name="AjaxTransformDetails" class="process.web.actions.ajax.AjaxTransformDetailAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="root">configData.jsonData</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+
+	</package>
+</struts>

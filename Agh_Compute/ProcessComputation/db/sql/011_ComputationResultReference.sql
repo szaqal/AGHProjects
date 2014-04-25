@@ -1,0 +1,1 @@
+ALTER TABLE computation_results ADD COLUMN performed_computation serial REFERENCES performed_computations(unique_id)

@@ -1,0 +1,39 @@
+<!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN" "http://java.sun.com/dtd/application_1_3.dtd">
+<application>
+	<display-name>ClusterComputaton</display-name>
+	<description>computing tasks</description>
+
+	<module>
+		<ejb>ProcessCore.jar</ejb>
+	</module>
+ 	<module>
+		<ejb>ProcessAuth.jar</ejb>
+	</module>
+	<module>
+		<ejb>ProcessComputation.jar</ejb>
+	</module>
+	<module>
+		<web>
+			<web-uri>ProcessWeb.war</web-uri>
+			<context-root>procc</context-root>
+		</web>
+	</module>
+		<module>
+		<web>
+			<web-uri>AuthTests.war</web-uri>
+			<context-root>AuthTests</context-root>
+		</web>
+	</module>
+	<module>
+		<web>
+			<web-uri>CoreTests.war</web-uri>
+			<context-root>CoreTests</context-root>
+		</web>
+	</module>
+	<module>
+		<web>
+			<web-uri>ComputationTests.war</web-uri>
+			<context-root>ComputationTests</context-root>
+		</web>
+	</module>
+</application>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ProcessComputationApi" basedir="." default="dist">
+	<description>API dla obliczen</description>
+	<property environment="env"/>
+	<property file="${env.TASK_HOME}/config.properties" />
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist" location="dist"/>
+	<property name="jdocs" location="jdocs"/>
+	<property name="cs" location="cs"/>
+	
+	<taskdef resource="checkstyletask.properties" 
+		classpath="${common.lib}/checkstyle-5.3-all.jar"/> 
+	
+	<path id="build.classpath">
+		<fileset dir="${common.lib}"/>
+	</path>
+	
+	<target name="init">
+		<tstamp/>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${dist}"/>
+		<mkdir dir="${jdocs}"/>
+	</target>
+	
+	<target name="checkstyle">
+		<checkstyle config="${cs}/cs.xml" failonviolation="true">
+		  <fileset dir="${src}" includes="**/*.java"/>
+		 </checkstyle>
+	</target>
+
+	<target name="pmd">
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="build.classpath"/>
+		<pmd shortFilenames="true">
+			<ruleset>basic</ruleset>
+			<ruleset>unusedcode</ruleset>
+			<ruleset>typeresolution</ruleset>
+			<ruleset>strings</ruleset>
+			<ruleset>strictexception</ruleset>
+			<ruleset>naming</ruleset>
+			<ruleset>imports</ruleset>
+			<ruleset>design</ruleset>
+			<ruleset>coupling</ruleset>
+			<ruleset>codesize</ruleset>
+			<ruleset>braces</ruleset>
+			<formatter type="html" toFile="${dist}/pmd_report.html" linkPrefix="http://pmd.sourceforge.net/xref/" />
+			<fileset dir="${src}">
+				<include name="**/*.java" />
+			</fileset>
+		</pmd>
+	</target>
+	
+	<target name="compile" depends="init,checkstyle, pmd">
+		<javac srcdir="${src}" destdir="${build}" debug="true">
+		</javac>
+	</target>
+	
+	<target name="docs" depends="init" >
+		<javadoc destdir="${jdocs}" sourcepath="${src}" packagenames="api.*">
+			
+		</javadoc>
+	</target>
+
+	<target name="dist" depends="compile">
+		<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}">
+		</jar>
+		<echo>Utworzono  -> ${ant.project.name}.jar</echo>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+		<delete dir="${jdocs}"/>
+	</target>
+
+</project>

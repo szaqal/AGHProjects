@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"
+                   logicalFilePath="classpath:/changelog.xml">
+                 
+	<changeSet id="core_1" author="Pawel Malczyk">
+        <sqlFile path="sql/000_ConfigurationItemTable.sql"/>
+    </changeSet>      
+    
+    <changeSet id="core_2" author="Pawel Malczyk">
+        <sqlFile path="sql/001_FileContentTable.sql"/>
+    </changeSet>  
+    
+    <changeSet id="core_3" author="Pawel Malczyk">
+        <sqlFile path="sql/002_XslTransforms.sql"/>
+    </changeSet>
+    
+    <changeSet id="core_4" author="Pawel Malczyk">
+        <sqlFile path="sql/003_XslTransformResultMime.sql"/>
+    </changeSet>
+    
+    <changeSet id="core_5" author="Pawel Malczyk">
+        <sqlFile path="sql/004_ConfigurationFilesTable.sql"/>
+    </changeSet>
+
+</databaseChangeLog>

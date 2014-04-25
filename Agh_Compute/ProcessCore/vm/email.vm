@@ -1,0 +1,8 @@
+<html>
+	<body>
+		<b> Obliczenie wykonane </b> <hr>
+		Wyniki dostępne : <br>		
+		<a href="$computationResultUrl">$computationResultUrl</a><br>
+		Czas trwania: $periodStr
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+	<tiles-definitions>
+	<definition name="newProcess" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/processupload.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Dodawanie obliczenia"></put-attribute>
+	</definition>
+	
+	<definition name="packageList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/packageList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="computationList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/computationList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="processValidation" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/processValidation.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Walidacja procesu"></put-attribute>
+	</definition>
+	
+	<definition name="failedProcessValidation" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/failedProcessValidation.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Walidacja procesu"></put-attribute>
+	</definition>
+	
+	<definition name="computationConfigList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/computationConfigList.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Lista konfiguracji obliczenia"></put-attribute>
+	</definition>
+	
+	<definition name="processCreateFailed" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/createNotCompleted.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="notValidated" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/notValidated.jsp"></put-attribute>
+	</definition>
+	
+	
+	
+	
+	<definition name="newProcessConfiguration" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/proc/newProcessConfiguration.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Dodawanie konfiguracji obliczenia"></put-attribute>
+	</definition>
+	
+	
+</tiles-definitions>

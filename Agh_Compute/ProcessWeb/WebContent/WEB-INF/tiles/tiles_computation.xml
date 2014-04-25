@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="nodesList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/nodesList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="nodeMappingsList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/mappingsList.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-List mapowan"></put-attribute>
+	</definition>
+	
+	<definition name="editMapping" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/editmapping.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Edycja mapowania"></put-attribute>
+	</definition>
+	
+	<definition name="performedCompList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/performedCompList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="compResultList" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/compResultList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="runComputationAction" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/runComputation.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="runComputationWithFileAction" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/runComputationWithFile.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="viewComputationResult" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/computationResult.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="computationScheduled" extends="simplelayout">
+		<put-attribute name="content" value="/jsp/comp/computationScheduled.jsp"></put-attribute>
+		<put-attribute name="titleText" value="Taskflow-Obliczenie skolejkowane"></put-attribute>
+	</definition>
+	
+	
+	
+</tiles-definitions>

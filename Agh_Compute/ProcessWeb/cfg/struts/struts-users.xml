@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="processuser" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="authInterceptor" class="process.interceptors.AuthenticationInterceptor" />
+			<interceptor name="authzInterceptor" class="process.interceptors.AuthorizationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="authzInterceptor"/>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="secureStack"/>
+
+		<action name="LoginUser" class="process.web.actions.LoginAction">
+			<result name="login" type="tiles">tileslogin</result>
+			<result name="input" type="tiles">tileslogin</result>
+			<result name="index" type="redirectAction">
+				<param name="actionName">Index</param>
+			</result>
+		</action>
+
+		<action name="LogoutUser" class="process.web.actions.LogoutAction">
+			<result name="login" type="redirect">LoginUser</result>
+		</action>
+
+		<action name="UsersList" class="process.web.actions.lists.UsersListAction">
+			<result name="list" type="tiles">usersList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="GroupsList" class="process.web.actions.lists.GroupsListAction">
+			<result name="list" type="tiles">groupsList</result>
+			<result name="login" type="redirectAction">
+				<param name="actionName">LoginUser</param>
+			</result>
+		</action>
+
+		<action name="GroupEdit" class="process.web.actions.edit.EditGroupAction">
+			<result name="new" type="tiles">groupNew</result>
+			<result name="success" type="redirect">GroupsList</result>
+		</action>
+
+		<action name="RegisterUser" class="process.web.actions.RegisterUserAction">
+			<result name="register" type="tiles">tilesregister</result>
+			<result name="input" type="tiles">tilesregister</result>
+			<result name="login" type="redirect">LoginUser</result>
+		</action>
+		
+		<action name="UserEdit" class="process.web.actions.edit.EditUserAction">
+			<result name="delete" type="redirect">UsersList</result>
+			<result name="save" type="redirect">UsersList</result>
+			<result name="edit" type="tiles">EditUser</result>
+			<result name="new" type="tiles">NewUser</result>
+			<result name="Unauthorized" type="redirect">Unauthorized</result>
+		</action>
+
+
+	</package>
+
+
+</struts>

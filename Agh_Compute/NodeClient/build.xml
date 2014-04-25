@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="NodeClient" basedir="." default="dist">
+	<description>Node Client</description>
+	<property file="build.properties"/>
+	<property name="src" location="src" />
+	<property environment="env"/>
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="lib" location="lib" />
+	<property name="cfg" location="cfg" />
+	<property name="jdocs" location="jdocs"/>
+	<property name="corelib" location="../ProcessCore/lib"/>
+	<property name="webcontent" location="WebContent" />
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"/>
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask"/>
+
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${jdocs}"/>
+
+		<copy todir="${basedir}" overwrite="true">
+			<fileset dir="${cfg}">
+				<include name="build.properties"/>
+				<include name="web.xml"/>
+			</fileset>
+			<filterset>
+				<filtersfile file="${env.TASK_HOME}/config.properties"/>
+			</filterset>
+		</copy>
+	</target>
+
+	<target name="docs" depends="init">
+		<javadoc destdir="${jdocs}" sourcepath="${src}" packagenames="node.*">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javadoc>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}" debug="true">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${ProcessComputationApi.dist}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile">
+		<copy todir="${build}" overwrite="true">
+			<fileset dir="${cfg}">
+				<include name="*" />
+			</fileset>
+			<filterset>
+				<filtersfile file="${env.TASK_HOME}/config.properties" />
+			</filterset>
+		</copy>
+		<war destfile="${dist}/${ant.project.name}.war" webxml="${basedir}/web.xml">
+			<fileset dir="${webcontent}" />
+			<classes dir="${build}" />
+			<lib dir="${lib}">
+				<include name="*.jar" />
+				<include name="*.xml" />
+			</lib>
+		</war>
+	</target>
+
+	<target name="deploy" depends="dist">
+		<property name="path" value="${app.path}"/>
+		<property name="url" value="${tomcat.url}"/>
+		<property name="username" value="${tomcat.manager.user}"/>
+		<property name="password" value="${tomcat.manager.password}"/>
+
+		<deploy url="${url}" username="${username}" password="${password}"
+		            path="${path}" war="file:${dist}/${ant.project.name}.war"/>
+	</target>
+
+	<target name="deploy-to" depends="dist">
+		<input message="Serwer docelowy " addproperty="target.node" defaultvalue="localhost:8888" />
+		<property name="path" value="${app.path}"/>
+		<property name="url" value="http://${target.node}/manager/text"/>
+		<property name="username" value="${tomcat.manager.user}"/>
+		<property name="password" value="${tomcat.manager.password}"/>
+
+		<deploy url="${url}" username="${username}" password="${password}"
+		            path="${path}" war="file:${dist}/${ant.project.name}.war"/>
+	</target>
+
+	<target name="undeploy">
+		<property name="path" value="${app.path}" />
+		<property name="url" value="${tomcat.url}" />
+		<property name="username" value="${tomcat.manager.user}" />
+		<property name="password" value="${tomcat.manager.password}" />
+		<undeploy url="${url}" username="${username}" password="${password}" path="${path}" />
+	</target>
+
+	<target name="undeploy-from">
+		<input message="Serwer docelowy " addproperty="target.node" defaultvalue="localhost:8888" />
+		<property name="path" value="${app.path}" />
+		<property name="url" value="http://${target.node}/manager/text"/>
+		<property name="username" value="${tomcat.manager.user}" />
+		<property name="password" value="${tomcat.manager.password}" />
+		<undeploy url="${url}" username="${username}" password="${password}" path="${path}" />
+	</target>
+
+	<target name="redeploy">
+		<antcall target="undeploy"/>
+		<antcall target="deploy"/>
+		<antcall target="copy-to-libs"/>
+	</target>
+
+	<target name="copy-to-libs" depends="dist">
+		<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}"/>
+		<copy file="${dist}/${ant.project.name}.jar"  todir="${corelib}"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+		<delete dir="${jdocs}" />
+		<delete file="${basedir}/build.properties"/>
+	</target>
+
+
+</project>
